@@ -5,8 +5,8 @@ import javax.swing.*;
 /**
  * @author L7aur
  */
-public class ButtonElement extends JButton {
-    public ButtonElement(String name) {
+public class MyButton extends JButton {
+    public MyButton(String name) {
         super(name);
     }
 }

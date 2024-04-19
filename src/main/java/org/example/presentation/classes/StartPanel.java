@@ -1,8 +1,7 @@
 package org.example.presentation.classes;
 
-import org.example.Main;
-import org.example.presentation.utility.ButtonElement;
-import org.example.presentation.utility.MyActionListener;
+import org.example.presentation.utility.MyButton;
+import org.example.presentation.utility.NavigateActionListener;
 import org.example.presentation.utility.View;
 
 import javax.swing.*;
@@ -24,12 +23,12 @@ public class StartPanel extends JPanel implements View {
 
     @Override
     public void createContent() {
-        ButtonElement goToClient = new ButtonElement("CLIENT OPERATIONS");
-        ButtonElement goToOrders = new ButtonElement("CREATE ORDER");
-        ButtonElement goToProducts = new ButtonElement("PRODUCT OPERATIONS");
-        goToClient.addActionListener(new MyActionListener(this.mainFrame, "CLIENT"));
-        goToOrders.addActionListener(new MyActionListener(this.mainFrame, "ORDER"));
-        goToProducts.addActionListener(new MyActionListener(this.mainFrame, "PRODUCT"));
+        MyButton goToClient = new MyButton("CLIENT OPERATIONS");
+        MyButton goToOrders = new MyButton("CREATE ORDER");
+        MyButton goToProducts = new MyButton("PRODUCT OPERATIONS");
+        goToClient.addActionListener(new NavigateActionListener(this.mainFrame, "CLIENT"));
+        goToOrders.addActionListener(new NavigateActionListener(this.mainFrame, "ORDER"));
+        goToProducts.addActionListener(new NavigateActionListener(this.mainFrame, "PRODUCT"));
         this.add(goToClient);
         this.add(goToOrders);
         this.add(goToProducts);
