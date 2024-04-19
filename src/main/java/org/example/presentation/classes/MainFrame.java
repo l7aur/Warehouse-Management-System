@@ -6,7 +6,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 /**
- *
+ * The application frame where all GUI components are housed
  * @author L7aur
  */
 public class MainFrame extends JFrame {

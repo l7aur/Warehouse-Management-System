@@ -5,6 +5,10 @@ import org.example.presentation.classes.MainFrame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Action listener that keeps track of what panel is displayed
+ * @author L7aur
+ */
 public class NavigateActionListener implements ActionListener {
     private final MainFrame mainFrame;
     private final String toWhere;

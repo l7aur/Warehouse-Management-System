@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- *
+ * The panel that houses the order view
  * @author L7aur
  */
 public class OrderPanel extends JPanel implements View {

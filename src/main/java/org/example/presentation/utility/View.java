@@ -1,10 +1,10 @@
 package org.example.presentation.utility;
 
 /**
- *
+ * Interface for views for easier further extension.
  * @author L7aur
  */
 public interface View {
-    public void createContent();
-    public String getId();
+    void createContent();
+    String getId();
 }

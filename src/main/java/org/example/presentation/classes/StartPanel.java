@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- *
+ * The initial panel that is displayed when the application is run
  * @author L7aur
  */
 public class StartPanel extends JPanel implements View {

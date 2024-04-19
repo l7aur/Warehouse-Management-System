@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- *
+ * The panel that houses the product view
  * @author L7aur
  */
 public class ProductPanel extends JPanel implements View {
@@ -32,7 +32,7 @@ public class ProductPanel extends JPanel implements View {
     }
 
     private JPanel mainPanel() {
-        JPanel panel = new JPanel();;
+        JPanel panel = new JPanel();
         panel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
         panel.setBackground(new Color(100, 42,68));
         return panel;
