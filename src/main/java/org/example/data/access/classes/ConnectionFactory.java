@@ -1,10 +1,13 @@
 package org.example.data.access.classes;
 
 import com.sun.jdi.connect.spi.Connection;
-import org.example.data.access.utility.Statement;
 
 import java.sql.ResultSet;
 
+/**
+ *
+ * @author L7aur
+ */
 public class ConnectionFactory {
     private static final String LOGGER = "";
     private static final String DRIVER = "";

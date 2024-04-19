@@ -1,5 +1,10 @@
 package org.example.data.access.utility;
 
+/**
+ *
+ * @param <T>
+ * @author L7aur
+ */
 public class DataBaseAccess<T> {
     public DataBaseAccess() {
 
