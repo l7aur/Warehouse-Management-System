@@ -23,6 +23,7 @@ public class ConnectionFactory {
         }
         catch (ClassNotFoundException e) {
             System.out.println("<ERROR>" + e.toString());
+            System.exit(-2);
         }
     }
 

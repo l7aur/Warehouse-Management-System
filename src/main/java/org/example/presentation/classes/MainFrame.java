@@ -13,10 +13,6 @@ public class MainFrame extends JFrame {
     private final Container contentPane;
     private final CardLayout layout;
     private ArrayList<String> panels;
-    private OrderPanel orderPanel;
-    private ClientPanel clientPanel;
-    private ProductPanel productPanel;
-    private StartPanel startPanel;
 
     public MainFrame() {
         super("Warehouse Orders Management System");
@@ -40,14 +36,14 @@ public class MainFrame extends JFrame {
         this.panels.add("ORDER");
     }
     public void addPanels() {
-        this.orderPanel = new OrderPanel();
-        this.clientPanel = new ClientPanel();
-        this.productPanel = new ProductPanel();
-        this.startPanel = new StartPanel();
-        contentPane.add(this.startPanel, this.startPanel.getId());
-        contentPane.add(this.clientPanel, this.clientPanel.getId());
-        contentPane.add(this.productPanel, this.productPanel.getId());
-        contentPane.add(this.orderPanel, this.orderPanel.getId());
+        OrderPanel orderPanel = new OrderPanel();
+        ClientPanel clientPanel = new ClientPanel();
+        ProductPanel productPanel = new ProductPanel();
+        StartPanel startPanel = new StartPanel();
+        contentPane.add(startPanel, startPanel.getId());
+        contentPane.add(clientPanel, clientPanel.getId());
+        contentPane.add(productPanel, productPanel.getId());
+        contentPane.add(orderPanel, orderPanel.getId());
     }
 
     public void showPanel(String index) {
