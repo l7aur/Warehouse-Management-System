@@ -21,11 +21,11 @@ public class CreateClientView extends AbstractView {
     @Override
     public void createContent() {
         this.setBorder(new EmptyBorder(10, 10, 10, 10));
-        String[] textNames = {"Name", "Phone number", "Address"};
+        String[] textNames = {"Name: ", "Phone Number: ", "Address: "};
         ArrayList<JTextField> textFields = new ArrayList<>();
         this.add(this.createTextFields(textNames, textFields), BorderLayout.NORTH);
         MyButton executeButton = new MyButton("EXECUTE CREATE");
-        executeButton.addActionListener(new FetchDataActionListener(textFields));
+        executeButton.addActionListener(new FetchDataActionListener(textFields, this.getId()));
         this.add(executeButton, BorderLayout.SOUTH);
     }
 

@@ -5,7 +5,7 @@ import org.example.model.classes.dto.Client;
 import java.util.regex.Pattern;
 
 public class AddressValidator implements Validator<Client> {
-    private static final String ADDRESS_PATTERN = "Str\\.\\ [A-Z][a-z]+\\ Nr\\.\\ [0-9]+[A-Z]?$";
+    private static final String ADDRESS_PATTERN = "Str\\.\\ [A-Z][A-Za-z]+\\ Nr\\.\\ [0-9]+[A-Z]?$";
 
     private static final AddressValidator addressValidator = new AddressValidator();
 

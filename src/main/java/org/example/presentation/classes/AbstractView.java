@@ -1,5 +1,6 @@
 package org.example.presentation.classes;
 
+import org.example.presentation.utility.FetchDataActionListener;
 import org.example.presentation.utility.MyButton;
 import org.example.presentation.utility.View;
 
@@ -8,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public abstract class AbstractView extends JPanel implements View {
     protected JPanel createTextFields(String[] names, ArrayList<JTextField> textFields) {
@@ -19,7 +21,10 @@ public abstract class AbstractView extends JPanel implements View {
             JTextField nameField = new JTextField();
             textFields.add(nameField);
             nameLabel.setLabelFor(nameField);
-            nameLabel.setForeground(Color.WHITE);
+            if(name.equals("Id: "))
+                nameLabel.setForeground(Color.RED);
+            else
+                nameLabel.setForeground(Color.WHITE);
             panel.add(nameLabel);
             panel.add(nameField);
         }
@@ -28,15 +33,6 @@ public abstract class AbstractView extends JPanel implements View {
 
     @Override
     public void createContent(){};
-
-    public void createContent(String operationName) {
-        this.setBorder(new EmptyBorder(10, 10, 10, 10));
-        String[] textNames = {"Name", "Phone number", "Address", "Id"};
-        ArrayList<JTextField> textFields = new ArrayList<>();
-        this.add(this.createTextFields(textNames, textFields), BorderLayout.NORTH);
-        MyButton executeButton = new MyButton("EXECUTE " + operationName);
-        this.add(executeButton, BorderLayout.SOUTH);
-    }
 
     @Override
     public String getId() {
