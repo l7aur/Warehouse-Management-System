@@ -1,4 +1,4 @@
-package org.example.model.classes;
+package org.example.data.access.classes;
 
 /**
  *  The client model
@@ -15,5 +15,17 @@ public class Client {
         this.phoneNumber = phoneNumber;
         this.address = address;
         this.id = id;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getAddress() {
+        return address;
     }
 }

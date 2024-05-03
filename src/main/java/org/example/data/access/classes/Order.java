@@ -1,4 +1,4 @@
-package org.example.model.classes;
+package org.example.data.access.classes;
 
 /**
  *  The order model
