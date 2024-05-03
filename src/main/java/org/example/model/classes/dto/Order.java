@@ -1,4 +1,4 @@
-package org.example.data.access.classes.dto;
+package org.example.model.classes.dto;
 
 /**
  *  The order model

@@ -1,20 +1,22 @@
-package org.example.model.classes;
+package org.example.data.access.classes;
 
-import org.example.data.access.classes.ConnectionFactory;
-import org.example.data.access.classes.dto.Client;
+import org.example.business.logic.classes.ClientT;
+import org.example.data.access.utility.ConnectionFactory;
+import org.example.model.classes.dto.Client;
 
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ClientDAO extends AbstractDAO<Client> {
+public class ClientDAO extends AbstractDAO<ClientT> {
     private static final Logger LOGGER = Logger.getLogger(ClientDAO.class.getName());
-    private static final String createStatement = "INSERT INTO client (name, phone_number, address, id) VALUES (?, ?, ?, ?)";
+    private static final String createStatement = "INSERT INTO client (name, phone_number, address) VALUES (?, ?, ?)";
 
     @Override
-    public int create(Client client) {
+    public int create(ClientT client) {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement insertStatement = null;
+        ResultSet rs = null;
         int insertedId = -1;
         try {
             insertStatement = con.prepareStatement(createStatement, Statement.RETURN_GENERATED_KEYS);
@@ -22,33 +24,32 @@ public class ClientDAO extends AbstractDAO<Client> {
             insertStatement.setString(2, client.getPhoneNumber());
             insertStatement.setString(3, client.getAddress());
             insertStatement.executeUpdate();
-            ResultSet rs = insertStatement.getGeneratedKeys();
+            rs = insertStatement.getGeneratedKeys();
             if(rs.next()) {
-                insertedId = rs.getInt(1);
+                insertedId = rs.getInt(4);
             }
         }
         catch (SQLException ex) {
-            LOGGER.log(Level.WARNING, "ClientDAO::insert" + ex.getMessage());
+            LOGGER.log(Level.WARNING, "ClientDAO::insert::" + ex.getMessage());
         }
         finally {
-            ConnectionFactory.close(insertStatement);
-            ConnectionFactory.close(con);
+            ConnectionFactory.closeAll(con, insertStatement, rs);
         }
         return insertedId;
     }
 
     @Override
-    public void read(Client client) {
+    public void read(ClientT client) {
         super.read(client);
     }
 
     @Override
-    public void update(Client client) {
+    public void update(ClientT client) {
         super.update(client);
     }
 
     @Override
-    public void delete(Client client) {
+    public void delete(ClientT client) {
         super.delete(client);
     }
 }

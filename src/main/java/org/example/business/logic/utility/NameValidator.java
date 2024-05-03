@@ -1,11 +1,18 @@
-package org.example.model.utility;
+package org.example.business.logic.utility;
 
-import org.example.data.access.classes.dto.Client;
+import org.example.model.classes.dto.Client;
 
+import javax.naming.Name;
 import java.util.regex.Pattern;
 
 public class NameValidator implements Validator<Client>{
     private static final String NAME_PATTERN = "[A-Z][a-z]+\\ [A-Z][a-z]+$";
+
+    private static final NameValidator nameValidator = new NameValidator();
+
+    public static NameValidator getValidator() {
+        return nameValidator;
+    }
 
     @Override
     public void validate(Client client) throws IllegalArgumentException {

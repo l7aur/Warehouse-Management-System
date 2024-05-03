@@ -20,7 +20,6 @@ public class ViewClientView extends AbstractView {
 
     @Override
     public void createContent() {
-        System.out.println("here");
     }
 
     @Override

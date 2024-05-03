@@ -1,4 +1,4 @@
-package org.example.data.access.classes;
+package org.example.data.access.utility;
 
 import java.sql.*;
 import java.sql.Statement;
@@ -16,15 +16,14 @@ public class ConnectionFactory {
     private static final String USER = "postgres";
     private static final String PASS = "L7aur";
 
-    private static ConnectionFactory singleInstance = new ConnectionFactory();
+    private static final ConnectionFactory singleInstance = new ConnectionFactory();
 
     private ConnectionFactory() {
         try {
             Class.forName(DRIVER);
         }
         catch (ClassNotFoundException e) {
-            System.out.println("<ERROR>" + e.toString());
-            e.printStackTrace();
+            System.out.println("<ERROR>" + e);
         }
     }
 
@@ -35,15 +34,21 @@ public class ConnectionFactory {
             System.out.println("Connection created");
         }
         catch (SQLException e) {
-            LOGGER.log(Level.WARNING, "An error occured while trying to connect to the database");
-            e.printStackTrace();
+            LOGGER.log(Level.WARNING, "An error occurred while trying to connect to the database");
         }
         return connection;
     }
     public static Connection getConnection() {
         return singleInstance.createConnection();
     }
-    public static void close(Connection connection) {
+    public static void closeAll(Connection connection, Statement statement, ResultSet resultSet) {
+        close(connection);
+        close(statement);
+        close(resultSet);
+        System.out.println("Connection closed");
+    }
+
+    private static void close(Connection connection) {
         if (connection != null) {
             try {
                 connection.close();
@@ -52,7 +57,8 @@ public class ConnectionFactory {
             }
         }
     }
-    public static void close(Statement statement) {
+
+    private static void close(Statement statement) {
         if (statement != null) {
             try {
                 statement.close();
@@ -61,7 +67,8 @@ public class ConnectionFactory {
             }
         }
     }
-    public static void close(ResultSet resultSet) {
+
+    private static void close(ResultSet resultSet) {
         if (resultSet != null) {
             try {
                 resultSet.close();

@@ -1,9 +1,4 @@
-package org.example.model.classes;
-
-import org.example.data.access.classes.ConnectionFactory;
-
-import java.lang.reflect.Field;
-import java.sql.*;
+package org.example.data.access.classes;
 
 public abstract class AbstractDAO<T> {
     public int create(T t) {

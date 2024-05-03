@@ -63,7 +63,7 @@ public class ClientPanel extends JPanel {
         button3.addActionListener(new ViewNavigateActionListener(this.panel, this.mainPanelCardLayout, "DELETE_CLIENT_VIEW"));
         MyButton button4 = new MyButton("VIEW CLIENTS");
         button4.addActionListener(new ViewNavigateActionListener(this.panel, this.mainPanelCardLayout, "VIEW_CLIENT_VIEW"));
-        button4.addActionListener(new FetchDataActionListener());
+//        button4.addActionListener(new ());
         operationButtons.add(button1);
         operationButtons.add(button2);
         operationButtons.add(button3);
