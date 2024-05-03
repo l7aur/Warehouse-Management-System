@@ -1,4 +1,4 @@
 package org.example.model.classes;
 
-public class OrderDTO {
+public class ProductDAO {
 }

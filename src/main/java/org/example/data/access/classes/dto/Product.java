@@ -1,4 +1,4 @@
-package org.example.data.access.classes;
+package org.example.data.access.classes.dto;
 
 /**
  * The product model

@@ -1,19 +1,14 @@
 package org.example.presentation.classes;
 
-import org.example.presentation.utility.View;
-
-import javax.swing.*;
 import java.awt.*;
 
-public class EditClientView extends JPanel implements View {
+public class EditClientView extends AbstractView {
     private final String id;
     public EditClientView() {
         this.id = "EDIT_CLIENT_VIEW";
-        this.setBackground(Color.white);
-    }
-
-    @Override
-    public void createContent() {
+        this.setBackground(new Color(32, 42,68));
+        this.setLayout(new BorderLayout());
+        this.createContent("EDIT");
     }
 
     @Override

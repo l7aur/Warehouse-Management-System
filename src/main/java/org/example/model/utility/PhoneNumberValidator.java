@@ -1,6 +1,6 @@
 package org.example.model.utility;
 
-import org.example.data.access.classes.Client;
+import org.example.data.access.classes.dto.Client;
 
 import java.util.regex.Pattern;
 

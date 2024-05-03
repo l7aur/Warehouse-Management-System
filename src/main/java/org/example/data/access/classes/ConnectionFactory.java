@@ -1,8 +1,8 @@
 package org.example.data.access.classes;
 
-import com.sun.jdi.connect.spi.Connection;
-
-import java.sql.ResultSet;
+import java.sql.*;
+import java.sql.Statement;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -24,23 +24,50 @@ public class ConnectionFactory {
         }
         catch (ClassNotFoundException e) {
             System.out.println("<ERROR>" + e.toString());
-            System.exit(-2);
+            e.printStackTrace();
         }
     }
 
     private Connection createConnection() {
-        return null;
+        Connection connection = null;
+        try {
+            connection = DriverManager.getConnection(DATABASE_URL, USER, PASS);
+            System.out.println("Connection created");
+        }
+        catch (SQLException e) {
+            LOGGER.log(Level.WARNING, "An error occured while trying to connect to the database");
+            e.printStackTrace();
+        }
+        return connection;
     }
     public static Connection getConnection() {
-        return null;
+        return singleInstance.createConnection();
     }
     public static void close(Connection connection) {
-
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                LOGGER.log(Level.WARNING, "An error occurred while trying to close the connection");
+            }
+        }
     }
     public static void close(Statement statement) {
-
+        if (statement != null) {
+            try {
+                statement.close();
+            } catch (SQLException e) {
+                LOGGER.log(Level.WARNING, "An error occurred while trying to close the statement");
+            }
+        }
     }
     public static void close(ResultSet resultSet) {
-
+        if (resultSet != null) {
+            try {
+                resultSet.close();
+            } catch (SQLException e) {
+                LOGGER.log(Level.WARNING, "An error occurred while trying to close the ResultSet");
+            }
+        }
     }
 }

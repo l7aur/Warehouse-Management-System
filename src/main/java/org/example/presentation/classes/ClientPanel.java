@@ -1,9 +1,6 @@
 package org.example.presentation.classes;
 
-import org.example.presentation.utility.MyButton;
-import org.example.presentation.utility.NavigateActionListener;
-import org.example.presentation.utility.View;
-import org.example.presentation.utility.ViewNavigateActionListener;
+import org.example.presentation.utility.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +9,7 @@ import java.awt.*;
  * The panel that houses the client view
  * @author L7aur
  */
-public class ClientPanel extends JPanel implements View {
+public class ClientPanel extends JPanel {
     private final String id;
     private final MainFrame mainFrame;
     private JPanel panel;
@@ -27,7 +24,6 @@ public class ClientPanel extends JPanel implements View {
         this.createContent();
     }
 
-    @Override
     public void createContent() {
         MyButton buttonElement = new MyButton("BACK");
         buttonElement.addActionListener(new NavigateActionListener(this.mainFrame, "BACK"));
@@ -40,7 +36,7 @@ public class ClientPanel extends JPanel implements View {
     private void setMainPanel() {
         this.panel = new JPanel();
         this.panel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
-        this.panel.setBackground(new Color(100, 42,68));
+        this.panel.setBackground(new Color(32, 42,68));
         this.mainPanelCardLayout = new CardLayout();
         this.panel.setLayout(this.mainPanelCardLayout);
         CreateClientView clientView = new CreateClientView();
@@ -67,6 +63,7 @@ public class ClientPanel extends JPanel implements View {
         button3.addActionListener(new ViewNavigateActionListener(this.panel, this.mainPanelCardLayout, "DELETE_CLIENT_VIEW"));
         MyButton button4 = new MyButton("VIEW CLIENTS");
         button4.addActionListener(new ViewNavigateActionListener(this.panel, this.mainPanelCardLayout, "VIEW_CLIENT_VIEW"));
+        button4.addActionListener(new FetchDataActionListener());
         operationButtons.add(button1);
         operationButtons.add(button2);
         operationButtons.add(button3);
@@ -74,7 +71,6 @@ public class ClientPanel extends JPanel implements View {
         return operationButtons;
     }
 
-    @Override
     public String getId() {
         return this.id;
     }
