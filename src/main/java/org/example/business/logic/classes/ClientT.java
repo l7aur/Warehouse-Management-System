@@ -12,6 +12,13 @@ public class ClientT {
 
     }
 
+    public ClientT(String name, String phoneNumber, String address, int id) {
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.id = id;
+    }
+
     public void setAll(String name, String phoneNumber, String address, int id) {
         this.name = name;
         this.phoneNumber = phoneNumber;

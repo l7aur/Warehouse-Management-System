@@ -14,13 +14,14 @@ public class ClientPanel extends JPanel {
     private final MainFrame mainFrame;
     private JPanel panel;
     private CardLayout mainPanelCardLayout;
+    private ViewClientView viewClientView;
 
     public ClientPanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         this.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
         this.setLayout(new BorderLayout());
         this.id = "CLIENT";
-        this.setBackground(new Color(32, 42,68));
+        this.setBackground(Colors.getInstance().getBackgroundColor());
         this.createContent();
     }
 
@@ -36,23 +37,23 @@ public class ClientPanel extends JPanel {
     private void setMainPanel() {
         this.panel = new JPanel();
         this.panel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
-        this.panel.setBackground(new Color(32, 42,68));
+        this.panel.setBackground(Colors.getInstance().getBackgroundColor());
         this.mainPanelCardLayout = new CardLayout();
         this.panel.setLayout(this.mainPanelCardLayout);
         CreateClientView clientView = new CreateClientView();
         EditClientView editClientView = new EditClientView();
-        ViewClientView viewClientView = new ViewClientView();
+        this.viewClientView = new ViewClientView();
         DeleteClientView deleteClientView = new DeleteClientView();
         this.panel.add(clientView, clientView.getId());
         this.panel.add(editClientView, editClientView.getId());
         this.panel.add(deleteClientView, deleteClientView.getId());
-        this.panel.add(viewClientView, viewClientView.getId());
+        this.panel.add(this.viewClientView, this.viewClientView.getId());
     }
 
     private JPanel createOperationButtons() {
         JPanel operationButtons = new JPanel();
         operationButtons.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
-        operationButtons.setBackground(new Color(32, 42,68));
+        operationButtons.setBackground(Colors.getInstance().getBackgroundColor());
         GridLayout layout = new GridLayout(4, 1, 10, 10);
         operationButtons.setLayout(layout);
         MyButton button1 = new MyButton("CREATE CLIENT");
@@ -63,7 +64,7 @@ public class ClientPanel extends JPanel {
         button3.addActionListener(new ViewNavigateActionListener(this.panel, this.mainPanelCardLayout, "DELETE_CLIENT_VIEW"));
         MyButton button4 = new MyButton("VIEW CLIENTS");
         button4.addActionListener(new ViewNavigateActionListener(this.panel, this.mainPanelCardLayout, "VIEW_CLIENT_VIEW"));
-//        button4.addActionListener(new ());
+        button4.addActionListener(new QueriesActionListener(this.viewClientView));
         operationButtons.add(button1);
         operationButtons.add(button2);
         operationButtons.add(button3);

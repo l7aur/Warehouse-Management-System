@@ -9,11 +9,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class FetchDataActionListener implements ActionListener {
+public class UpdatesActionListener implements ActionListener {
     private final ArrayList<JTextField> textFields;
     private QueryType type;
 
-    public FetchDataActionListener(ArrayList<JTextField> textFields, String operationName) {
+    public UpdatesActionListener(ArrayList<JTextField> textFields, String operationName) {
         this.textFields = textFields;
         switch (operationName) {
             case "EDIT_CLIENT_VIEW":
@@ -24,9 +24,6 @@ public class FetchDataActionListener implements ActionListener {
                 break;
             case "DELETE_CLIENT_VIEW":
                 this.type = QueryType.DELETE;
-                break;
-            case "VIEW_CLIENT_VIEW":
-                this.type = QueryType.SELECT;
                 break;
             default:
                 System.out.println("You should not be here");
@@ -52,9 +49,6 @@ public class FetchDataActionListener implements ActionListener {
                 case DELETE:
                     cType.convertToDAO().delete(cType);
                     break;
-                case SELECT:
-                    cType.convertToDAO().read(cType);
-                    break;
                 default:
                     System.out.println("You should not be here");
                     break;
@@ -66,6 +60,8 @@ public class FetchDataActionListener implements ActionListener {
 
     private ClientT getClientT() {
         Client newClient;
+        if(textFields == null)
+            return (new Client()).convertToEntity();
         if (textFields.size() == 3) {
             newClient = new Client(textFields.getFirst().getText(),
                     textFields.get(1).getText(),

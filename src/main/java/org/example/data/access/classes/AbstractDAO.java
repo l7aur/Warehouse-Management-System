@@ -1,5 +1,7 @@
 package org.example.data.access.classes;
 
+import java.util.ArrayList;
+
 public abstract class AbstractDAO<T> {
     public int create(T t) {
 //        Class<?> clazz = t.getClass();
@@ -20,7 +22,9 @@ public abstract class AbstractDAO<T> {
 //        ResultSet rs = null;
         return -1;
     };
-    public void read(T t) {};
+    public ArrayList<T> read() {
+        return null;
+    };
     public void update(T t){};
     public void delete(T t){};
 }

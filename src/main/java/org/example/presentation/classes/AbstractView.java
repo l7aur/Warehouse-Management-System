@@ -1,20 +1,18 @@
 package org.example.presentation.classes;
 
-import org.example.presentation.utility.FetchDataActionListener;
-import org.example.presentation.utility.MyButton;
+import org.example.business.logic.classes.ClientT;
+import org.example.presentation.utility.Colors;
 import org.example.presentation.utility.View;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Objects;
 
 public abstract class AbstractView extends JPanel implements View {
     protected JPanel createTextFields(String[] names, ArrayList<JTextField> textFields) {
         JPanel panel = new JPanel();
-        panel.setBackground(new Color(32, 42,68));
+        panel.setBackground(Colors.getInstance().getBackgroundColor());
         panel.setLayout(new GridLayout(names.length, 1, 5,5));
         for (String name : names) {
             JLabel nameLabel = new JLabel(name);
@@ -22,9 +20,9 @@ public abstract class AbstractView extends JPanel implements View {
             textFields.add(nameField);
             nameLabel.setLabelFor(nameField);
             if(name.equals("Id: "))
-                nameLabel.setForeground(Color.RED);
+                nameLabel.setForeground(Colors.getInstance().getHighlightColor());
             else
-                nameLabel.setForeground(Color.WHITE);
+                nameLabel.setForeground(Colors.getInstance().getForegroundColor());
             panel.add(nameLabel);
             panel.add(nameField);
         }
@@ -38,4 +36,8 @@ public abstract class AbstractView extends JPanel implements View {
     public String getId() {
         return "";
     }
+
+//    protected void updateContent(ArrayList<Objects> objects) {
+//
+//    }
 }

@@ -20,6 +20,8 @@ public class Client {
         this.phoneNumber = phoneNumber;
         this.address = address;
     }
+    public Client() {
+    }
 
     public Client(String name, String phoneNumber, String address, int id) {
         this.name = name;
