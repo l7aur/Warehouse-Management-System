@@ -8,8 +8,10 @@ public class ClientT {
     private String address;
     private int id;
 
+    public ClientT(int id){
+        this.id = id;
+    }
     public ClientT(){
-
     }
 
     public ClientT(String name, String phoneNumber, String address, int id) {
@@ -17,6 +19,12 @@ public class ClientT {
         this.phoneNumber = phoneNumber;
         this.address = address;
         this.id = id;
+    }
+
+    public ClientT(String name, String phoneNumber, String address) {
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
     }
 
     public void setAll(String name, String phoneNumber, String address, int id) {
@@ -60,6 +68,6 @@ public class ClientT {
 
     @Override
     public String toString() {
-        return "ClientT [name=" + name + ", phoneNumber=" + phoneNumber + ", address=" + address + "]";
+        return "ClientT [name=" + name + ", phoneNumber=" + phoneNumber + ", address=" + address + ", id=" + id +"]";
     }
 }

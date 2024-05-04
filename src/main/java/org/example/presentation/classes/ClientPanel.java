@@ -9,7 +9,7 @@ import java.awt.*;
  * The panel that houses the client view
  * @author L7aur
  */
-public class ClientPanel extends JPanel {
+public class ClientPanel extends AbstractView {
     private final String id;
     private final MainFrame mainFrame;
     private JPanel panel;
@@ -25,6 +25,7 @@ public class ClientPanel extends JPanel {
         this.createContent();
     }
 
+    @Override
     public void createContent() {
         MyButton buttonElement = new MyButton("BACK");
         buttonElement.addActionListener(new NavigateActionListener(this.mainFrame, "BACK"));
@@ -64,7 +65,7 @@ public class ClientPanel extends JPanel {
         button3.addActionListener(new ViewNavigateActionListener(this.panel, this.mainPanelCardLayout, "DELETE_CLIENT_VIEW"));
         MyButton button4 = new MyButton("VIEW CLIENTS");
         button4.addActionListener(new ViewNavigateActionListener(this.panel, this.mainPanelCardLayout, "VIEW_CLIENT_VIEW"));
-        button4.addActionListener(new QueriesActionListener(this.viewClientView));
+        button4.addActionListener(new ClientQueriesActionListener(this.viewClientView));
         operationButtons.add(button1);
         operationButtons.add(button2);
         operationButtons.add(button3);
@@ -72,6 +73,7 @@ public class ClientPanel extends JPanel {
         return operationButtons;
     }
 
+    @Override
     public String getId() {
         return this.id;
     }

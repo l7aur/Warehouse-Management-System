@@ -1,13 +1,13 @@
 package org.example.presentation.classes;
 
-import org.example.business.logic.classes.ClientT;
 import org.example.presentation.utility.Colors;
 import org.example.presentation.utility.View;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public abstract class AbstractView extends JPanel implements View {
     protected JPanel createTextFields(String[] names, ArrayList<JTextField> textFields) {
@@ -30,14 +30,35 @@ public abstract class AbstractView extends JPanel implements View {
     }
 
     @Override
-    public void createContent(){};
+    public void createContent(){}
 
     @Override
     public String getId() {
         return "";
     }
 
-//    protected void updateContent(ArrayList<Objects> objects) {
-//
-//    }
+    protected void addScrollPane(String[][] data, String[] columns, String tableName) {
+        JTable table = constructTable(data, columns, tableName);
+        table.getTableHeader().setBackground(Colors.getInstance().getBackgroundColor());
+        table.getTableHeader().setForeground(Colors.getInstance().getForegroundColor());
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.getViewport().setBackground(Colors.getInstance().getBackgroundColor());
+        this.add(scrollPane, BorderLayout.CENTER);
+    }
+
+    private static JTable constructTable(String[][] data, String[] columns, String tableName) {
+        JTable table = new JTable(data, columns);
+        table.setName(tableName);
+        table.setModel(new DefaultTableModel(data, columns) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
+        table.setBorder(new EmptyBorder(10, 10, 10, 10));
+        table.setBackground(Colors.getInstance().getBackgroundColor());
+        table.setSelectionBackground(Colors.getInstance().getForegroundColor());
+        table.setForeground(Colors.getInstance().getForegroundColor());
+        return table;
+    }
 }

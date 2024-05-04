@@ -1,9 +1,10 @@
 package org.example.model.classes.dto;
 
 import org.example.business.logic.classes.ClientT;
-import org.example.business.logic.utility.AddressValidator;
-import org.example.business.logic.utility.NameValidator;
-import org.example.business.logic.utility.PhoneNumberValidator;
+import org.example.model.utility.AddressValidator;
+import org.example.model.utility.IdValidator;
+import org.example.model.utility.PersonNameValidator;
+import org.example.model.utility.PhoneNumberValidator;
 
 /**
  *  The client model
@@ -13,47 +14,48 @@ public class Client {
     private String name;
     private String phoneNumber;
     private String address;
-    private int id;
+    private String id;
 
     public Client(String name, String phoneNumber, String address) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.address = address;
     }
+
     public Client() {
     }
 
-    public Client(String name, String phoneNumber, String address, int id) {
+    public Client(String name, String phoneNumber, String address, String id) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.address = address;
         this.id = id;
     }
 
-    public Client(int id) {
-        this.name = null;
-        this.phoneNumber = null;
-        this.address = null;
+    public Client(String  id) {
         this.id = id;
     }
 
-    public ClientT convertToEntity(){
-        ClientT entity = new ClientT();
-        if(this.name != null && this.address != null && this.phoneNumber != null) {
-            try {
-                NameValidator.getValidator().validate(this);
-                AddressValidator.getValidator().validate(this);
-                PhoneNumberValidator.getPhoneNumberValidator().validate(this);
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.toString());
-                return null;
-            }
+    public ClientT convertToEntity() {
+        try {
+            PersonNameValidator.getValidator().validate(this);
+            AddressValidator.getValidator().validate(this);
+            PhoneNumberValidator.getValidator().validate(this);
+            IdValidator.getValidator().validate(this.id);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.toString());
+            return null;
         }
-        entity.setAll(this.name, this.phoneNumber, this.address, this.id);
-        return entity;
+        if(this.id == null && this.name == null)
+            return new ClientT();
+        if(this.name == null)
+            return new ClientT(Integer.parseInt(this.id));
+        if(this.id == null)
+            return new ClientT(this.name, this.phoneNumber, this.address);
+        return new ClientT(this.name, this.phoneNumber, this.address, Integer.parseInt(this.id));
     }
 
-    public Integer getId() {
+    public String  getId() {
         return id;
     }
 

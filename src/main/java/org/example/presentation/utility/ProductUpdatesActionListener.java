@@ -1,28 +1,28 @@
 package org.example.presentation.utility;
 
-import org.example.business.logic.classes.ClientT;
+import org.example.business.logic.classes.ProductT;
 import org.example.data.access.utility.QueryType;
-import org.example.model.classes.dto.Client;
+import org.example.model.classes.dto.Product;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class UpdatesActionListener implements ActionListener {
+public class ProductUpdatesActionListener implements ActionListener {
     private final ArrayList<JTextField> textFields;
     private QueryType type;
 
-    public UpdatesActionListener(ArrayList<JTextField> textFields, String operationName) {
+    public ProductUpdatesActionListener(ArrayList<JTextField> textFields, String operationName) {
         this.textFields = textFields;
         switch (operationName) {
-            case "EDIT_CLIENT_VIEW":
+            case "EDIT_PRODUCT_VIEW":
                 this.type = QueryType.UPDATE;
                 break;
-            case "CREATE_CLIENT_VIEW":
+            case "CREATE_PRODUCT_VIEW":
                 this.type = QueryType.INSERT;
                 break;
-            case "DELETE_CLIENT_VIEW":
+            case "DELETE_PRODUCT_VIEW":
                 this.type = QueryType.DELETE;
                 break;
             default:
@@ -33,21 +33,21 @@ public class UpdatesActionListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        ClientT cType = getClientT();
+        ProductT pType = getProductT();
 //        for (JTextField textField : textFields) {
 //            textField.setText("");
 //        }
-        if (cType != null) {
-            System.out.println(cType.toString());
+        if (pType != null) {
             switch (this.type) {
                 case INSERT:
-                    int id = cType.convertToDAO().create(cType);
+                    int id = pType.convertToDAO().create(pType);
+                    System.out.println("Inserted product with ID " + id);
                     break;
                 case UPDATE:
-                    cType.convertToDAO().update(cType);
+                    pType.convertToDAO().update(pType);
                     break;
                 case DELETE:
-                    cType.convertToDAO().delete(cType);
+                    pType.convertToDAO().delete(pType);
                     break;
                 default:
                     System.out.println("You should not be here");
@@ -58,23 +58,24 @@ public class UpdatesActionListener implements ActionListener {
             System.out.println("null");
     }
 
-    private ClientT getClientT() {
-        Client newClient;
+    private ProductT getProductT() {
+        Product newProduct;
         if(textFields == null)
-            return (new Client()).convertToEntity();
-        if (textFields.size() == 3) {
-            newClient = new Client(textFields.getFirst().getText(),
+            return (new Product()).convertToEntity();
+        if (textFields.size() == 3) { //create
+            newProduct = new Product(textFields.getFirst().getText(),
                     textFields.get(1).getText(),
                     textFields.get(2).getText());
         }
-        else if(textFields.size() == 4){
-            newClient = new Client(textFields.getFirst().getText(),
+        else if(textFields.size() == 4) { //edit
+            newProduct = new Product(textFields.getFirst().getText(),
                     textFields.get(1).getText(),
                     textFields.get(2).getText(),
-                    Integer.parseInt(textFields.get(3).getText()));
+                    textFields.get(3).getText());
         }
-        else
-            newClient = new Client(Integer.parseInt(textFields.getFirst().getText()));
-        return newClient.convertToEntity();
+        else //delete
+            newProduct = new Product(textFields.getFirst().getText());
+
+        return newProduct.convertToEntity();
     }
 }

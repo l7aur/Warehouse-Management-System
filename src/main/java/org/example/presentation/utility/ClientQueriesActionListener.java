@@ -8,9 +8,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class QueriesActionListener implements ActionListener {
+public class ClientQueriesActionListener implements ActionListener {
     private final ViewClientView panel;
-    public QueriesActionListener(ViewClientView panel) {
+    public ClientQueriesActionListener(ViewClientView panel) {
         this.panel = panel;
     }
 

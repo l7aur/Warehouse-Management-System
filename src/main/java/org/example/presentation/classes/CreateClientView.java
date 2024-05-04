@@ -1,7 +1,7 @@
 package org.example.presentation.classes;
 
 import org.example.presentation.utility.Colors;
-import org.example.presentation.utility.UpdatesActionListener;
+import org.example.presentation.utility.ClientUpdatesActionListener;
 import org.example.presentation.utility.MyButton;
 
 import javax.swing.*;
@@ -25,7 +25,7 @@ public class CreateClientView extends AbstractView {
         ArrayList<JTextField> textFields = new ArrayList<>();
         this.add(this.createTextFields(textNames, textFields), BorderLayout.NORTH);
         MyButton executeButton = new MyButton("EXECUTE CREATE");
-        executeButton.addActionListener(new UpdatesActionListener(textFields, this.getId()));
+        executeButton.addActionListener(new ClientUpdatesActionListener(textFields, this.getId()));
         this.add(executeButton, BorderLayout.SOUTH);
     }
 

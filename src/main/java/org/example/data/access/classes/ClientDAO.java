@@ -45,7 +45,7 @@ public class ClientDAO extends AbstractDAO<ClientT> {
     private ArrayList<ClientT> processSelectResultSet(ResultSet rs)  {
         if(rs == null)
             return null;
-        ArrayList<ClientT> list = new ArrayList<ClientT>();
+        ArrayList<ClientT> list = new ArrayList<>();
         try {
             while (rs.next()) {
                 int id = Integer.parseInt(rs.getString("id"));
