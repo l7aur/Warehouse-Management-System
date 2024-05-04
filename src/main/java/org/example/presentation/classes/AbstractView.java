@@ -57,7 +57,7 @@ public abstract class AbstractView extends JPanel implements View {
         });
         table.setBorder(new EmptyBorder(10, 10, 10, 10));
         table.setBackground(Colors.getInstance().getBackgroundColor());
-        table.setSelectionBackground(Colors.getInstance().getForegroundColor());
+        table.setSelectionBackground(Colors.getInstance().getSelectionColor());
         table.setForeground(Colors.getInstance().getForegroundColor());
         return table;
     }
