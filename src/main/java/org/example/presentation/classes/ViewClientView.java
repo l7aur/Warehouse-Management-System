@@ -19,6 +19,7 @@ public class ViewClientView extends AbstractView {
     }
 
     public void updateContent(ArrayList<ClientT> clients) {
+        this.removeAll();
         String[][] data = new String[clients.size()][4];
         String[] columns = {"Name", "Address", "Phone Number", "Id"};
         int i = 0;
@@ -44,6 +45,8 @@ public class ViewClientView extends AbstractView {
         scrollPane.getViewport().setBackground(Colors.getInstance().getBackgroundColor());
 
         this.add(scrollPane, BorderLayout.CENTER);
+        this.revalidate();
+        this.repaint();
     }
 
     @Override
