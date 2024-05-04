@@ -52,7 +52,7 @@ public class ProductPanel extends AbstractView {
 
     private JPanel createOperationButtons() {
         JPanel operationButtons = new JPanel();
-        operationButtons.setBackground(new Color(32, 42,68));
+        operationButtons.setBackground(Colors.getInstance().getBackgroundColor());
         operationButtons.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
         GridLayout layout = new GridLayout(4, 1, 10, 10);
         operationButtons.setLayout(layout);

@@ -1,5 +1,6 @@
 package org.example.presentation.classes;
 
+import org.example.presentation.utility.Colors;
 import org.example.presentation.utility.MyButton;
 import org.example.presentation.utility.NavigateActionListener;
 import org.example.presentation.utility.View;
@@ -17,7 +18,7 @@ public class StartPanel extends JPanel implements View {
     public StartPanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         this.id = "START";
-        this.setBackground(new Color(32, 42,68));
+        this.setBackground(Colors.getInstance().getBackgroundColor());
         this.createContent();
     }
 

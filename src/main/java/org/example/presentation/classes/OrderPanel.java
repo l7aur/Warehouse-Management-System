@@ -1,5 +1,6 @@
 package org.example.presentation.classes;
 
+import org.example.presentation.utility.Colors;
 import org.example.presentation.utility.MyButton;
 import org.example.presentation.utility.NavigateActionListener;
 import org.example.presentation.utility.View;
@@ -17,7 +18,7 @@ public class OrderPanel extends JPanel implements View {
     public OrderPanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         this.id = "ORDER";
-        this.setBackground(new Color(32, 42,68));
+        this.setBackground(Colors.getInstance().getBackgroundColor());
         this.setLayout(new BorderLayout());
         this.createContent();
     }
@@ -30,7 +31,7 @@ public class OrderPanel extends JPanel implements View {
 
     private JPanel createButtonMenu() {
         JPanel panel = new JPanel();
-        panel.setBackground(new Color(32, 42,68));
+        panel.setBackground(Colors.getInstance().getBackgroundColor());
         MyButton backButton = new MyButton("BACK");
         backButton.addActionListener(new NavigateActionListener(this.mainFrame, "BACK"));
         MyButton placeOrderButton = new MyButton("PLACE ORDER");
@@ -41,7 +42,7 @@ public class OrderPanel extends JPanel implements View {
 
     private JPanel createSelectors() {
         JPanel selectorPanel = new JPanel();
-        selectorPanel.setBackground(new Color(32, 42,68));
+        selectorPanel.setBackground(Colors.getInstance().getBackgroundColor());
         selectorPanel.add(this.createSelectorType("CLIENTS"));
         selectorPanel.add(this.createSelectorType("PRODUCTS"));
         selectorPanel.add(this.createSelectorType("QUANTITY"));
@@ -52,10 +53,13 @@ public class OrderPanel extends JPanel implements View {
         JPanel panel = new JPanel();
         panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         panel.setLayout(new GridLayout(2, 1));
-        panel.setBackground(new Color(32, 42,68));
+        panel.setBackground(Colors.getInstance().getBackgroundColor());
         String[] fields = {"aaa", "bbb", "ccc", "ddd"};
+        //todo get fields from clients
+        //todo get fields from products
+        //todo make quantity go from 1 to maximum number taken from products
         JLabel label1 = new JLabel(selectorName);
-        label1.setForeground(new Color(255, 255,255));
+        label1.setForeground(Colors.getInstance().getForegroundColor());
         JComboBox<String> comboBox1 = new JComboBox<>(fields);
         panel.add(label1);
         panel.add(comboBox1);
