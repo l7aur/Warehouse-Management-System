@@ -28,35 +28,31 @@ public class ClientDAO extends AbstractDAO<ClientT> {
             statement.setString(3, client.getAddress());
             statement.executeUpdate();
             rs = statement.getGeneratedKeys();
-            if(rs.next()) {
+            if (rs.next()) {
                 insertedId = rs.getInt(4);
             }
-        }
-        catch (SQLException ex) {
+        } catch (SQLException ex) {
             LOGGER.log(Level.WARNING, "ClientDAO::insert::" + ex.getMessage());
-        }
-        finally {
-            System.out.println("ClientDAO::insert::" + insertedId);
+        } finally {
+            String successString = "success";
+            if(insertedId != -1)
+                successString = "fail";
+            System.out.println("ClientDAO::insert::" + successString + "::" + insertedId); ;
             ConnectionFactory.closeAll(con, statement, rs);
         }
         return insertedId;
     }
 
-    private ArrayList<ClientT> processSelectResultSet(ResultSet rs)  {
-        if(rs == null)
+    private ArrayList<ClientT> processSelectResultSet(ResultSet rs) throws SQLException {
+        if (rs == null)
             return null;
         ArrayList<ClientT> list = new ArrayList<>();
-        try {
-            while (rs.next()) {
-                int id = Integer.parseInt(rs.getString("id"));
-                String name = rs.getString("name");
-                String phoneNumber = rs.getString("phone_number");
-                String address = rs.getString("address");
-                list.add(new ClientT(name, phoneNumber, address, id));
-            }
-        }
-        catch (SQLException ex) {
-            LOGGER.log(Level.WARNING, "ClientDAO::processing select::" + ex.getMessage());
+        while (rs.next()) {
+            int id = Integer.parseInt(rs.getString("id"));
+            String name = rs.getString("name");
+            String phoneNumber = rs.getString("phone_number");
+            String address = rs.getString("address");
+            list.add(new ClientT(name, phoneNumber, address, id));
         }
         return list;
     }
@@ -66,16 +62,18 @@ public class ClientDAO extends AbstractDAO<ClientT> {
         PreparedStatement statement = null;
         ResultSet rs = null;
         ArrayList<ClientT> list = null;
+        String successString = "success";
         try {
             statement = con.prepareStatement(selectStatement, Statement.RETURN_GENERATED_KEYS);
             rs = statement.executeQuery();
             list = processSelectResultSet(rs);
         }
         catch (SQLException ex) {
+            successString = "fail";
             LOGGER.log(Level.WARNING, "ClientDAO::select::" + ex.getMessage());
         }
         finally {
-            System.out.println("ClientDAO::select::0");
+            System.out.println("ClientDAO::select::" + successString);
             ConnectionFactory.closeAll(con, statement, rs);
         }
         return list;
@@ -98,7 +96,10 @@ public class ClientDAO extends AbstractDAO<ClientT> {
             LOGGER.log(Level.WARNING, "ClientDAO::update::" + ex.getMessage());
         }
         finally {
-            System.out.println("ClientDAO::update::" + success);
+            String successString = "success";
+            if(success == -1)
+                successString = "fail";
+            System.out.println("ClientDAO::update::" + successString);
             ConnectionFactory.closeAll(con, statement, null);
         }
     }
@@ -117,7 +118,10 @@ public class ClientDAO extends AbstractDAO<ClientT> {
             LOGGER.log(Level.WARNING, "ClientDAO::delete::" + ex.getMessage());
         }
         finally {
-            System.out.println("ClientDAO::delete::" + success);
+            String successString = "success";
+            if(success == -1)
+                successString = "fail";
+            System.out.println("ClientDAO::delete::" + successString);
             ConnectionFactory.closeAll(con, statement, null);
         }
     }

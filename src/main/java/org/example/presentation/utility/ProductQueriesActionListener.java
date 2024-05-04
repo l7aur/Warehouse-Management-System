@@ -18,7 +18,6 @@ public class ProductQueriesActionListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         ProductT pType = getProductT();
         if (pType != null) {
-            System.out.println(pType);
             ArrayList<ProductT> list = pType.convertToDAO().read();
             panel.updateContent(list);
         }

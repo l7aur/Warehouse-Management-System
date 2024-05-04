@@ -36,28 +36,28 @@ public class ProductDAO extends AbstractDAO<ProductT> {
             LOGGER.log(Level.WARNING, "ProductDAO::insert::" + ex.getMessage());
         }
         finally {
-            System.out.println("ProductDAO::insert::" + insertedId);
+            String successString = "success";
+            if(insertedId != -1)
+                successString = "fail";
+            System.out.println("ProductDAO::insert::" + successString + "::" + insertedId); ;
             ConnectionFactory.closeAll(con, statement, rs);
         }
         return insertedId;
     }
 
-    private ArrayList<ProductT> processSelectResultSet(ResultSet rs)  {
-        if(rs == null)
+    private ArrayList<ProductT> processSelectResultSet(ResultSet rs) throws SQLException {
+        if (rs == null)
             return null;
         ArrayList<ProductT> list = new ArrayList<>();
-        try {
-            while (rs.next()) {
-                int id = Integer.parseInt(rs.getString("id"));
-                String name = rs.getString("name");
-                Integer stock  = Integer.valueOf(rs.getString("stock"));
-                Integer price  = Integer.valueOf(rs.getString("price"));
-                list.add(new ProductT(name, stock, price, id));
-            }
+
+        while (rs.next()) {
+            int id = Integer.parseInt(rs.getString("id"));
+            String name = rs.getString("name");
+            Integer stock = Integer.valueOf(rs.getString("stock"));
+            Integer price = Integer.valueOf(rs.getString("price"));
+            list.add(new ProductT(name, stock, price, id));
         }
-        catch (SQLException ex) {
-            LOGGER.log(Level.WARNING, "ClientDAO::processing select::" + ex.getMessage());
-        }
+
         return list;
     }
     @Override
@@ -66,16 +66,18 @@ public class ProductDAO extends AbstractDAO<ProductT> {
         PreparedStatement statement = null;
         ResultSet rs = null;
         ArrayList<ProductT> list = null;
+        String successString = "success";
         try {
             statement = con.prepareStatement(selectStatement, Statement.RETURN_GENERATED_KEYS);
             rs = statement.executeQuery();
             list = processSelectResultSet(rs);
         }
         catch (SQLException ex) {
+            successString = "fail";
             LOGGER.log(Level.WARNING, "ProductDAO::select::" + ex.getMessage());
         }
         finally {
-            System.out.println("ProductDAO::select::0");
+            System.out.println("ProductDAO::select::"+ successString);
             ConnectionFactory.closeAll(con, statement, rs);
         }
         return list;
@@ -99,7 +101,10 @@ public class ProductDAO extends AbstractDAO<ProductT> {
             LOGGER.log(Level.WARNING, "ProductDAO::update::" + ex.getMessage());
         }
         finally {
-            System.out.println("ProductDAO::update::" + success);
+            String successString = "success";
+            if(success == -1)
+                successString = "fail";
+            System.out.println("ProductDAO::update::" + successString);
             ConnectionFactory.closeAll(con, statement, null);
         }
     }
@@ -120,7 +125,10 @@ public class ProductDAO extends AbstractDAO<ProductT> {
             LOGGER.log(Level.WARNING, "ProductDAO::delete::" + ex.getMessage());
         }
         finally {
-            System.out.println("ProductDAO::delete::" + success);
+            String successString = "success";
+            if(success == -1)
+                successString = "fail";
+            System.out.println("ProductDAO::delete::" + successString);
             ConnectionFactory.closeAll(con, statement, null);
         }
     }

@@ -18,7 +18,6 @@ public class ClientQueriesActionListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         ClientT cType = getClientT();
         if (cType != null) {
-            System.out.println(cType);
             ArrayList<ClientT> list = cType.convertToDAO().read();
             panel.updateContent(list);
         }

@@ -45,7 +45,7 @@ public class ConnectionFactory {
         close(connection);
         close(statement);
         close(resultSet);
-        System.out.println("Connection closed");
+        System.out.println("Connection closed\n");
     }
 
     private static void close(Connection connection) {
