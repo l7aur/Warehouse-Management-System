@@ -5,11 +5,11 @@ import org.example.business.logic.classes.ProductT;
 import org.example.presentation.utility.Colors;
 import org.example.presentation.utility.MyButton;
 import org.example.presentation.utility.NavigateActionListener;
+import org.example.presentation.utility.OrderUpdatesActionListener;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.function.Function;
 
 /**
  * The panel that houses the order view
@@ -19,6 +19,10 @@ public class OrderPanel extends AbstractView {
     private final String id;
     private final MainFrame mainFrame;
     private final JPanel selectorPanel;
+    private JComboBox<ClientT> clientComboBox;
+    private JComboBox<ProductT> productComboBox;
+    private JTextField textField;
+
     private static final String SELECTOR_NAME_1 = "CLIENT";
     private static final String SELECTOR_NAME_2 = "PRODUCT";
     private static final String SELECTOR_NAME_3 = "QUANTITY";
@@ -30,13 +34,7 @@ public class OrderPanel extends AbstractView {
         this.selectorPanel.setLayout(new BoxLayout(selectorPanel, BoxLayout.Y_AXIS));
         this.setBackground(Colors.getInstance().getBackgroundColor());
         this.setLayout(new BorderLayout());
-        this.createContent();
-    }
-
-    @Override
-    public void createContent() {
         this.add(selectorPanel, BorderLayout.PAGE_START);
-        this.add(this.createButtonMenu(), BorderLayout.PAGE_END);
     }
 
     private void setSelectorPanels(JPanel panel) {
@@ -51,6 +49,8 @@ public class OrderPanel extends AbstractView {
         MyButton backButton = new MyButton("BACK");
         backButton.addActionListener(new NavigateActionListener(this.mainFrame, "BACK"));
         MyButton placeOrderButton = new MyButton("PLACE ORDER");
+        placeOrderButton.addActionListener(new OrderUpdatesActionListener(this.textField, this.clientComboBox,
+                this.productComboBox, "INSERT"));
         panel.add(placeOrderButton);
         panel.add(backButton);
         return panel;
@@ -64,7 +64,6 @@ public class OrderPanel extends AbstractView {
         this.setSelectorPanels(selectorPanel2);
         this.setSelectorPanels(selectorPanel3);
 
-
         JLabel label1 = new JLabel(SELECTOR_NAME_1);
         JLabel label2 = new JLabel(SELECTOR_NAME_2);
         JLabel label3 = new JLabel(SELECTOR_NAME_3);
@@ -76,24 +75,29 @@ public class OrderPanel extends AbstractView {
         selectorPanel2.add(label2);
         selectorPanel3.add(label3);
 
-        selectorPanel1.add(this.createSelector(clients, ClientT::getName));
-        selectorPanel2.add(this.createSelector(products, ProductT::getName));
-        selectorPanel3.add(this.createTextField(SELECTOR_NAME_3));
+        this.clientComboBox = this.createSelector(clients);
+        this.productComboBox = this.createSelector(products);
+        this.textField = this.createTextField(SELECTOR_NAME_3);
+
+        selectorPanel1.add(this.clientComboBox);
+        selectorPanel2.add(this.productComboBox);
+        selectorPanel3.add(this.textField);
 
         this.selectorPanel.removeAll();
         this.selectorPanel.add(selectorPanel1);
         this.selectorPanel.add(selectorPanel2);
         this.selectorPanel.add(selectorPanel3);
 
+        this.add(this.createButtonMenu(), BorderLayout.PAGE_END);
+
         this.revalidate();
         this.repaint();
     }
 
-    private <T> JComboBox<String> createSelector(ArrayList<T> list, Function<T, String> getName) {
-        String[] fields = new String[list.size() + 1];
-        fields[0] = "---";
+    private <T> JComboBox<T> createSelector(ArrayList<T> list) {
+        T[] fields = (T[]) new Object[list.size()];
         for (int i = 0; i < list.size(); i++) {
-            fields[i + 1] = getName.apply(list.get(i));
+            fields[i] = list.get(i);
         }
         return new JComboBox<>(fields);
     }

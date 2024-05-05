@@ -26,9 +26,9 @@ public class ProductPanel extends AbstractView {
 
     @Override
     public void createContent() {
-        MyButton buttonElement = new MyButton("BACK");
-        buttonElement.addActionListener(new NavigateActionListener(this.mainFrame, "BACK"));
         this.setMainPanel();
+        MyButton buttonElement = new MyButton("BACK");
+        buttonElement.addActionListener(new NavigateActionListener(this.mainFrame, "BACK", this.panel));
         this.add(buttonElement, BorderLayout.PAGE_END);
         this.add(this.createOperationButtons(), BorderLayout.WEST);
         this.add(this.panel, BorderLayout.CENTER);

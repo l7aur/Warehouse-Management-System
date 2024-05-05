@@ -1,23 +1,29 @@
 package org.example.business.logic.classes;
 
+import org.example.data.access.classes.OrderDAO;
+
 public class OrderT {
-    private int orderID;
+    private int productID;
     private int clientID;
     private int quantity;
     private int id;
 
-    public OrderT(int orderID, int clientID, int quantity) {
-        this.orderID = orderID;
+    public OrderT(int clientID, int productID, int quantity) {
+        this.productID = productID;
         this.clientID = clientID;
         this.quantity = quantity;
     }
 
-    public int getOrderID() {
-        return orderID;
+    public int getProductID() {
+        return productID;
     }
 
-    public void setOrderID(int orderID) {
-        this.orderID = orderID;
+    public OrderDAO convertToDAO() {
+        return new OrderDAO();
+    }
+
+    public void setProductID(int productID) {
+        this.productID = productID;
     }
 
     public int getClientID() {

@@ -26,7 +26,7 @@ public class ClientUpdatesActionListener implements ActionListener {
                 this.type = QueryType.DELETE;
                 break;
             default:
-                System.out.println("You should not be here");
+                System.out.println("You should not be here!!!");
                 break;
         }
     }
@@ -50,12 +50,12 @@ public class ClientUpdatesActionListener implements ActionListener {
                     cType.convertToDAO().delete(cType);
                     break;
                 default:
-                    System.out.println("You should not be here");
+                    System.out.println("You should not be here!!!!");
                     break;
             }
         }
         else
-            System.out.println("null");
+            System.out.println("Client is null");
     }
 
     private ClientT getClientT() {

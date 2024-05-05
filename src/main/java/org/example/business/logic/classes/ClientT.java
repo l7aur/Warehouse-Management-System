@@ -68,6 +68,6 @@ public class ClientT {
 
     @Override
     public String toString() {
-        return "ClientT [name=" + name + ", phoneNumber=" + phoneNumber + ", address=" + address + ", id=" + id +"]";
+        return name;
     }
 }

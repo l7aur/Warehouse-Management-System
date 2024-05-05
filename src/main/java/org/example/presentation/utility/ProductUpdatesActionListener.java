@@ -26,7 +26,7 @@ public class ProductUpdatesActionListener implements ActionListener {
                 this.type = QueryType.DELETE;
                 break;
             default:
-                System.out.println("You should not be here");
+                System.out.println("You should not be here !!" + operationName);
                 break;
         }
     }
@@ -50,7 +50,7 @@ public class ProductUpdatesActionListener implements ActionListener {
                     pType.convertToDAO().delete(pType);
                     break;
                 default:
-                    System.out.println("You should not be here");
+                    System.out.println("You should not be here !");
                     break;
             }
         }

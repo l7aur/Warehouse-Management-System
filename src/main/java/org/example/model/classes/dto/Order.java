@@ -10,26 +10,32 @@ import org.example.model.utility.QuantityValidator;
  */
 public class Order {
     private final String clientID;
-    private final String orderID;
+    private final String productID;
     private final String quantity;
     private String id;
 
-    public Order(String clientID, String orderID, String quantity) {
+    public Order(String clientID, String productID, String quantity) {
         this.clientID = clientID;
-        this.orderID = orderID;
+        this.productID = productID;
         this.quantity = quantity;
     }
 
     public OrderT convertToEntity() {
         try {
             IdValidator.getValidator().validate(this.clientID);
-            IdValidator.getValidator().validate(this.orderID);
+            IdValidator.getValidator().validate(this.productID);
             QuantityValidator.getValidator().validate(this.quantity);
         }
         catch (IllegalArgumentException e) {
             System.out.println(e.toString());
             return null;
         }
-        return new OrderT(Integer.parseInt(this.clientID), Integer.parseInt(this.orderID), Integer.parseInt(this.quantity));
+        return new OrderT(Integer.parseInt(this.clientID), Integer.parseInt(this.productID),
+                Integer.parseInt(this.quantity));
+    }
+
+    @Override
+    public String toString() {
+        return "Order [clientID=" + clientID + ", productID=" + productID + ", quantity=" + quantity + "id=" + id +"]";
     }
 }

@@ -16,11 +16,6 @@ public class ClientDAO extends AbstractDAO<ClientT> {
     private static final String deleteStatement = "DELETE FROM client WHERE id = ?";
     private static final String selectStatement = "SELECT * FROM client";
 
-    private static final int ID_COLUMN = 4;
-    private static final int NAME_COLUMN = 1;
-    private static final int PHONE_NUMBER_COLUMN = 2;
-    private static final int ADDRESS_COLUMN = 3;
-
     @Override
     public int create(ClientT client) {
         Connection con = ConnectionFactory.getConnection();
@@ -29,19 +24,19 @@ public class ClientDAO extends AbstractDAO<ClientT> {
         int insertedId = -1;
         try {
             statement = con.prepareStatement(createStatement, Statement.RETURN_GENERATED_KEYS);
-            statement.setString(NAME_COLUMN, client.getName());
-            statement.setString(PHONE_NUMBER_COLUMN, client.getPhoneNumber());
-            statement.setString(ADDRESS_COLUMN, client.getAddress());
+            statement.setString(1, client.getName());
+            statement.setString(2, client.getPhoneNumber());
+            statement.setString(3, client.getAddress());
             statement.executeUpdate();
             rs = statement.getGeneratedKeys();
             if (rs.next()) {
-                insertedId = rs.getInt(ID_COLUMN);
+                insertedId = rs.getInt(4);
             }
         } catch (SQLException ex) {
             LOGGER.log(Level.WARNING, "ClientDAO::insert::" + ex.getMessage());
         } finally {
             String successString = "success";
-            if(insertedId != -1)
+            if(insertedId == -1)
                 successString = "fail";
             System.out.println("ClientDAO::insert::" + successString + "::" + insertedId);
             ConnectionFactory.closeAll(con, statement, rs);
@@ -92,10 +87,10 @@ public class ClientDAO extends AbstractDAO<ClientT> {
         int success = -1;
         try {
             statement = con.prepareStatement(updateStatement, Statement.RETURN_GENERATED_KEYS);
-            statement.setString(NAME_COLUMN, client.getName());
-            statement.setString(PHONE_NUMBER_COLUMN, client.getPhoneNumber());
-            statement.setString(ADDRESS_COLUMN, client.getAddress());
-            statement.setInt(ID_COLUMN, client.getId());
+            statement.setString(1, client.getName());
+            statement.setString(2, client.getPhoneNumber());
+            statement.setString(3, client.getAddress());
+            statement.setInt(4, client.getId());
             success = statement.executeUpdate();
         }
         catch (SQLException ex) {
@@ -117,7 +112,7 @@ public class ClientDAO extends AbstractDAO<ClientT> {
         int success = -1;
         try {
             statement = con.prepareStatement(deleteStatement, Statement.RETURN_GENERATED_KEYS);
-            statement.setInt(ID_COLUMN, client.getId());
+            statement.setInt(1, client.getId());
             success = statement.executeUpdate();
         }
         catch (SQLException ex) {

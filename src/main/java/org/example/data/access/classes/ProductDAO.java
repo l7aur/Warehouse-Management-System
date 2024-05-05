@@ -15,11 +15,32 @@ public class ProductDAO extends AbstractDAO<ProductT> {
     private static final String updateStatement = "UPDATE product SET name = ?, stock = ?, price = ? WHERE id = ?";
     private static final String deleteStatement = "DELETE FROM product WHERE id = ?";
     private static final String selectStatement = "SELECT * FROM product";
+    private static final String selectByIdStatement = "SELECT * FROM product WHERE id = ?";
 
-    private static final int ID_COLUMN = 3;
-    private static final int NAME_COLUMN = 1;
-    private static final int STOCK_COLUMN = 2;
-    private static final int PRICE_COLUMN = 4;
+    public ProductT getProductById(int id) {
+        ProductT product = new ProductT();
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement statement = null;
+        ResultSet rs = null;
+        try {
+            statement = con.prepareStatement(selectByIdStatement, Statement.RETURN_GENERATED_KEYS);
+            statement.setInt(1, id);
+            rs = statement.executeQuery();
+            if(rs.next()) {
+                product.setId(rs.getInt(3));
+                product.setName(rs.getString(1));
+                product.setStock(rs.getInt(2));
+                product.setPrice(rs.getInt(4));
+            }
+        }
+        catch (SQLException ex) {
+            LOGGER.log(Level.WARNING, "ProductDAO::selectById::" + ex.getMessage());
+        }
+        finally {
+            ConnectionFactory.closeAll(con, statement, rs);
+        }
+        return product;
+    }
 
     @Override
     public int create(ProductT product) {
@@ -29,13 +50,13 @@ public class ProductDAO extends AbstractDAO<ProductT> {
         int insertedId = -1;
         try {
             statement = con.prepareStatement(createStatement, Statement.RETURN_GENERATED_KEYS);
-            statement.setString(NAME_COLUMN, product.getName());
-            statement.setInt(STOCK_COLUMN, product.getStock());
-            statement.setInt(PRICE_COLUMN, product.getPrice());
+            statement.setString(1, product.getName());
+            statement.setInt(2, product.getStock());
+            statement.setInt(3, product.getPrice());
             statement.executeUpdate();
             rs = statement.getGeneratedKeys();
             if(rs.next()) {
-                insertedId = rs.getInt(ID_COLUMN);
+                insertedId = rs.getInt(4);
             }
         }
         catch (SQLException ex) {
@@ -43,7 +64,7 @@ public class ProductDAO extends AbstractDAO<ProductT> {
         }
         finally {
             String successString = "success";
-            if(insertedId != -1)
+            if(insertedId == -1)
                 successString = "fail";
             System.out.println("ProductDAO::insert::" + successString + "::" + insertedId);
             ConnectionFactory.closeAll(con, statement, rs);
@@ -96,11 +117,10 @@ public class ProductDAO extends AbstractDAO<ProductT> {
         int success = -1;
         try {
             statement = con.prepareStatement(updateStatement, Statement.RETURN_GENERATED_KEYS);
-            statement.setString(NAME_COLUMN, product.getName());
-            statement.setInt(STOCK_COLUMN, product.getStock());
-            statement.setInt(PRICE_COLUMN, product.getPrice());
-            statement.setInt(ID_COLUMN, product.getId());
-            System.out.println(product.getId() + " " + product.getName() + " " + product.getStock() + " " + product.getPrice());
+            statement.setString(1, product.getName());
+            statement.setInt(2, product.getStock());
+            statement.setInt(3, product.getPrice());
+            statement.setInt(4, product.getId());
             success = statement.executeUpdate();
         }
         catch (SQLException ex) {
@@ -124,7 +144,7 @@ public class ProductDAO extends AbstractDAO<ProductT> {
         try {
             statement = con.prepareStatement(deleteStatement, Statement.RETURN_GENERATED_KEYS);
             System.out.println(product.getId());
-            statement.setInt(ID_COLUMN, product.getId());
+            statement.setInt(1, product.getId());
             success = statement.executeUpdate();
         }
         catch (SQLException ex) {

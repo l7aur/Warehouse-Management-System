@@ -21,10 +21,13 @@ public abstract class AbstractDAO<T> {
 //        PreparedStatement ps = null;
 //        ResultSet rs = null;
         return -1;
-    };
+    }
+
     public ArrayList<T> read() {
         return null;
-    };
-    public void update(T t){};
-    public void delete(T t){};
+    }
+
+    public void update(T t){}
+
+    public void delete(T t){}
 }

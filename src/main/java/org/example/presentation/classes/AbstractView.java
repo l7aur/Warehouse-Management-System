@@ -1,9 +1,6 @@
 package org.example.presentation.classes;
 
-import org.example.presentation.utility.Colors;
-import org.example.presentation.utility.MyButton;
-import org.example.presentation.utility.ProductUpdatesActionListener;
-import org.example.presentation.utility.View;
+import org.example.presentation.utility.*;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -38,7 +35,10 @@ public abstract class AbstractView extends JPanel implements View {
         String[] names = {"Id: "};
         this.add(this.createTextFields(names, fields), BorderLayout.NORTH);
         MyButton executeButton = new MyButton("EXECUTE DELETE");
-        executeButton.addActionListener(new ProductUpdatesActionListener(fields, this.getId()));
+        if(this.getId().equals("DELETE_CLIENT_VIEW"))
+            executeButton.addActionListener(new ClientUpdatesActionListener(fields, this.getId()));
+        else
+            executeButton.addActionListener(new ProductUpdatesActionListener(fields, this.getId()));
         this.add(executeButton, BorderLayout.SOUTH);
     }
 
@@ -71,4 +71,5 @@ public abstract class AbstractView extends JPanel implements View {
         table.setForeground(Colors.getInstance().getForegroundColor());
         return table;
     }
+
 }

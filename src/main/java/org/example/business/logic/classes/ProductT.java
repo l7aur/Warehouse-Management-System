@@ -72,6 +72,6 @@ public class ProductT {
 
     @Override
     public String toString() {
-        return "ProductT [name=" + name + ", stock=" + stock + ", price=" + price +"]";
+        return name;
     }
 }
