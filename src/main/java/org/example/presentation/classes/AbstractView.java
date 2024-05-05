@@ -1,6 +1,8 @@
 package org.example.presentation.classes;
 
 import org.example.presentation.utility.Colors;
+import org.example.presentation.utility.MyButton;
+import org.example.presentation.utility.ProductUpdatesActionListener;
 import org.example.presentation.utility.View;
 
 import javax.swing.*;
@@ -30,7 +32,15 @@ public abstract class AbstractView extends JPanel implements View {
     }
 
     @Override
-    public void createContent(){}
+    public void createContent() {
+        this.setBorder(new EmptyBorder(10, 10, 10, 10));
+        ArrayList<JTextField> fields = new ArrayList<>();
+        String[] names = {"Id: "};
+        this.add(this.createTextFields(names, fields), BorderLayout.NORTH);
+        MyButton executeButton = new MyButton("EXECUTE DELETE");
+        executeButton.addActionListener(new ProductUpdatesActionListener(fields, this.getId()));
+        this.add(executeButton, BorderLayout.SOUTH);
+    }
 
     @Override
     public String getId() {

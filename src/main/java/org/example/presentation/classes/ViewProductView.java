@@ -12,7 +12,6 @@ public class ViewProductView extends AbstractView {
         this.id = "VIEW_PRODUCT_VIEW";
         this.setBackground(Colors.getInstance().getBackgroundColor());
         this.setLayout(new BorderLayout());
-        this.createContent();
     }
 
     public void updateContent(ArrayList<ProductT> products) {

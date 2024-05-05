@@ -9,9 +9,9 @@ import org.example.model.utility.QuantityValidator;
  * @author L7aur
  */
 public class Order {
-    private String clientID;
-    private String orderID;
-    private String quantity;
+    private final String clientID;
+    private final String orderID;
+    private final String quantity;
     private String id;
 
     public Order(String clientID, String orderID, String quantity) {

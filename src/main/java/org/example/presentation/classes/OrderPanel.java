@@ -98,7 +98,6 @@ public class OrderPanel extends AbstractView {
         return new JComboBox<>(fields);
     }
 
-
     private JTextField createTextField(String name) {
         JTextField field = new JTextField();
         JLabel label = new JLabel(name);

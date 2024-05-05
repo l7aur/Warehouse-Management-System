@@ -13,7 +13,6 @@ public class ViewClientView extends AbstractView {
         this.id = "VIEW_CLIENT_VIEW";
         this.setBackground(Colors.getInstance().getBackgroundColor());
         this.setLayout(new BorderLayout());
-        this.createContent();
     }
 
     public void updateContent(ArrayList<ClientT> clients) {
