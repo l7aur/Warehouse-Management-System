@@ -10,10 +10,16 @@ import java.util.logging.Logger;
 
 public class ClientDAO extends AbstractDAO<ClientT> {
     private static final Logger LOGGER = Logger.getLogger(ClientDAO.class.getName());
+
     private static final String createStatement = "INSERT INTO client (name, phone_number, address) VALUES (?, ?, ?)";
     private static final String updateStatement = "UPDATE client SET name = ?, phone_number = ?, address = ? WHERE id = ?";
     private static final String deleteStatement = "DELETE FROM client WHERE id = ?";
     private static final String selectStatement = "SELECT * FROM client";
+
+    private static final int ID_COLUMN = 4;
+    private static final int NAME_COLUMN = 1;
+    private static final int PHONE_NUMBER_COLUMN = 2;
+    private static final int ADDRESS_COLUMN = 3;
 
     @Override
     public int create(ClientT client) {
@@ -23,13 +29,13 @@ public class ClientDAO extends AbstractDAO<ClientT> {
         int insertedId = -1;
         try {
             statement = con.prepareStatement(createStatement, Statement.RETURN_GENERATED_KEYS);
-            statement.setString(1, client.getName());
-            statement.setString(2, client.getPhoneNumber());
-            statement.setString(3, client.getAddress());
+            statement.setString(NAME_COLUMN, client.getName());
+            statement.setString(PHONE_NUMBER_COLUMN, client.getPhoneNumber());
+            statement.setString(ADDRESS_COLUMN, client.getAddress());
             statement.executeUpdate();
             rs = statement.getGeneratedKeys();
             if (rs.next()) {
-                insertedId = rs.getInt(4);
+                insertedId = rs.getInt(ID_COLUMN);
             }
         } catch (SQLException ex) {
             LOGGER.log(Level.WARNING, "ClientDAO::insert::" + ex.getMessage());
@@ -37,7 +43,7 @@ public class ClientDAO extends AbstractDAO<ClientT> {
             String successString = "success";
             if(insertedId != -1)
                 successString = "fail";
-            System.out.println("ClientDAO::insert::" + successString + "::" + insertedId); ;
+            System.out.println("ClientDAO::insert::" + successString + "::" + insertedId);
             ConnectionFactory.closeAll(con, statement, rs);
         }
         return insertedId;
@@ -86,10 +92,10 @@ public class ClientDAO extends AbstractDAO<ClientT> {
         int success = -1;
         try {
             statement = con.prepareStatement(updateStatement, Statement.RETURN_GENERATED_KEYS);
-            statement.setString(1, client.getName());
-            statement.setString(2, client.getPhoneNumber());
-            statement.setString(3, client.getAddress());
-            statement.setInt(4, client.getId());
+            statement.setString(NAME_COLUMN, client.getName());
+            statement.setString(PHONE_NUMBER_COLUMN, client.getPhoneNumber());
+            statement.setString(ADDRESS_COLUMN, client.getAddress());
+            statement.setInt(ID_COLUMN, client.getId());
             success = statement.executeUpdate();
         }
         catch (SQLException ex) {
@@ -111,7 +117,7 @@ public class ClientDAO extends AbstractDAO<ClientT> {
         int success = -1;
         try {
             statement = con.prepareStatement(deleteStatement, Statement.RETURN_GENERATED_KEYS);
-            statement.setInt(1, client.getId());
+            statement.setInt(ID_COLUMN, client.getId());
             success = statement.executeUpdate();
         }
         catch (SQLException ex) {

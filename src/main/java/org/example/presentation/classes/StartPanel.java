@@ -1,9 +1,7 @@
 package org.example.presentation.classes;
 
-import org.example.presentation.utility.Colors;
-import org.example.presentation.utility.MyButton;
-import org.example.presentation.utility.NavigateActionListener;
-import org.example.presentation.utility.View;
+import org.example.model.classes.dto.Order;
+import org.example.presentation.utility.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,9 +10,10 @@ import java.awt.*;
  * The initial panel that is displayed when the application is run
  * @author L7aur
  */
-public class StartPanel extends JPanel implements View {
+public class StartPanel extends AbstractView {
     private final String id;
     private final MainFrame mainFrame;
+
     public StartPanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         this.id = "START";
@@ -28,8 +27,15 @@ public class StartPanel extends JPanel implements View {
         MyButton goToOrders = new MyButton("CREATE ORDER");
         MyButton goToProducts = new MyButton("PRODUCT OPERATIONS");
         goToClient.addActionListener(new NavigateActionListener(this.mainFrame, "CLIENT"));
-        goToOrders.addActionListener(new NavigateActionListener(this.mainFrame, "ORDER"));
         goToProducts.addActionListener(new NavigateActionListener(this.mainFrame, "PRODUCT"));
+        goToOrders.addActionListener(new NavigateActionListener(this.mainFrame, "ORDER"));
+        OrderPanel panel = null;
+        for (Component component : this.mainFrame.getContentPane().getComponents()) {
+            System.out.println(component.getClass().getName());
+            if(component instanceof OrderPanel)
+                panel = (OrderPanel) component;
+        }
+        goToOrders.addActionListener(new OrderPageActionListener(panel));
         this.add(goToClient);
         this.add(goToOrders);
         this.add(goToProducts);

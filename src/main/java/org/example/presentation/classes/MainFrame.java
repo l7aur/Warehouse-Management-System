@@ -38,13 +38,16 @@ public class MainFrame extends JFrame {
     }
     public void addPanels() {
         OrderPanel orderPanel = new OrderPanel(this);
+        contentPane.add(orderPanel, orderPanel.getId());
+
         ClientPanel clientPanel = new ClientPanel(this);
+        contentPane.add(clientPanel, clientPanel.getId());
+
         ProductPanel productPanel = new ProductPanel(this);
+        contentPane.add(productPanel, productPanel.getId());
+
         StartPanel startPanel = new StartPanel(this);
         contentPane.add(startPanel, startPanel.getId());
-        contentPane.add(clientPanel, clientPanel.getId());
-        contentPane.add(productPanel, productPanel.getId());
-        contentPane.add(orderPanel, orderPanel.getId());
     }
 
     public void showPanel(String index) {

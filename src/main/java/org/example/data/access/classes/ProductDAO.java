@@ -10,10 +10,16 @@ import java.util.logging.Logger;
 
 public class ProductDAO extends AbstractDAO<ProductT> {
     private static final Logger LOGGER = Logger.getLogger(ProductDAO.class.getName());
+
     private static final String createStatement = "INSERT INTO product (name, stock, price ) VALUES (?, ?, ?)";
     private static final String updateStatement = "UPDATE product SET name = ?, stock = ?, price = ? WHERE id = ?";
     private static final String deleteStatement = "DELETE FROM product WHERE id = ?";
     private static final String selectStatement = "SELECT * FROM product";
+
+    private static final int ID_COLUMN = 3;
+    private static final int NAME_COLUMN = 1;
+    private static final int STOCK_COLUMN = 2;
+    private static final int PRICE_COLUMN = 4;
 
     @Override
     public int create(ProductT product) {
@@ -23,13 +29,13 @@ public class ProductDAO extends AbstractDAO<ProductT> {
         int insertedId = -1;
         try {
             statement = con.prepareStatement(createStatement, Statement.RETURN_GENERATED_KEYS);
-            statement.setString(1, product.getName());
-            statement.setInt(2, product.getStock());
-            statement.setInt(3, product.getPrice());
+            statement.setString(NAME_COLUMN, product.getName());
+            statement.setInt(STOCK_COLUMN, product.getStock());
+            statement.setInt(PRICE_COLUMN, product.getPrice());
             statement.executeUpdate();
             rs = statement.getGeneratedKeys();
             if(rs.next()) {
-                insertedId = rs.getInt(4);
+                insertedId = rs.getInt(ID_COLUMN);
             }
         }
         catch (SQLException ex) {
@@ -39,7 +45,7 @@ public class ProductDAO extends AbstractDAO<ProductT> {
             String successString = "success";
             if(insertedId != -1)
                 successString = "fail";
-            System.out.println("ProductDAO::insert::" + successString + "::" + insertedId); ;
+            System.out.println("ProductDAO::insert::" + successString + "::" + insertedId);
             ConnectionFactory.closeAll(con, statement, rs);
         }
         return insertedId;
@@ -90,10 +96,10 @@ public class ProductDAO extends AbstractDAO<ProductT> {
         int success = -1;
         try {
             statement = con.prepareStatement(updateStatement, Statement.RETURN_GENERATED_KEYS);
-            statement.setString(1, product.getName());
-            statement.setInt(2, product.getStock());
-            statement.setInt(3, product.getPrice());
-            statement.setInt(4, product.getId());
+            statement.setString(NAME_COLUMN, product.getName());
+            statement.setInt(STOCK_COLUMN, product.getStock());
+            statement.setInt(PRICE_COLUMN, product.getPrice());
+            statement.setInt(ID_COLUMN, product.getId());
             System.out.println(product.getId() + " " + product.getName() + " " + product.getStock() + " " + product.getPrice());
             success = statement.executeUpdate();
         }
@@ -118,7 +124,7 @@ public class ProductDAO extends AbstractDAO<ProductT> {
         try {
             statement = con.prepareStatement(deleteStatement, Statement.RETURN_GENERATED_KEYS);
             System.out.println(product.getId());
-            statement.setInt(1, product.getId());
+            statement.setInt(ID_COLUMN, product.getId());
             success = statement.executeUpdate();
         }
         catch (SQLException ex) {
