@@ -1,7 +1,7 @@
 package org.example.presentation.utility;
 
 /**
- * Interface for views for easier further extension.
+ * Interface that is implemented by each View in the application
  * @author L7aur
  */
 public interface View {

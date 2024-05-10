@@ -1,6 +1,7 @@
 package org.example.presentation.classes;
 
 import org.example.business.logic.classes.ClientT;
+import org.example.presentation.utility.AbstractView;
 import org.example.presentation.utility.Colors;
 
 import java.awt.*;

@@ -6,7 +6,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Singleton pattern
+ * The class that implements the connection to the database.
  * @author L7aur
  */
 public class ConnectionFactory {
@@ -18,6 +19,9 @@ public class ConnectionFactory {
 
     private static final ConnectionFactory singleInstance = new ConnectionFactory();
 
+    /**
+     * Empty constructor
+     */
     private ConnectionFactory() {
         try {
             Class.forName(DRIVER);
@@ -27,6 +31,10 @@ public class ConnectionFactory {
         }
     }
 
+    /**
+     * Creates a connection to the database
+     * @return a Connection
+     */
     private Connection createConnection() {
         Connection connection = null;
         try {
@@ -38,9 +46,21 @@ public class ConnectionFactory {
         }
         return connection;
     }
+
+    /**
+     * Getter
+     * @return the singleton instance open connection
+     */
     public static Connection getConnection() {
         return singleInstance.createConnection();
     }
+
+    /**
+     * Closes everything related to the connection to the database
+     * @param connection the Connection object if any
+     * @param statement the Statement object if any
+     * @param resultSet the ResultSet object if any
+     */
     public static void closeAll(Connection connection, Statement statement, ResultSet resultSet) {
         close(connection);
         close(statement);
@@ -48,6 +68,10 @@ public class ConnectionFactory {
         System.out.println("Connection closed\n");
     }
 
+    /**
+     * Closes the Connection object if any
+     * @param connection the Connection object to be closed
+     */
     private static void close(Connection connection) {
         if (connection != null) {
             try {
@@ -58,6 +82,10 @@ public class ConnectionFactory {
         }
     }
 
+    /**
+     * Closes the Statement object if any
+     * @param statement the Statement object to be closed
+     */
     private static void close(Statement statement) {
         if (statement != null) {
             try {
@@ -68,6 +96,10 @@ public class ConnectionFactory {
         }
     }
 
+    /**
+     * Closes a ResultSet object if any
+     * @param resultSet the ResultSet object to be closed
+     */
     private static void close(ResultSet resultSet) {
         if (resultSet != null) {
             try {

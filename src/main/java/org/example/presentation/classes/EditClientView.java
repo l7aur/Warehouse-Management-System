@@ -1,5 +1,6 @@
 package org.example.presentation.classes;
 
+import org.example.presentation.utility.AbstractView;
 import org.example.presentation.utility.Colors;
 import org.example.presentation.utility.ClientUpdatesActionListener;
 import org.example.presentation.utility.MyButton;

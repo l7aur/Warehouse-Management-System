@@ -2,10 +2,7 @@ package org.example.presentation.classes;
 
 import org.example.business.logic.classes.ClientT;
 import org.example.business.logic.classes.ProductT;
-import org.example.presentation.utility.Colors;
-import org.example.presentation.utility.MyButton;
-import org.example.presentation.utility.NavigateActionListener;
-import org.example.presentation.utility.OrderUpdatesActionListener;
+import org.example.presentation.utility.*;
 
 import javax.swing.*;
 import java.awt.*;
