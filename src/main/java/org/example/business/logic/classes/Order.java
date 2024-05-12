@@ -1,18 +1,14 @@
-package org.example.model.classes.dto;
+package org.example.business.logic.classes;
 
-import org.example.business.logic.classes.OrderT;
-import org.example.model.utility.IdValidator;
-import org.example.model.utility.QuantityValidator;
+import org.example.model.classes.dto.OrderT;
+import org.example.business.logic.utility.IdValidator;
+import org.example.business.logic.utility.QuantityValidator;
 
 /**
  *  The order data transfer object
  * @author L7aur
  */
-public class Order {
-    private final String clientID;
-    private final String productID;
-    private final String quantity;
-    private String id;
+public record Order(String clientID, String productID, String quantity, String id) {
 
     /**
      * Parameterised constructor
@@ -21,9 +17,7 @@ public class Order {
      * @param quantity the quantity requested by the order
      */
     public Order(String clientID, String productID, String quantity) {
-        this.clientID = clientID;
-        this.productID = productID;
-        this.quantity = quantity;
+        this(clientID, productID, quantity, null);
     }
 
     /**
@@ -40,7 +34,7 @@ public class Order {
             QuantityValidator.getValidator().validate(this.quantity);
         }
         catch (IllegalArgumentException e) {
-            System.out.println(e.toString());
+            System.out.println("<EXCEPTION> Order.java");
             return null;
         }
         return new OrderT(Integer.parseInt(this.clientID), Integer.parseInt(this.productID),

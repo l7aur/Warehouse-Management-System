@@ -1,6 +1,6 @@
 package org.example.data.access.classes;
 
-import org.example.business.logic.classes.ProductT;
+import org.example.model.classes.dto.ProductT;
 import org.example.data.access.utility.ConnectionFactory;
 
 import java.sql.*;
@@ -72,10 +72,10 @@ public class ProductDAO extends AbstractDAO<ProductT> {
         return insertedId;
     }
 
-    private ArrayList<ProductT> processSelectResultSet(ResultSet rs) throws SQLException {
+    private ArrayList<Object> processSelectResultSet(ResultSet rs) throws SQLException {
         if (rs == null)
             return null;
-        ArrayList<ProductT> list = new ArrayList<>();
+        ArrayList<Object> list = new ArrayList<>();
 
         while (rs.next()) {
             int id = Integer.parseInt(rs.getString("id"));
@@ -88,11 +88,11 @@ public class ProductDAO extends AbstractDAO<ProductT> {
         return list;
     }
     @Override
-    public ArrayList<ProductT> read() {
+    public ArrayList<Object> read() {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement statement = null;
         ResultSet rs = null;
-        ArrayList<ProductT> list = null;
+        ArrayList<Object> list = null;
         String successString = "success";
         try {
             statement = con.prepareStatement(selectStatement, Statement.RETURN_GENERATED_KEYS);

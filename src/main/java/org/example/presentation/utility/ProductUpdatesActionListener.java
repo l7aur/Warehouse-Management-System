@@ -1,8 +1,8 @@
 package org.example.presentation.utility;
 
-import org.example.business.logic.classes.ProductT;
+import org.example.model.classes.dto.ProductT;
 import org.example.data.access.utility.QueryType;
-import org.example.model.classes.dto.Product;
+import org.example.business.logic.classes.Product;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

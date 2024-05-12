@@ -1,6 +1,6 @@
 package org.example.presentation.classes;
 
-import org.example.business.logic.classes.ClientT;
+import org.example.model.classes.dto.ClientT;
 import org.example.presentation.utility.AbstractView;
 import org.example.presentation.utility.Colors;
 
@@ -29,7 +29,7 @@ public class ViewClientView extends AbstractView {
                 data[i][3] = client.getId().toString();
                 i++;
             }
-            addScrollPane(data, columns, "CLIENTS");
+            addScrollPane(data, columns);
         }
         this.revalidate();
         this.repaint();

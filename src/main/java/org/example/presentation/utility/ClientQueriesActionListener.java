@@ -1,7 +1,7 @@
 package org.example.presentation.utility;
 
-import org.example.business.logic.classes.ClientT;
-import org.example.model.classes.dto.Client;
+import org.example.model.classes.dto.ClientT;
+import org.example.business.logic.classes.Client;
 import org.example.presentation.classes.ViewClientView;
 
 import java.awt.event.ActionEvent;
@@ -18,7 +18,7 @@ public class ClientQueriesActionListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         ClientT cType = getClientT();
         if (cType != null) {
-            ArrayList<ClientT> list = cType.convertToDAO().read();
+            ArrayList<Object> list = cType.convertToDAO().read();
             panel.updateContent(list);
         }
         else

@@ -1,4 +1,4 @@
-package org.example.model.utility;
+package org.example.business.logic.utility;
 
 import java.util.regex.Pattern;
 

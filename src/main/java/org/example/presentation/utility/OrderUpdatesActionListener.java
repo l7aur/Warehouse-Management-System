@@ -1,10 +1,10 @@
 package org.example.presentation.utility;
 
-import org.example.business.logic.classes.ClientT;
-import org.example.business.logic.classes.OrderT;
-import org.example.business.logic.classes.ProductT;
+import org.example.model.classes.dto.ClientT;
+import org.example.model.classes.dto.OrderT;
+import org.example.model.classes.dto.ProductT;
 import org.example.data.access.utility.QueryType;
-import org.example.model.classes.dto.Order;
+import org.example.business.logic.classes.Order;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

@@ -1,9 +1,9 @@
 package org.example.presentation.utility;
 
-import org.example.business.logic.classes.ClientT;
-import org.example.business.logic.classes.ProductT;
-import org.example.model.classes.dto.Client;
-import org.example.model.classes.dto.Product;
+import org.example.model.classes.dto.ClientT;
+import org.example.model.classes.dto.ProductT;
+import org.example.business.logic.classes.Client;
+import org.example.business.logic.classes.Product;
 import org.example.presentation.classes.OrderPanel;
 
 import java.awt.event.ActionEvent;
@@ -22,14 +22,14 @@ public class OrderPageActionListener implements ActionListener {
         ProductT pType = getProductT();
         ClientT cType = getClientT();
 
-        ArrayList<ProductT> productList = null;
-        ArrayList<ClientT> clientList = null;
+        ArrayList<Object> productList = null;
+        ArrayList<Object> clientList = null;
 
         if(pType != null)
             productList = pType.convertToDAO().read();
         if(cType != null)
             clientList = cType.convertToDAO().read();
-        this.panel.updateContent(clientList, productList);
+//        this.panel.updateContent(clientList, productList);
     }
 
     private ClientT getClientT() {

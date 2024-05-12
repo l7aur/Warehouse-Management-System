@@ -1,4 +1,4 @@
-package org.example.business.logic.classes;
+package org.example.model.classes.dto;
 
 import org.example.data.access.classes.ProductDAO;
 

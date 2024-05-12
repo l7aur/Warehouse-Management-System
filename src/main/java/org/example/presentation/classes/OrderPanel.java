@@ -1,7 +1,7 @@
 package org.example.presentation.classes;
 
-import org.example.business.logic.classes.ClientT;
-import org.example.business.logic.classes.ProductT;
+import org.example.model.classes.dto.ClientT;
+import org.example.model.classes.dto.ProductT;
 import org.example.presentation.utility.*;
 
 import javax.swing.*;

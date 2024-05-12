@@ -1,7 +1,7 @@
 package org.example.presentation.utility;
 
-import org.example.business.logic.classes.ProductT;
-import org.example.model.classes.dto.Product;
+import org.example.model.classes.dto.ProductT;
+import org.example.business.logic.classes.Product;
 import org.example.presentation.classes.ViewProductView;
 
 import java.awt.event.ActionEvent;
@@ -18,7 +18,7 @@ public class ProductQueriesActionListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         ProductT pType = getProductT();
         if (pType != null) {
-            ArrayList<ProductT> list = pType.convertToDAO().read();
+            ArrayList<Object> list = pType.convertToDAO().read();
             panel.updateContent(list);
         }
         else

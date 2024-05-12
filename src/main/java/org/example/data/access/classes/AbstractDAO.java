@@ -23,7 +23,7 @@ public abstract class AbstractDAO<T> {
         return -1;
     }
 
-    public ArrayList<T> read() {
+    public ArrayList<Object> read() {
         return null;
     }
 

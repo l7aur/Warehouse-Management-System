@@ -1,8 +1,8 @@
 package org.example.presentation.utility;
 
-import org.example.business.logic.classes.ClientT;
+import org.example.model.classes.dto.ClientT;
 import org.example.data.access.utility.QueryType;
-import org.example.model.classes.dto.Client;
+import org.example.business.logic.classes.Client;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -75,7 +75,7 @@ public class ClientUpdatesActionListener implements ActionListener {
         }
         else
             newClient = new Client(textFields.getFirst().getText());
-        System.out.println(newClient.getName());
+        System.out.println(newClient.name());
         return newClient.convertToEntity();
     }
 }

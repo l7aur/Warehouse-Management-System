@@ -4,7 +4,9 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Abstract class that is the root of each View in the application
@@ -66,10 +68,9 @@ public abstract class AbstractView extends JPanel implements View {
      * Creates and adds a JScrollPane to the current object. Used for the OrderPanel View
      * @param data matrix that stores the data that is going to fill the table in String format
      * @param columns the name of the columns
-     * @param tableName the name the table is given
      */
-    protected void addScrollPane(String[][] data, String[] columns, String tableName) {
-        JTable table = constructTable(data, columns, tableName);
+    protected void addScrollPane(String[][] data, String[] columns) {
+        JTable table = constructTable(data, columns);
         table.getTableHeader().setBackground(Colors.getInstance().getBackgroundColor());
         table.getTableHeader().setForeground(Colors.getInstance().getForegroundColor());
         JScrollPane scrollPane = new JScrollPane(table);
@@ -77,16 +78,52 @@ public abstract class AbstractView extends JPanel implements View {
         this.add(scrollPane, BorderLayout.CENTER);
     }
 
+    public void updateContent(List<Object> objects) {
+        if (objects == null)
+            return;
+        this.removeAll();
+        String[] columns = getTableHeader(objects.getFirst());
+        String[][] data = getTableEntries(objects, columns.length);
+        addScrollPane(data, columns);
+    }
+
+    private static String[][] getTableEntries(List<Object> objects, int cols) {
+        String[][] data = new String[objects.size()][cols];
+        for (int i = 0; i < objects.size(); i++) {
+            Class<?> clazz = objects.getFirst().getClass();
+            Field[] fields = clazz.getDeclaredFields();
+            for (int j = 0; j < fields.length; j++) {
+                fields[j].setAccessible(true);
+                try {
+                    data[i][j] = fields[j].get(objects.get(i)).toString();
+                }
+                catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return data;
+    }
+
+    private static String[] getTableHeader(Object object) {
+        Class<?> clazz = object.getClass();
+        System.out.println(clazz.getName());
+        Field[] fields = clazz.getDeclaredFields();
+        String[] columns = new String[fields.length];
+        for(int i = 0; i < fields.length; i++) {
+            columns[i] = fields[i].getName();
+        }
+        return columns;
+    }
+
     /**
      * Constructs a JTable with un-editable cells.
      * @param data the data that is going to populate the table in String format
      * @param columns the name of the columns in String format
-     * @param tableName the name the table is given
      * @return a JTable with the above-mentioned characteristics
      */
-    private static JTable constructTable(String[][] data, String[] columns, String tableName) {
+    private JTable constructTable(String[][] data, String[] columns) {
         JTable table = new JTable(data, columns);
-        table.setName(tableName);
         table.setModel(new DefaultTableModel(data, columns) {
             @Override
             public boolean isCellEditable(int row, int column) {

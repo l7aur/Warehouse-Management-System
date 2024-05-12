@@ -1,7 +1,7 @@
 package org.example.data.access.classes;
 
-import org.example.business.logic.classes.OrderT;
-import org.example.business.logic.classes.ProductT;
+import org.example.model.classes.dto.OrderT;
+import org.example.model.classes.dto.ProductT;
 import org.example.data.access.utility.ConnectionFactory;
 
 import java.sql.*;

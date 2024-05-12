@@ -1,10 +1,8 @@
-package org.example.model.utility;
-
-import org.example.model.classes.dto.Product;
+package org.example.business.logic.utility;
 
 import java.util.regex.Pattern;
 
-public class ProductNameValidator implements Validator<Product>{
+public class ProductNameValidator implements Validator<String>{
     private static final String PRODUCT_NAME_PATTERN = "^[A-Za-z-]+$";
 
     private static final ProductNameValidator instance = new ProductNameValidator();
@@ -14,12 +12,12 @@ public class ProductNameValidator implements Validator<Product>{
     }
 
     @Override
-    public void validate(Product product) throws IllegalArgumentException {
-        if (product != null && product.getName() != null) {
+    public void validate(String string) throws IllegalArgumentException {
+        if (string != null) {
             Pattern pattern = Pattern.compile(PRODUCT_NAME_PATTERN);
-            if (!pattern.matcher(product.getName()).matches())
+            if (!pattern.matcher(string).matches())
                 throw new IllegalArgumentException("Invalid Product Name");
-            if (product.getPrice().length() > 200)
+            if (string.length() > 200)
                 throw new IllegalArgumentException("Product Name is too large");
         }
     }
