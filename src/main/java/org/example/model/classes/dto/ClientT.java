@@ -2,30 +2,18 @@ package org.example.model.classes.dto;
 
 import org.example.data.access.classes.ClientDAO;
 
-public class ClientT {
-    private String name;
-    private String phoneNumber;
-    private String address;
-    private int id;
+public record ClientT(String name, String phoneNumber, String address, int id) {
 
     public ClientT(int id){
-        this.id = id;
+        this(null, null, null,id);
     }
 
     public ClientT(){
-    }
-
-    public ClientT(String name, String phoneNumber, String address, int id) {
-        this.name = name;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
-        this.id = id;
+        this(null, null, null,0);
     }
 
     public ClientT(String name, String phoneNumber, String address) {
-        this.name = name;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
+        this(name, phoneNumber, address, 0);
     }
 
     public ClientDAO convertToDAO() {

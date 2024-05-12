@@ -40,10 +40,12 @@ public class ProductPanel extends AbstractView {
         this.panel.setBackground(Colors.getInstance().getBackgroundColor());
         this.mainPanelCardLayout = new CardLayout();
         this.panel.setLayout(this.mainPanelCardLayout);
+
         CreateProductView createProductView = new CreateProductView();
         EditProductView editProductView = new EditProductView();
-        this.viewProductView = new ViewProductView();
         DeleteProductView deleteProductView = new DeleteProductView();
+        this.viewProductView = new ViewProductView();
+
         this.panel.add(createProductView, createProductView.getId());
         this.panel.add(editProductView, editProductView.getId());
         this.panel.add(this.viewProductView, this.viewProductView.getId());
@@ -57,13 +59,13 @@ public class ProductPanel extends AbstractView {
         GridLayout layout = new GridLayout(4, 1, 10, 10);
         operationButtons.setLayout(layout);
         MyButton button1 = new MyButton("CREATE PRODUCT");
-        button1.addActionListener(new ViewNavigateActionListener(this.panel,this.mainPanelCardLayout,"CREATE_PRODUCT_VIEW"));
+        button1.addActionListener(new ViewNavigateActionListener(this.panel, this.mainPanelCardLayout,"CREATE_PRODUCT_VIEW"));
         MyButton button2 = new MyButton("EDIT PRODUCT");
-        button2.addActionListener(new ViewNavigateActionListener(this.panel,this.mainPanelCardLayout, "EDIT_PRODUCT_VIEW"));
+        button2.addActionListener(new ViewNavigateActionListener(this.panel, this.mainPanelCardLayout, "EDIT_PRODUCT_VIEW"));
         MyButton button3 = new MyButton("DELETE PRODUCT");
-        button3.addActionListener(new ViewNavigateActionListener(this.panel,this.mainPanelCardLayout, "DELETE_PRODUCT_VIEW"));
+        button3.addActionListener(new ViewNavigateActionListener(this.panel, this.mainPanelCardLayout, "DELETE_PRODUCT_VIEW"));
         MyButton button4 = new MyButton("VIEW PRODUCTS");
-        button4.addActionListener(new ViewNavigateActionListener(this.panel,this.mainPanelCardLayout ,"VIEW_PRODUCT_VIEW"));
+        button4.addActionListener(new ViewNavigateActionListener(this.panel, this.mainPanelCardLayout ,"VIEW_PRODUCT_VIEW"));
         button4.addActionListener(new ProductQueriesActionListener(this.viewProductView));
         operationButtons.add(button1);
         operationButtons.add(button2);

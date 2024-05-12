@@ -53,7 +53,7 @@ public class OrderPanel extends AbstractView {
         return panel;
     }
 
-    public void updateContent(ArrayList<ClientT> clients, ArrayList<ProductT> products) {
+    public void updateContent(ArrayList<Object> clients, ArrayList<Object> products) {
         JPanel selectorPanel1 = new JPanel();
         JPanel selectorPanel2 = new JPanel();
         JPanel selectorPanel3 = new JPanel();
@@ -91,12 +91,25 @@ public class OrderPanel extends AbstractView {
         this.repaint();
     }
 
-    private <T> JComboBox<T> createSelector(ArrayList<T> list) {
-        T[] fields = (T[]) new Object[list.size()];
-        for (int i = 0; i < list.size(); i++) {
-            fields[i] = list.get(i);
+    private <T> JComboBox<T> createSelector(ArrayList<Object> list) {
+        Class<?> clazz = list.getFirst().getClass();
+        switch (clazz.getSimpleName()) {
+            case "ClientT":
+                ClientT[] fields = new ClientT[list.size()];
+                for (int i = 0; i < list.size(); i++) {
+                    fields[i] = (ClientT) list.get(i);
+                }
+                return (JComboBox<T>) new JComboBox<>(fields);
+            case "ProductT":
+                ProductT[] fields1 = new ProductT[list.size()];
+                for (int i = 0; i < list.size(); i++) {
+                    fields1[i] = (ProductT) list.get(i);
+                }
+                return (JComboBox<T>) new JComboBox<>(fields1);
+            default:
+                System.out.println("Why are you here??");
         }
-        return new JComboBox<>(fields);
+        return null;
     }
 
     private JTextField createTextField(String name) {

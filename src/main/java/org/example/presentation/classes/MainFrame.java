@@ -34,9 +34,14 @@ public class MainFrame extends JFrame {
         this.panels.add("CLIENT");
         this.panels.add("PRODUCT");
         this.panels.add("ORDER");
+        this.panels.add("BILL");
         this.panels.add("BACK");
     }
     public void addPanels() {
+
+        BillPanel billPanel = new BillPanel(this);
+        contentPane.add(billPanel, billPanel.getId());
+
         OrderPanel orderPanel = new OrderPanel(this);
         contentPane.add(orderPanel, orderPanel.getId());
 

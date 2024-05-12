@@ -16,6 +16,7 @@ public class NavigateActionListener implements ActionListener {
     private final MainFrame mainFrame;
     private final JPanel currentPanel;
     private final String toWhere;
+
     public NavigateActionListener(MainFrame mainFrame, String toWhere, JPanel currentPanel) {
         this.mainFrame = mainFrame;
         this.currentPanel = currentPanel;

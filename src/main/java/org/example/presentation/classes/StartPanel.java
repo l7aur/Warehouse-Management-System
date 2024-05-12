@@ -24,9 +24,12 @@ public class StartPanel extends AbstractView {
         MyButton goToClient = new MyButton("CLIENT OPERATIONS");
         MyButton goToOrders = new MyButton("CREATE ORDER");
         MyButton goToProducts = new MyButton("PRODUCT OPERATIONS");
+        MyButton goToBills = new MyButton("BILL OPERATIONS");
         goToClient.addActionListener(new NavigateActionListener(this.mainFrame, "CLIENT"));
         goToProducts.addActionListener(new NavigateActionListener(this.mainFrame, "PRODUCT"));
         goToOrders.addActionListener(new NavigateActionListener(this.mainFrame, "ORDER"));
+        goToBills.addActionListener(new NavigateActionListener(this.mainFrame, "BILL"));
+        goToBills.addActionListener(new BillQueriesActionListener(new ViewBillView()));
         OrderPanel panel = null;
         for (Component component : this.mainFrame.getContentPane().getComponents()) {
             if(component instanceof OrderPanel)
@@ -36,6 +39,7 @@ public class StartPanel extends AbstractView {
         this.add(goToClient);
         this.add(goToOrders);
         this.add(goToProducts);
+        this.add(goToBills);
     }
     @Override
     public String getId() {
