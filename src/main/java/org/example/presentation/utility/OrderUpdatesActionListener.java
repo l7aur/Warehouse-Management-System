@@ -58,7 +58,7 @@ public class OrderUpdatesActionListener implements ActionListener {
         if (comboBox1.getSelectedItem() == null || comboBox2.getSelectedItem() == null)
             return null;
         Order order = new Order(String.valueOf( ((ClientT)comboBox1.getSelectedItem()).getId()),
-                String.valueOf(((ProductT)comboBox2.getSelectedItem()).getId()),
+                String.valueOf(((ProductT)comboBox2.getSelectedItem()).id()),
                 textField.getText());
         return order.convertToEntity();
     }

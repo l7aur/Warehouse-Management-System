@@ -28,7 +28,7 @@ public abstract class AbstractView extends JPanel implements View {
             JTextField nameField = new JTextField();
             textFields.add(nameField);
             nameLabel.setLabelFor(nameField);
-            if(name.equals("Id: "))
+            if(name.equals("Id: ") || name.equals("Order ID: "))
                 nameLabel.setForeground(Colors.getInstance().getHighlightColor());
             else
                 nameLabel.setForeground(Colors.getInstance().getForegroundColor());

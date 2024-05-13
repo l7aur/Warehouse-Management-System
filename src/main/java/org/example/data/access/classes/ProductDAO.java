@@ -11,14 +11,14 @@ import java.util.logging.Logger;
 public class ProductDAO extends AbstractDAO<ProductT> {
     private static final Logger LOGGER = Logger.getLogger(ProductDAO.class.getName());
 
-    private static final String createStatement = "INSERT INTO product (name, stock, price ) VALUES (?, ?, ?)";
+    private static final String createStatement = "INSERT INTO product (name, stock, price) VALUES (?, ?, ?)";
     private static final String updateStatement = "UPDATE product SET name = ?, stock = ?, price = ? WHERE id = ?";
     private static final String deleteStatement = "DELETE FROM product WHERE id = ?";
     private static final String selectStatement = "SELECT * FROM product";
     private static final String selectByIdStatement = "SELECT * FROM product WHERE id = ?";
 
     public ProductT getProductById(int id) {
-        ProductT product = new ProductT();
+        ProductT productT = null;
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement statement = null;
         ResultSet rs = null;
@@ -27,10 +27,8 @@ public class ProductDAO extends AbstractDAO<ProductT> {
             statement.setInt(1, id);
             rs = statement.executeQuery();
             if(rs.next()) {
-                product.setId(rs.getInt(3));
-                product.setName(rs.getString(1));
-                product.setStock(rs.getInt(2));
-                product.setPrice(rs.getInt(4));
+                productT = new ProductT(rs.getString(1), rs.getInt(2),
+                        rs.getInt(4), rs.getInt(3));
             }
         }
         catch (SQLException ex) {
@@ -39,7 +37,7 @@ public class ProductDAO extends AbstractDAO<ProductT> {
         finally {
             ConnectionFactory.closeAll(con, statement, rs);
         }
-        return product;
+        return productT;
     }
 
     @Override
@@ -50,9 +48,9 @@ public class ProductDAO extends AbstractDAO<ProductT> {
         int insertedId = -1;
         try {
             statement = con.prepareStatement(createStatement, Statement.RETURN_GENERATED_KEYS);
-            statement.setString(1, product.getName());
-            statement.setInt(2, product.getStock());
-            statement.setInt(3, product.getPrice());
+            statement.setString(1, product.name());
+            statement.setInt(2, product.stock());
+            statement.setInt(3, product.price());
             statement.executeUpdate();
             rs = statement.getGeneratedKeys();
             if(rs.next()) {
@@ -80,8 +78,8 @@ public class ProductDAO extends AbstractDAO<ProductT> {
         while (rs.next()) {
             int id = Integer.parseInt(rs.getString("id"));
             String name = rs.getString("name");
-            Integer stock = Integer.valueOf(rs.getString("stock"));
-            Integer price = Integer.valueOf(rs.getString("price"));
+            int stock = Integer.parseInt(rs.getString("stock"));
+            int price = Integer.parseInt(rs.getString("price"));
             list.add(new ProductT(name, stock, price, id));
         }
 
@@ -117,10 +115,10 @@ public class ProductDAO extends AbstractDAO<ProductT> {
         int success = -1;
         try {
             statement = con.prepareStatement(updateStatement, Statement.RETURN_GENERATED_KEYS);
-            statement.setString(1, product.getName());
-            statement.setInt(2, product.getStock());
-            statement.setInt(3, product.getPrice());
-            statement.setInt(4, product.getId());
+            statement.setString(1, product.name());
+            statement.setInt(2, product.stock());
+            statement.setInt(3, product.price());
+            statement.setInt(4, product.id());
             success = statement.executeUpdate();
         }
         catch (SQLException ex) {
@@ -137,14 +135,14 @@ public class ProductDAO extends AbstractDAO<ProductT> {
 
     @Override
     public void delete(ProductT product) {
-        System.out.println(product.getId());
+        System.out.println(product.id());
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement statement = null;
         int success = -1;
         try {
             statement = con.prepareStatement(deleteStatement, Statement.RETURN_GENERATED_KEYS);
-            System.out.println(product.getId());
-            statement.setInt(1, product.getId());
+            System.out.println(product.id());
+            statement.setInt(1, product.id());
             success = statement.executeUpdate();
         }
         catch (SQLException ex) {

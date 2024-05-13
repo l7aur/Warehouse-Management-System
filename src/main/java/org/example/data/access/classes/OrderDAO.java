@@ -12,6 +12,7 @@ public class OrderDAO extends AbstractDAO<OrderT> {
     private static final Logger LOGGER = Logger.getLogger(OrderDAO.class.getName());
 
     private static final String createStatement = "INSERT INTO \"order\" (client_id, product_id, quantity) VALUES (?, ?, ?)";
+    private static final String selectStatement = "SELECT * FROM \"order\" WHERE id = ?";
 
 
     private ProductT getProduct(int id) {
@@ -24,13 +25,40 @@ public class OrderDAO extends AbstractDAO<OrderT> {
         productDAO.update(product);
     }
 
+    public OrderT getOrder(int id) {
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement statement = null;
+        ResultSet rs = null;
+        String successString = "fail";
+        OrderT orderT = null;
+        try {
+            statement = con.prepareStatement(selectStatement, Statement.RETURN_GENERATED_KEYS);
+            statement.setInt(1, id);
+            rs = statement.executeQuery();
+            if (rs.next()) {
+                successString = "success";
+                orderT = new OrderT(rs.getInt(1), rs.getInt(2),
+                        rs.getInt(4), rs.getInt(3));
+            }
+        }
+        catch (SQLException ex) {
+            LOGGER.log(Level.WARNING, "Can't find the order", ex);
+        }
+        finally {
+            System.out.println("OrderDAO::select::" + successString);
+            ConnectionFactory.closeAll(con, statement, rs);
+        }
+        return orderT;
+    }
+
     @Override
     public int create(OrderT orderT) {
         ProductT product = this.getProduct(orderT.getProductID());
-        if(product.getStock() < orderT.getQuantity())
+        if(product.stock() < orderT.getQuantity())
             return -1;
-        product.setStock(product.getStock() - orderT.getQuantity());
-        this.updateQuantity(product);
+        ProductT newProduct = new ProductT(product.name(), product.stock() - orderT.getQuantity(),
+                product.price(), product.id());
+        this.updateQuantity(newProduct);
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement statement = null;
         ResultSet rs = null;

@@ -75,7 +75,6 @@ public class ClientUpdatesActionListener implements ActionListener {
         }
         else
             newClient = new Client(textFields.getFirst().getText());
-        System.out.println(newClient.name());
         return newClient.convertToEntity();
     }
 }

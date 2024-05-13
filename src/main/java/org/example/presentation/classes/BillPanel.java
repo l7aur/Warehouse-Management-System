@@ -11,6 +11,7 @@ public class BillPanel extends AbstractView {
     private final MainFrame mainFrame;
     private JPanel panel;
     private CardLayout mainPanelCardLayout;
+    private ViewBillView viewBillView;
 
     public BillPanel(MainFrame mainFrame) {
         this.id = "BILL";
@@ -39,7 +40,7 @@ public class BillPanel extends AbstractView {
         this.panel.setLayout(this.mainPanelCardLayout);
 
         CreateBillView createBillView = new CreateBillView();
-        ViewBillView viewBillView = new ViewBillView();
+        this.viewBillView = new ViewBillView();
         this.panel.add(createBillView, createBillView.getId());
         this.panel.add(viewBillView, viewBillView.getId());
     }
@@ -54,6 +55,7 @@ public class BillPanel extends AbstractView {
         MyButton button2 = new MyButton("VIEW BILLS");
         button1.addActionListener(new ViewNavigateActionListener(this.panel, this.mainPanelCardLayout, "CREATE_BILL_VIEW"));
         button2.addActionListener(new ViewNavigateActionListener(this.panel, this.mainPanelCardLayout, "VIEW_BILL_VIEW"));
+        button2.addActionListener(new BillQueriesActionListener(this.viewBillView));
         operationButtons.add(button1);
         operationButtons.add(button2);
         return operationButtons;

@@ -29,7 +29,6 @@ public class StartPanel extends AbstractView {
         goToProducts.addActionListener(new NavigateActionListener(this.mainFrame, "PRODUCT"));
         goToOrders.addActionListener(new NavigateActionListener(this.mainFrame, "ORDER"));
         goToBills.addActionListener(new NavigateActionListener(this.mainFrame, "BILL"));
-        goToBills.addActionListener(new BillQueriesActionListener(new ViewBillView()));
         OrderPanel panel = null;
         for (Component component : this.mainFrame.getContentPane().getComponents()) {
             if(component instanceof OrderPanel)
