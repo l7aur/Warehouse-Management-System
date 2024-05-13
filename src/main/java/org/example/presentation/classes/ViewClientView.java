@@ -1,11 +1,9 @@
 package org.example.presentation.classes;
 
-import org.example.model.classes.dto.ClientT;
 import org.example.presentation.utility.AbstractView;
 import org.example.presentation.utility.Colors;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 public class ViewClientView extends AbstractView {
     private final String id;

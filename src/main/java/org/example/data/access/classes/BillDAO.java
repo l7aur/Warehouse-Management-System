@@ -2,7 +2,6 @@ package org.example.data.access.classes;
 
 import org.example.data.access.utility.ConnectionFactory;
 import org.example.model.classes.dto.BillT;
-import org.example.model.classes.dto.ProductT;
 
 import java.sql.*;
 import java.util.ArrayList;

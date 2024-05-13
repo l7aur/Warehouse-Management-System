@@ -34,9 +34,9 @@ public class ProductUpdatesActionListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         ProductT pType = getProductT();
-//        for (JTextField textField : textFields) {
-//            textField.setText("");
-//        }
+        for (JTextField textField : textFields) {
+            textField.setText("");
+        }
         if (pType != null) {
             switch (this.type) {
                 case INSERT:

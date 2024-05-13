@@ -11,10 +11,6 @@ public class App {
 
     }
     public void startApp() {
-        MainFrame mainFrame = new MainFrame();
-    }
-
-    public void quitApp() {
-
+        new MainFrame();
     }
 }

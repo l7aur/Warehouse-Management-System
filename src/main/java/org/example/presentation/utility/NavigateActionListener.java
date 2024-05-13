@@ -1,6 +1,5 @@
 package org.example.presentation.utility;
 
-import org.example.Main;
 import org.example.presentation.classes.MainFrame;
 
 import javax.swing.*;

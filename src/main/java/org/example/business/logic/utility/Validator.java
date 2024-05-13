@@ -5,5 +5,5 @@ package org.example.business.logic.utility;
  * @param <T> type of field to be validated by some certain implementation of the interface
  */
 public interface Validator<T> {
-    public void validate(T t) throws IllegalArgumentException;
+    void validate(T t) throws IllegalArgumentException;
 }

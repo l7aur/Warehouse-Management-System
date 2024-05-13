@@ -23,6 +23,9 @@ public class BillUpdatesActionListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         int orderID = getOrderID();
+        for (JTextField textField : textFields) {
+            textField.setText("");
+        }
         OrderDAO orderDAO = new OrderDAO();
         OrderT orderT = orderDAO.getOrder(orderID);
 
@@ -33,6 +36,8 @@ public class BillUpdatesActionListener implements ActionListener {
         BillT billT = new BillT(orderT.id(), price);
         BillDAO billDAO = new BillDAO();
         int id = billDAO.create(billT);
+        if(id == -1)
+            JOptionPane.showMessageDialog(null, "Bill could not be created");
     }
 
     private int getOrderID() {

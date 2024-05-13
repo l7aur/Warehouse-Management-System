@@ -12,10 +12,6 @@ public record BillT(int orderID, int price) {
         this(-1, -1);
     }
 
-    public BillT(int OrderID) {
-        this(OrderID, -1);
-    }
-
     public BillDAO convertToDAO() {
         return new BillDAO();
     }

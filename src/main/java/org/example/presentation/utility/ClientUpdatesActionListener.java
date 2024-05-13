@@ -34,9 +34,9 @@ public class ClientUpdatesActionListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         ClientT cType = getClientT();
-//        for (JTextField textField : textFields) {
-//            textField.setText("");
-//        }
+        for (JTextField textField : textFields) {
+            textField.setText("");
+        }
         if (cType != null) {
             switch (this.type) {
                 case INSERT:
