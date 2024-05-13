@@ -39,6 +39,41 @@ public abstract class AbstractDAO<T> {
         return null;
     }
 
+    private String updateStatement(T t) {
+        if(t != null) {
+            Class<?> clazz = t.getClass();
+            StringBuilder statementText = new StringBuilder();
+            statementText.append("UPDATE \"");
+            statementText.append(clazz.getSimpleName().toLowerCase());
+            statementText.delete(statementText.length() - 1, statementText.length());
+            statementText.append("\" SET ");
+            Field[] fields = clazz.getDeclaredFields();
+            for (Field field : fields) {
+                switch (field.getName()) {
+                    case "phoneNumber":
+                        statementText.append("phone_number = ?, ");
+                        break;
+                    case "clientID":
+                        statementText.append("client_id = ?, ");
+                        break;
+                    case "productID":
+                        statementText.append("product_id = ?, ");
+                        break;
+                    case "id":
+                        break;
+                    default:
+                        statementText.append(field.getName());
+                        statementText.append(" = ?, ");
+                        break;
+                }
+            }
+            statementText.delete(statementText.length() - 2, statementText.length());
+            statementText.append(" WHERE id = ?");
+            return statementText.toString();
+        }
+        return null;
+    }
+
     private String deleteStatement(T t) {
         if(t != null) {
             Class<?> clazz = t.getClass();
@@ -52,29 +87,20 @@ public abstract class AbstractDAO<T> {
         return null;
     }
 
-    private String updateStatement(T t) {
-        if(t != null) {
-            Class<?> clazz = t.getClass();
-            StringBuilder statementText = new StringBuilder();
-            //todo
-            return statementText.toString();
-        }
-        return null;
-    }
-
-    private void setParametersForCreate(PreparedStatement statement, T t) {
+    private void setParametersForCreateUpdate(PreparedStatement statement, T t, QueryType queryType) {
         if(t != null) {
             Class<?> clazz = t.getClass();
             Field[] fields = clazz.getDeclaredFields();
             int index = 0;
-            for (Field field : fields) {
-                if (!field.getName().equals("id")) {
-                    index++;
-                    try {
-                        field.setAccessible(true);
+            try {
+                int idFieldValue = -1;
+                for (Field field : fields) {
+                    field.setAccessible(true);
+                    if (!field.getName().equals("id")) {
+                        index++;
                         switch (field.getType().getSimpleName()) {
                             case "int":
-                                statement.setInt(index, (Integer) field.get(t));
+                                statement.setInt(index, field.getInt(t));
                                 break;
                             case "String":
                                 statement.setString(index, field.get(t).toString());
@@ -83,69 +109,17 @@ public abstract class AbstractDAO<T> {
                                 LOGGER.log(Level.SEVERE, "Unrecognized field type!");
                                 break;
                         }
-                    } catch (IllegalAccessException e) {
-                        LOGGER.log(Level.SEVERE, "Unrecognized field type!");
-                    } catch (SQLException e) {
-                        LOGGER.log(Level.SEVERE, "SQL Exception at params!");
                     }
+                    else
+                        idFieldValue = field.getInt(t);
                 }
+                if(queryType == QueryType.UPDATE)
+                    statement.setInt(++index, idFieldValue);
+            } catch (IllegalAccessException e) {
+                LOGGER.log(Level.SEVERE, "Unrecognized field type!");
+            } catch (SQLException e) {
+                LOGGER.log(Level.SEVERE, "SQL Exception at params!");
             }
-        }
-    }
-
-    public int create(T t) {
-        Connection connection = ConnectionFactory.getConnection();
-        PreparedStatement statement = null;
-        ResultSet resultSet = null;
-        int insertedId = -1;
-        try {
-            statement = connection.prepareStatement(createStatement(t), Statement.RETURN_GENERATED_KEYS);
-            setParametersForCreate(statement, t);
-            statement.executeUpdate();
-            resultSet = statement.getGeneratedKeys();
-            if(resultSet.next()) {
-                insertedId = resultSet.getInt("id");
-            }
-        }
-        catch (SQLException e) {
-            LOGGER.log(Level.WARNING, "FAILED CREATE OPERATION\n" + e.getMessage());
-        }
-        finally {
-            if(insertedId != -1)
-                LOGGER.log(Level.INFO, "SUCCESS CREATE OPERATION\nID: " + insertedId + "\n");
-            ConnectionFactory.closeAll(connection, statement, resultSet);
-        }
-        return insertedId;
-    }
-
-    public ArrayList<Object> read() {
-        return null;
-    }
-
-    private void setParametersForUpdate(PreparedStatement statement, T t) {
-        //todo
-    }
-
-    public void update(T t){
-        //replace with new one todo
-    }
-
-    public void update1(T t){
-        Connection connection = ConnectionFactory.getConnection();
-        PreparedStatement statement = null;
-        int success = -1;
-        try {
-            statement = connection.prepareStatement(updateStatement(t), Statement.RETURN_GENERATED_KEYS);
-            setParametersForUpdate(statement, t);
-            success = statement.executeUpdate();
-        }
-        catch (SQLException ex) {
-            LOGGER.log(Level.WARNING, "FAILED UPDATE OPERATION\n" + ex.getMessage());
-        }
-        finally {
-            if(success != -1)
-                LOGGER.log(Level.INFO, "SUCCESS UPDATE OPERATION\n");
-            ConnectionFactory.closeAll(connection, statement, null);
         }
     }
 
@@ -169,6 +143,55 @@ public abstract class AbstractDAO<T> {
                 }
             }
         }
+    }
+
+    public int create(T t) {
+        Connection connection = ConnectionFactory.getConnection();
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        int insertedId = -1;
+        try {
+            statement = connection.prepareStatement(createStatement(t), Statement.RETURN_GENERATED_KEYS);
+            setParametersForCreateUpdate(statement, t, QueryType.INSERT);
+            statement.executeUpdate();
+            resultSet = statement.getGeneratedKeys();
+            if(resultSet.next()) {
+                insertedId = resultSet.getInt("id");
+            }
+        }
+        catch (SQLException e) {
+            LOGGER.log(Level.WARNING, "FAILED CREATE OPERATION\n" + e.getMessage());
+        }
+        finally {
+            if(insertedId != -1)
+                LOGGER.log(Level.INFO, "SUCCESS CREATE OPERATION\nID: " + insertedId);
+            ConnectionFactory.closeAll(connection, statement, resultSet);
+        }
+        return insertedId;
+    }
+
+    public void update(T t){
+        Connection connection = ConnectionFactory.getConnection();
+        PreparedStatement statement = null;
+        int success = -1;
+        try {
+            statement = connection.prepareStatement(updateStatement(t), Statement.RETURN_GENERATED_KEYS);
+            setParametersForCreateUpdate(statement, t, QueryType.UPDATE);
+            success = statement.executeUpdate();
+        }
+        catch (SQLException ex) {
+            LOGGER.log(Level.WARNING, "FAILED UPDATE OPERATION\n" + ex.getMessage());
+        }
+        finally {
+            if(success != -1)
+                LOGGER.log(Level.INFO, "SUCCESS UPDATE OPERATION\n");
+            ConnectionFactory.closeAll(connection, statement, null);
+        }
+    }
+
+    public ArrayList<Object> read() {
+        //todo
+        return null;
     }
 
     public void delete(T t) {

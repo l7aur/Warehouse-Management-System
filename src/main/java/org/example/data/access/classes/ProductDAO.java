@@ -12,9 +12,6 @@ import java.util.logging.Logger;
 public class ProductDAO extends AbstractDAO<ProductT> {
     private static final Logger LOGGER = Logger.getLogger(ProductDAO.class.getName());
 
-    private static final String createStatement = "INSERT INTO product (name, stock, price) VALUES (?, ?, ?)";
-    private static final String updateStatement = "UPDATE product SET name = ?, stock = ?, price = ? WHERE id = ?";
-    private static final String deleteStatement = "DELETE FROM product WHERE id = ?";
     private static final String selectStatement = "SELECT * FROM product";
     private static final String selectByIdStatement = "SELECT * FROM product WHERE id = ?";
 
@@ -77,30 +74,5 @@ public class ProductDAO extends AbstractDAO<ProductT> {
             ConnectionFactory.closeAll(con, statement, rs);
         }
         return list;
-    }
-
-    @Override
-    public void update(ProductT product) {
-        Connection con = ConnectionFactory.getConnection();
-        PreparedStatement statement = null;
-        int success = -1;
-        try {
-            statement = con.prepareStatement(updateStatement, Statement.RETURN_GENERATED_KEYS);
-            statement.setString(1, product.name());
-            statement.setInt(2, product.stock());
-            statement.setInt(3, product.price());
-            statement.setInt(4, product.id());
-            success = statement.executeUpdate();
-        }
-        catch (SQLException ex) {
-            LOGGER.log(Level.WARNING, "ProductDAO::update::" + ex.getMessage());
-        }
-        finally {
-            String successString = "success";
-            if(success == -1)
-                successString = "fail";
-            System.out.println("ProductDAO::update::" + successString);
-            ConnectionFactory.closeAll(con, statement, null);
-        }
     }
 }

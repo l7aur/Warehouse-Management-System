@@ -12,9 +12,6 @@ import java.util.logging.Logger;
 public class ClientDAO extends AbstractDAO<ClientT> {
     private static final Logger LOGGER = Logger.getLogger(ClientDAO.class.getName());
 
-    private static final String createStatement = "INSERT INTO client (name, phone_number, address) VALUES (?, ?, ?)";
-    private static final String updateStatement = "UPDATE client SET name = ?, phone_number = ?, address = ? WHERE id = ?";
-    private static final String deleteStatement = "DELETE FROM client WHERE id = ?";
     private static final String selectStatement = "SELECT * FROM client";
 
     private ArrayList<Object> processSelectResultSet(ResultSet rs) throws SQLException {
@@ -52,30 +49,5 @@ public class ClientDAO extends AbstractDAO<ClientT> {
             ConnectionFactory.closeAll(con, statement, rs);
         }
         return list;
-    }
-
-    @Override
-    public void update(ClientT client) {
-        Connection con = ConnectionFactory.getConnection();
-        PreparedStatement statement = null;
-        int success = -1;
-        try {
-            statement = con.prepareStatement(updateStatement, Statement.RETURN_GENERATED_KEYS);
-            statement.setString(1, client.getName());
-            statement.setString(2, client.getPhoneNumber());
-            statement.setString(3, client.getAddress());
-            statement.setInt(4, client.getId());
-            success = statement.executeUpdate();
-        }
-        catch (SQLException ex) {
-            LOGGER.log(Level.WARNING, "ClientDAO::update::" + ex.getMessage());
-        }
-        finally {
-            String successString = "success";
-            if(success == -1)
-                successString = "fail";
-            System.out.println("ClientDAO::update::" + successString);
-            ConnectionFactory.closeAll(con, statement, null);
-        }
     }
 }
