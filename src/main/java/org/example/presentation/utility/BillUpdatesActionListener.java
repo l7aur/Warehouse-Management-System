@@ -27,12 +27,12 @@ public class BillUpdatesActionListener implements ActionListener {
             textField.setText("");
         }
         OrderDAO orderDAO = new OrderDAO();
-        OrderT orderT = orderDAO.getOrder(orderID);
+        OrderT orderT = orderDAO.getOrderById(orderID);
 
         ProductDAO productDAO = new ProductDAO();
         ProductT productT = productDAO.getProductById(orderT.productID());
 
-        int price = productT.price() * orderT.getQuantity();
+        int price = productT.price() * orderT.quantity();
         BillT billT = new BillT(orderT.id(), price);
         BillDAO billDAO = new BillDAO();
         int id = billDAO.create(billT);

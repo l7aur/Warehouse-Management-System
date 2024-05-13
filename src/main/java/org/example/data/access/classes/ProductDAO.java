@@ -5,15 +5,23 @@ import org.example.model.classes.dto.ProductT;
 import org.example.data.access.utility.ConnectionFactory;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Class that implements specific product SQL queries.
+ * @author L7aur
+ */
 public class ProductDAO extends AbstractDAO<ProductT> {
     private static final Logger LOGGER = Logger.getLogger(ProductDAO.class.getName());
 
     private static final String selectByIdStatement = "SELECT * FROM product WHERE id = ?";
 
+    /**
+     * Returns the product that has the corresponding id if it exists.
+     * @param id The id of the product to be searched.
+     * @return The product that has the same id as the parameter.
+     */
     public ProductT getProductById(int id) {
         ProductT productT = null;
         Connection con = ConnectionFactory.getConnection();

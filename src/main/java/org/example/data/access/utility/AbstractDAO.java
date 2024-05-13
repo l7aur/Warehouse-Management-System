@@ -11,9 +11,19 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Generic class that implements the CRUD SQL operations based on reflection.
+ * @param <T> The type of data the functions operate on.
+ * @author L7aur
+ */
 public abstract class AbstractDAO<T> {
     private static final Logger LOGGER = Logger.getLogger(AbstractDAO.class.getSimpleName());
 
+    /**
+     * Constructs the 'INSERT INTO' statement.
+     * @param t The type of data the statement will operate on.
+     * @return The query in string format.
+     */
     private String createStatement(T t) {
         if (t != null) {
             Class<?> clazz = t.getClass();
@@ -50,6 +60,11 @@ public abstract class AbstractDAO<T> {
         return null;
     }
 
+    /**
+     * Constructs the 'UPDATE' statement.
+     * @param t The type of data the statement will operate on.
+     * @return The query in string format.
+     */
     private String updateStatement(T t) {
         if (t != null) {
             Class<?> clazz = t.getClass();
@@ -85,6 +100,11 @@ public abstract class AbstractDAO<T> {
         return null;
     }
 
+    /**
+     * Constructs the 'DELETE FROM' statement.
+     * @param t The type of data the statement will operate on.
+     * @return The query in string format.
+     */
     private String deleteStatement(T t) {
         if (t != null) {
             Class<?> clazz = t.getClass();
@@ -98,6 +118,11 @@ public abstract class AbstractDAO<T> {
         return null;
     }
 
+    /**
+     * Constructs the 'SELECT * FROM' statement.
+     * @param t The type of data the statement will operate on.
+     * @return The query in string format.
+     */
     private String readStatement(T t) {
         if (t != null) {
             Class<?> clazz = t.getClass();
@@ -115,6 +140,12 @@ public abstract class AbstractDAO<T> {
         return null;
     }
 
+    /**
+     * Sets the query unknown parameters for 'CREATE' or 'UPDATE' statements.
+     * @param statement The statement that is prepared to be executed.
+     * @param t The type of data the query is prepared for.
+     * @param queryType Either 'CREATE' or 'UPDATE'.
+     */
     private void setParametersForCreateUpdate(PreparedStatement statement, T t, QueryType queryType) {
         if (t != null) {
             Class<?> clazz = t.getClass();
@@ -150,6 +181,11 @@ public abstract class AbstractDAO<T> {
         }
     }
 
+    /**
+     * Sets the query unknown parameters for the 'DELETE' statement.
+     * @param statement The statement that is prepared to be executed.
+     * @param t The type of data the query is prepared for.
+     */
     private void setParametersForDelete(PreparedStatement statement, T t) {
         if (t != null) {
             Class<?> clazz = t.getClass();
@@ -172,6 +208,11 @@ public abstract class AbstractDAO<T> {
         }
     }
 
+    /**
+     * Executes a 'CREATE' SQL query.
+     * @param t The data type the query operates on.
+     * @return The unique identifier that is generated when the query is executed successfully.
+     */
     public int create(T t) {
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement statement = null;
@@ -199,7 +240,12 @@ public abstract class AbstractDAO<T> {
         return insertedId;
     }
 
-    private Integer handleBillCreation(T t) {
+    /**
+     * Handles the generation of a bill each time a new order is placed.
+     * @param t The data type the query operates on.
+     * @return 0 if the generation of the bill was successful or -1, otherwise.
+     */
+    private int handleBillCreation(T t) {
         ProductDAO productDAO = new ProductDAO();
         Class<?> clazz = t.getClass();
         try {
@@ -221,6 +267,10 @@ public abstract class AbstractDAO<T> {
         return 0;
     }
 
+    /**
+     * Executes an 'UPDATE' SQL query.
+     * @param t The data type the query operates on.
+     */
     public void update(T t) {
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement statement = null;
@@ -238,6 +288,11 @@ public abstract class AbstractDAO<T> {
         }
     }
 
+    /**
+     * Executes a 'SELECT * FROM' SQL query.
+     * @param t The data type the query operates on.
+     * @return The result set that is generated when the query is executed successfully.
+     */
     public ArrayList<Object> read(T t) {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement statement = null;
@@ -256,6 +311,10 @@ public abstract class AbstractDAO<T> {
         return list;
     }
 
+    /**
+     * Executes a 'DELETE FROM' SQL query.
+     * @param t The data type the query operates on.
+     */
     public void delete(T t) {
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement statement = null;
@@ -273,7 +332,14 @@ public abstract class AbstractDAO<T> {
         }
     }
 
-    private ArrayList<Object> processSelectResultSet(ResultSet rs, T t) throws SQLException {
+    /**
+     * Converts the result set that is generated by the 'SELECT * FROM' query into an array of objects.
+     * @param rs The result set that is generated by the 'SELECT * FROM' query.
+     * @param t The data type the query operates on.
+     * @return The results of the 'SELECT * FROM' query as an array.
+     * @throws SQLException If the result set does not comply with the methods.
+     */
+private ArrayList<Object> processSelectResultSet(ResultSet rs, T t) throws SQLException {
         if (rs == null)
             return null;
         Class<?> clazz = t.getClass();

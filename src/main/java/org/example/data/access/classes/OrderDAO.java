@@ -8,12 +8,22 @@ import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
+/**
+ * Class that implements specific order SQL queries.
+ * @author L7aur
+ */
 public class OrderDAO extends AbstractDAO<OrderT> {
     private static final Logger LOGGER = Logger.getLogger(OrderDAO.class.getName());
 
     private static final String selectStatement = "SELECT * FROM \"order\" WHERE id = ?";
 
-    public OrderT getOrder(int id) {
+    /**
+     * Returns the order that has the corresponding id if it exists.
+     * @param id The id of the order to be searched.
+     * @return The order that has the same id as the parameter.
+     */
+    public OrderT getOrderById(int id) {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement statement = null;
         ResultSet rs = null;
@@ -30,10 +40,13 @@ public class OrderDAO extends AbstractDAO<OrderT> {
             }
         }
         catch (SQLException ex) {
-            LOGGER.log(Level.WARNING, "Can't find the order", ex);
+            LOGGER.log(Level.WARNING, "FAILED ORDER FIND BY ID", ex);
         }
         finally {
-            System.out.println("OrderDAO::select::" + successString);
+            if(successString.equals("success"))
+                LOGGER.log(Level.INFO, "SUCCESS ORDER FIND BY ID");
+            else
+                LOGGER.log(Level.INFO, "ORDER DOES NOT EXIST");
             ConnectionFactory.closeAll(con, statement, rs);
         }
         return orderT;

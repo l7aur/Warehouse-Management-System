@@ -1,7 +1,7 @@
 package org.example.data.access.utility;
 
 /**
- * Enum of basic query types
+ * Enumeration of the used query types.
  * @author L7aur
  */
 public enum QueryType {

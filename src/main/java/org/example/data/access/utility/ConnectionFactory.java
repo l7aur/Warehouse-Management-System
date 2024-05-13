@@ -6,8 +6,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Singleton pattern
- * The class that implements the connection to the database.
+ * Singleton implementation of the connection to the database.
  * @author L7aur
  */
 public class ConnectionFactory {
@@ -20,7 +19,7 @@ public class ConnectionFactory {
     private static final ConnectionFactory singleInstance = new ConnectionFactory();
 
     /**
-     * Empty constructor
+     * Constructor.
      */
     private ConnectionFactory() {
         try {
@@ -32,8 +31,8 @@ public class ConnectionFactory {
     }
 
     /**
-     * Creates a connection to the database
-     * @return a Connection
+     * Creates a connection to the database.
+     * @return a connection if possible.
      */
     private Connection createConnection() {
         Connection connection = null;
@@ -42,24 +41,24 @@ public class ConnectionFactory {
             System.out.println("Connection created");
         }
         catch (SQLException e) {
-            LOGGER.log(Level.WARNING, "An error occurred while trying to connect to the database");
+            LOGGER.log(Level.WARNING, "An error occurred while trying to connect to the database!");
         }
         return connection;
     }
 
     /**
-     * Getter
-     * @return the singleton instance open connection
+     * Gets the singleton instance of the validator.
+     * @return The singleton instance.
      */
     public static Connection getConnection() {
         return singleInstance.createConnection();
     }
 
     /**
-     * Closes everything related to the connection to the database
-     * @param connection the Connection object if any
-     * @param statement the Statement object if any
-     * @param resultSet the ResultSet object if any
+     * Closes everything related to the connection to the database.
+     * @param connection The connection if any.
+     * @param statement The statement if any.
+     * @param resultSet The result set if any.
      */
     public static void closeAll(Connection connection, Statement statement, ResultSet resultSet) {
         close(connection);
@@ -69,8 +68,8 @@ public class ConnectionFactory {
     }
 
     /**
-     * Closes the Connection object if any
-     * @param connection the Connection object to be closed
+     * Closes the connection object if any.
+     * @param connection The connection to be closed.
      */
     private static void close(Connection connection) {
         if (connection != null) {
@@ -83,8 +82,8 @@ public class ConnectionFactory {
     }
 
     /**
-     * Closes the Statement object if any
-     * @param statement the Statement object to be closed
+     * Closes the statement object if any.
+     * @param statement The statement object to be closed.
      */
     private static void close(Statement statement) {
         if (statement != null) {
@@ -97,8 +96,8 @@ public class ConnectionFactory {
     }
 
     /**
-     * Closes a ResultSet object if any
-     * @param resultSet the ResultSet object to be closed
+     * Closes a result set object if any.
+     * @param resultSet The result set object to be closed.
      */
     private static void close(ResultSet resultSet) {
         if (resultSet != null) {
