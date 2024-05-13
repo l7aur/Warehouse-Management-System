@@ -1,9 +1,16 @@
 package org.example.business.logic.utility;
 
 /**
- * Interface that implements the validation of an input field
- * @param <T> type of field to be validated by some certain implementation of the interface
+ * Generic interface that implements the validation of a generic input field.
+ * Intended to work mainly with regex.
+ * @param <T> The type of data to be validated.
  */
 public interface Validator<T> {
+
+    /**
+     * Checks if the given data complies a certain format.
+     * @param t The data to validate
+     * @throws IllegalArgumentException If the data is invalid.
+     */
     void validate(T t) throws IllegalArgumentException;
 }

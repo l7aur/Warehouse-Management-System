@@ -2,15 +2,28 @@ package org.example.business.logic.utility;
 
 import java.util.regex.Pattern;
 
+/**
+ * Singleton implementation of the Validator interface.
+ * Regex-based validation.
+ */
 public class ProductNameValidator implements Validator<String>{
     private static final String PRODUCT_NAME_PATTERN = "^[A-Za-z-]+$";
 
     private static final ProductNameValidator instance = new ProductNameValidator();
 
+    /**
+     * Gets the singleton instance of the validator.
+     * @return The singleton instance.
+     */
     public static ProductNameValidator getValidator() {
         return instance;
     }
 
+    /**
+     * Checks if the given parameter complies with the regex expression.
+     * @param string The data to be validated.
+     * @throws IllegalArgumentException If the data is invalid.
+     */
     @Override
     public void validate(String string) throws IllegalArgumentException {
         if (string != null) {

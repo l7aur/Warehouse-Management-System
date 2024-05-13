@@ -3,8 +3,8 @@ package org.example.business.logic.utility;
 import java.util.regex.Pattern;
 
 /**
- * Singleton pattern
- * Implements the validation of a name field based on regex
+ * Singleton implementation of the Validator interface.
+ * Regex-based validation.
  */
 public class PersonNameValidator implements Validator<String>{
     private static final String NAME_PATTERN = "^[A-Z][a-z]+ [A-Z][a-z]+$";
@@ -12,17 +12,17 @@ public class PersonNameValidator implements Validator<String>{
     private static final PersonNameValidator PERSON_NAME_VALIDATOR = new PersonNameValidator();
 
     /**
-     * Getter
-     * @return the singleton instance
+     * Gets the singleton instance of the validator.
+     * @return The singleton instance.
      */
     public static PersonNameValidator getValidator() {
         return PERSON_NAME_VALIDATOR;
     }
 
     /**
-     * Checks if the name attribute of the client data transfer object is valid
-     * @param string the Client data transfer object to be checked
-     * @throws IllegalArgumentException if the name does not comply the regex pattern
+     * Checks if the given parameter complies with the regex expression.
+     * @param string The data to be validated.
+     * @throws IllegalArgumentException If the data is invalid.
      */
     @Override
     public void validate(String string) throws IllegalArgumentException {

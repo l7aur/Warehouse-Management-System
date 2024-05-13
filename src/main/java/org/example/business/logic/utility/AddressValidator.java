@@ -3,8 +3,8 @@ package org.example.business.logic.utility;
 import java.util.regex.Pattern;
 
 /**
- * Singleton pattern
- * Implements the validation of an address field based on regex
+ * Singleton implementation of the Validator interface.
+ * Regex-based validation.
  */
 public class AddressValidator implements Validator<String> {
     private static final String ADDRESS_PATTERN = "^Str\\. [A-Z][A-Za-z]+ Nr\\. [0-9]+[A-Z]?$";
@@ -12,17 +12,17 @@ public class AddressValidator implements Validator<String> {
     private static final AddressValidator addressValidator = new AddressValidator();
 
     /**
-     * getter
-     * @return the singleton instance
+     * Gets the singleton instance of the validator.
+     * @return The singleton instance.
      */
     public static AddressValidator getValidator() {
         return addressValidator;
     }
 
     /**
-     * Checks if the address attribute of a client data transfer object is valid
-     * @param string the Client data transfer object to be checked
-     * @throws IllegalArgumentException if the attribute does not comply with the regex
+     * Checks if the given parameter complies with the regex expression.
+     * @param string The data to be validated.
+     * @throws IllegalArgumentException If the data is invalid.
      */
     @Override
     public void validate(String string) throws IllegalArgumentException {

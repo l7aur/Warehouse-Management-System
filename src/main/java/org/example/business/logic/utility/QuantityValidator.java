@@ -2,15 +2,28 @@ package org.example.business.logic.utility;
 
 import java.util.regex.Pattern;
 
+/**
+ * Singleton implementation of the Validator interface.
+ * Regex-based validation.
+ */
 public class QuantityValidator implements Validator<String>{
     private final static String INTEGER_PATTERN = "^[1-9]\\d*$";
 
     private static final QuantityValidator instance = new QuantityValidator();
 
+    /**
+     * Gets the singleton instance of the validator.
+     * @return The singleton instance.
+     */
     public static QuantityValidator getValidator(){
         return instance;
     }
 
+    /**
+     * Checks if the given parameter complies with the regex expression.
+     * @param integer The data to be validated.
+     * @throws IllegalArgumentException If the data is invalid.
+     */
     @Override
     public void validate(String integer) throws IllegalArgumentException {
         Pattern pattern = Pattern.compile(INTEGER_PATTERN);

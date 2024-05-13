@@ -3,8 +3,8 @@ package org.example.business.logic.utility;
 import java.util.regex.Pattern;
 
 /**
- * Singleton pattern
- * Implements the validation of an id field based on regex
+ * Singleton implementation of the Validator interface.
+ * Regex-based validation.
  */
 public class IdValidator implements Validator<String> {
     private static final String ID_PATTERN = "^[1-9]\\d*$";
@@ -12,17 +12,17 @@ public class IdValidator implements Validator<String> {
     private static final IdValidator instance = new IdValidator();
 
     /**
-     * Getter
-     * @return the singleton instance
+     * Gets the singleton instance of the validator.
+     * @return The singleton instance.
      */
     public static IdValidator getValidator() {
         return instance;
     }
 
     /**
-     * Checks if the id attribute of an order data transfer object is valid
-     * @param integer the id value to be checked
-     * @throws IllegalArgumentException if the attribute does not comply with the regex
+     * Checks if the given parameter complies with the regex expression.
+     * @param integer The data to be validated.
+     * @throws IllegalArgumentException If the data is invalid.
      */
     @Override
     public void validate(String integer) throws IllegalArgumentException {
