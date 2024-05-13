@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 /**
  * Singleton implementation of the Validator interface.
  * Regex-based validation.
+ * @author L7aur
  */
 public class PersonNameValidator implements Validator<String>{
     private static final String NAME_PATTERN = "^[A-Z][a-z]+ [A-Z][a-z]+$";

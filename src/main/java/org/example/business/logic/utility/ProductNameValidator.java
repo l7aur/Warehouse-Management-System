@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 /**
  * Singleton implementation of the Validator interface.
  * Regex-based validation.
+ * @author L7aur
  */
 public class ProductNameValidator implements Validator<String>{
     private static final String PRODUCT_NAME_PATTERN = "^[A-Za-z-]+$";

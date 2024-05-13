@@ -40,8 +40,7 @@ public class ClientUpdatesActionListener implements ActionListener {
         if (cType != null) {
             switch (this.type) {
                 case INSERT:
-                    int id = cType.convertToDAO().create(cType);
-                    System.out.println("Inserted client with ID " + id);
+                    cType.convertToDAO().create(cType);
                     break;
                 case UPDATE:
                     cType.convertToDAO().update(cType);

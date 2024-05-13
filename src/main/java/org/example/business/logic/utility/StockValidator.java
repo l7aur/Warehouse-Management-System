@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 /**
  * Singleton implementation of the Validator interface.
  * Regex-based validation.
+ * @author L7aur
  */
 public class StockValidator implements Validator<String> {
     private static final String STOCK_PATTERN = "^[0-9]+$";

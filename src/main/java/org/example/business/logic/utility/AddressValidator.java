@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 /**
  * Singleton implementation of the Validator interface.
  * Regex-based validation.
+ * @author L7aur
  */
 public class AddressValidator implements Validator<String> {
     private static final String ADDRESS_PATTERN = "^Str\\. [A-Z][A-Za-z]+ Nr\\. [0-9]+[A-Z]?$";

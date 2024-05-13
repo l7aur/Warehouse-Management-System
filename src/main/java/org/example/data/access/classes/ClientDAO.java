@@ -1,5 +1,6 @@
 package org.example.data.access.classes;
 
+import org.example.data.access.utility.AbstractDAO;
 import org.example.model.classes.dto.ClientT;
 import org.example.data.access.utility.ConnectionFactory;
 
@@ -15,34 +16,6 @@ public class ClientDAO extends AbstractDAO<ClientT> {
     private static final String updateStatement = "UPDATE client SET name = ?, phone_number = ?, address = ? WHERE id = ?";
     private static final String deleteStatement = "DELETE FROM client WHERE id = ?";
     private static final String selectStatement = "SELECT * FROM client";
-
-    @Override
-    public int create(ClientT client) {
-        Connection con = ConnectionFactory.getConnection();
-        PreparedStatement statement = null;
-        ResultSet rs = null;
-        int insertedId = -1;
-        try {
-            statement = con.prepareStatement(createStatement, Statement.RETURN_GENERATED_KEYS);
-            statement.setString(1, client.getName());
-            statement.setString(2, client.getPhoneNumber());
-            statement.setString(3, client.getAddress());
-            statement.executeUpdate();
-            rs = statement.getGeneratedKeys();
-            if (rs.next()) {
-                insertedId = rs.getInt(4);
-            }
-        } catch (SQLException ex) {
-            LOGGER.log(Level.WARNING, "ClientDAO::insert::" + ex.getMessage());
-        } finally {
-            String successString = "success";
-            if(insertedId == -1)
-                successString = "fail";
-            System.out.println("ClientDAO::insert::" + successString + "::" + insertedId);
-            ConnectionFactory.closeAll(con, statement, rs);
-        }
-        return insertedId;
-    }
 
     private ArrayList<Object> processSelectResultSet(ResultSet rs) throws SQLException {
         if (rs == null)
@@ -102,28 +75,6 @@ public class ClientDAO extends AbstractDAO<ClientT> {
             if(success == -1)
                 successString = "fail";
             System.out.println("ClientDAO::update::" + successString);
-            ConnectionFactory.closeAll(con, statement, null);
-        }
-    }
-
-    @Override
-    public void delete(ClientT client) {
-        Connection con = ConnectionFactory.getConnection();
-        PreparedStatement statement = null;
-        int success = -1;
-        try {
-            statement = con.prepareStatement(deleteStatement, Statement.RETURN_GENERATED_KEYS);
-            statement.setInt(1, client.getId());
-            success = statement.executeUpdate();
-        }
-        catch (SQLException ex) {
-            LOGGER.log(Level.WARNING, "ClientDAO::delete::" + ex.getMessage());
-        }
-        finally {
-            String successString = "success";
-            if(success == -1)
-                successString = "fail";
-            System.out.println("ClientDAO::delete::" + successString);
             ConnectionFactory.closeAll(con, statement, null);
         }
     }

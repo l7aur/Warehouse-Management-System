@@ -40,8 +40,7 @@ public class ProductUpdatesActionListener implements ActionListener {
         if (pType != null) {
             switch (this.type) {
                 case INSERT:
-                    int id = pType.convertToDAO().create(pType);
-                    System.out.println("Inserted product with ID " + id);
+                    pType.convertToDAO().create(pType);
                     break;
                 case UPDATE:
                     pType.convertToDAO().update(pType);

@@ -5,27 +5,28 @@ import org.example.business.logic.utility.IdValidator;
 import org.example.business.logic.utility.QuantityValidator;
 
 /**
- *  The order data transfer object
+ * Represents a possible order with a client id, a product id, a quantity and an id.
+ * @param clientID The unique client identifier of the possible order.
+ * @param productID The unique product identifier of the possible order.
+ * @param quantity The quantity of the product in the possible order.
+ * @param id The unique identifier of the possible order.
  * @author L7aur
  */
 public record Order(String clientID, String productID, String quantity, String id) {
 
     /**
-     * Parameterised constructor
-     * @param clientID the id of the client (foreign key to the client table)
-     * @param productID the id of the product (foreign key to the order table)
-     * @param quantity the quantity requested by the order
+     * Constructor.
+     * @param clientID The ID of the client that placed the possible order.
+     * @param productID The ID of the product that the client has bought in the possible order.
+     * @param quantity The amount of the product the client has to pay in the possible order.
      */
     public Order(String clientID, String productID, String quantity) {
         this(clientID, productID, quantity, null);
     }
 
     /**
-     * Checks if the fields are valid data for an Order Entity
-     * If they are
-     * @return the entity model of the order abstract data type
-     * else
-     * handles as exception
+     * Checks if the fields are valid data for an order entity by means of validators.
+     * @return The order entity model or null.
      */
     public OrderT convertToEntity() {
         try {
@@ -42,8 +43,8 @@ public record Order(String clientID, String productID, String quantity, String i
     }
 
     /**
-     * Converts the order data transfer object into the printable version of the order.
-     * @return the printable version of the order
+     * Creates the printable version of the order.
+     * @return The printable version of the order.
      */
     @Override
     public String toString() {

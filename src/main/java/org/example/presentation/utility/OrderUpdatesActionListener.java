@@ -44,9 +44,9 @@ public class OrderUpdatesActionListener implements ActionListener {
                 case INSERT:
                     int id = oType.convertToDAO().create(oType);
                     if (id == -1) {
-                        JOptionPane.showMessageDialog(null, "Insufficient stock!\nOrder failed!");
+                        JOptionPane.showMessageDialog(null, "Insufficient stock!\nOrder failed!",
+                                "Error", JOptionPane.ERROR_MESSAGE);
                     }
-                    System.out.println("Inserted Order ID: " + id);
                     break;
                 default:
                     System.out.println("You should not be here!!");

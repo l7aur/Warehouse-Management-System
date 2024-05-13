@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 /**
  * Singleton implementation of the Validator interface.
  * Regex-based validation.
+ * @author L7aur
  */
 public class PhoneNumberValidator implements Validator<String> {
     private static final String PHONE_NUMBER_PATTERN = "^\\+407[0-9]{8}$";

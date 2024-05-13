@@ -7,42 +7,43 @@ import org.example.business.logic.utility.PersonNameValidator;
 import org.example.business.logic.utility.PhoneNumberValidator;
 
 /**
- *  The client data transfer object
+ * Represents a possible client with a name, a phone number, an address and an id.
+ * @param name The client's possible name.
+ * @param phoneNumber The client's possible phone number.
+ * @param address The client's possible address.
+ * @param id The client's possible unique identifier.
  * @author L7aur
  */
 public record Client(String name, String phoneNumber, String address, String id) {
 
     /**
-     * Parameterised constructor
-     * @param name the name of the client
-     * @param phoneNumber the phone number of the client
-     * @param address the address of the client
+     * Constructor.
+     * @param name The client's possible name.
+     * @param phoneNumber The client's possible phone number.
+     * @param address The client's possible address.
      */
     public Client(String name, String phoneNumber, String address) {
         this(name, phoneNumber, address, null);
     }
 
     /**
-     * Empty constructor
+     * Constructor.
      */
     public Client() {
         this(null, null, null, null);
     }
 
     /**
-     * Parameterised constructor
-     * @param id id of the client
+     * Constructor.
+     * @param id The client's possible unique identifier.
      */
     public Client(String  id) {
         this(null, null, null, id);
     }
 
     /**
-     * Checks if the fields are valid data for a Client Entity
-     * If they are
-     * @return the entity model of the client abstract data type
-     * else
-     * handles as exception
+     * Checks if the fields are valid data for a client entity by means of validators.
+     * @return The client entity model or null.
      */
     public ClientT convertToEntity() {
         try {

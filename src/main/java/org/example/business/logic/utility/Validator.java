@@ -4,6 +4,7 @@ package org.example.business.logic.utility;
  * Generic interface that implements the validation of a generic input field.
  * Intended to work mainly with regex.
  * @param <T> The type of data to be validated.
+ * @author L7aur
  */
 public interface Validator<T> {
 

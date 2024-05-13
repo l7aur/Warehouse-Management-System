@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 /**
  * Singleton implementation of the Validator interface.
  * Regex-based validation.
+ * @author L7aur
  */
 public class QuantityValidator implements Validator<String>{
     private final static String INTEGER_PATTERN = "^[1-9]\\d*$";

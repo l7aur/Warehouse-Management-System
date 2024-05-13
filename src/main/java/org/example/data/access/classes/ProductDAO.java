@@ -1,5 +1,6 @@
 package org.example.data.access.classes;
 
+import org.example.data.access.utility.AbstractDAO;
 import org.example.model.classes.dto.ProductT;
 import org.example.data.access.utility.ConnectionFactory;
 
@@ -38,36 +39,6 @@ public class ProductDAO extends AbstractDAO<ProductT> {
             ConnectionFactory.closeAll(con, statement, rs);
         }
         return productT;
-    }
-
-    @Override
-    public int create(ProductT product) {
-        Connection con = ConnectionFactory.getConnection();
-        PreparedStatement statement = null;
-        ResultSet rs = null;
-        int insertedId = -1;
-        try {
-            statement = con.prepareStatement(createStatement, Statement.RETURN_GENERATED_KEYS);
-            statement.setString(1, product.name());
-            statement.setInt(2, product.stock());
-            statement.setInt(3, product.price());
-            statement.executeUpdate();
-            rs = statement.getGeneratedKeys();
-            if(rs.next()) {
-                insertedId = rs.getInt(4);
-            }
-        }
-        catch (SQLException ex) {
-            LOGGER.log(Level.WARNING, "ProductDAO::insert::" + ex.getMessage());
-        }
-        finally {
-            String successString = "success";
-            if(insertedId == -1)
-                successString = "fail";
-            System.out.println("ProductDAO::insert::" + successString + "::" + insertedId);
-            ConnectionFactory.closeAll(con, statement, rs);
-        }
-        return insertedId;
     }
 
     private ArrayList<Object> processSelectResultSet(ResultSet rs) throws SQLException {
@@ -129,30 +100,6 @@ public class ProductDAO extends AbstractDAO<ProductT> {
             if(success == -1)
                 successString = "fail";
             System.out.println("ProductDAO::update::" + successString);
-            ConnectionFactory.closeAll(con, statement, null);
-        }
-    }
-
-    @Override
-    public void delete(ProductT product) {
-        System.out.println(product.id());
-        Connection con = ConnectionFactory.getConnection();
-        PreparedStatement statement = null;
-        int success = -1;
-        try {
-            statement = con.prepareStatement(deleteStatement, Statement.RETURN_GENERATED_KEYS);
-            System.out.println(product.id());
-            statement.setInt(1, product.id());
-            success = statement.executeUpdate();
-        }
-        catch (SQLException ex) {
-            LOGGER.log(Level.WARNING, "ProductDAO::delete::" + ex.getMessage());
-        }
-        finally {
-            String successString = "success";
-            if(success == -1)
-                successString = "fail";
-            System.out.println("ProductDAO::delete::" + successString);
             ConnectionFactory.closeAll(con, statement, null);
         }
     }

@@ -7,42 +7,43 @@ import org.example.business.logic.utility.StockValidator;
 import org.example.model.classes.dto.ProductT;
 
 /**
- * The product data transfer object
+ * Represents a possible product with a product name, a stock, a price per unit and an id.
+ * @param name The name of the possible product.
+ * @param stock The available stock of the possible product.
+ * @param price The price per unit of the possible product.
+ * @param id The unique identifier of the possible product.
  * @author L7aur
  */
 public record Product(String name, String stock, String price, String id) {
 
     /**
-     * Parameterised constructor
-     * @param name the name of the product
-     * @param stock the available stock
-     * @param price the price per unit
+     * Constructor.
+     * @param name The name of the possible product.
+     * @param stock The available stock of the possible product.
+     * @param price The price per unit of the possible product.
      */
     public Product(String name, String stock, String price) {
         this(name, stock, price, null);
     }
 
     /**
-     * Empty constructor
+     * Constructor.
      */
     public Product() {
         this(null, null, null, null);
     }
 
     /**
-     * Parameterised constructor
-     * @param id the id of the product
+     * Constructor.
+     * @param id The unique identifier of the possible product.
      */
     public Product(String id) {
         this(null, null, null, id);
     }
 
     /**
-     * Checks if the fields are valid data for a Product Entity
-     * If they are
-     * @return the entity model of the product abstract data type
-     * else
-     * handles as exception
+     * Checks if the fields are valid data for a product entity by means of validators.
+     * @return The product entity model or null.
      */
     public ProductT convertToEntity() {
         try {

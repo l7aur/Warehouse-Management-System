@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class BillDAO  {
+public class BillDAO {
     private static final Logger LOGGER = Logger.getLogger(OrderDAO.class.getName());
 
     private static final String createStatement = "INSERT INTO log (order_id, price) VALUES (?, ?)";
