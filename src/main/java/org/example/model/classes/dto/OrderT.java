@@ -8,16 +8,8 @@ public record OrderT(int clientID, int productID, int quantity, int id) {
         this(clientID, productID, quantity, -1);
     }
 
-    public int getProductID() {
-        return productID;
-    }
-
     public OrderDAO convertToDAO() {
         return new OrderDAO();
-    }
-
-    public int getClientID() {
-        return clientID;
     }
 
     public int getQuantity() {

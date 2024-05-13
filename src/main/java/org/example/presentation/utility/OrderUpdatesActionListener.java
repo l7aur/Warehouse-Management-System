@@ -1,5 +1,8 @@
 package org.example.presentation.utility;
 
+import org.example.data.access.classes.BillDAO;
+import org.example.data.access.classes.ProductDAO;
+import org.example.model.classes.dto.BillT;
 import org.example.model.classes.dto.ClientT;
 import org.example.model.classes.dto.OrderT;
 import org.example.model.classes.dto.ProductT;
@@ -46,6 +49,12 @@ public class OrderUpdatesActionListener implements ActionListener {
                     if (id == -1) {
                         JOptionPane.showMessageDialog(null, "Insufficient stock!\nOrder failed!",
                                 "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                    else {
+                        ProductDAO productDAO = new ProductDAO();
+                        ProductT productT = productDAO.getProductById(oType.productID());
+
+                        (new BillDAO()).create(new BillT(id, oType.quantity() * productT.price()));
                     }
                     break;
                 default:

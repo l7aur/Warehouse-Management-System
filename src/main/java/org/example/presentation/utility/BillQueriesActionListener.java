@@ -17,7 +17,7 @@ public class BillQueriesActionListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         BillT bType = new BillT();
-        ArrayList<Object> list = bType.convertToDAO().read();
+        ArrayList<Object> list = bType.convertToDAO().read(bType);
         panel.updateContent(list);
     }
 

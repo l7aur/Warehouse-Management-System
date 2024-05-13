@@ -12,7 +12,6 @@ import java.util.logging.Logger;
 public class ProductDAO extends AbstractDAO<ProductT> {
     private static final Logger LOGGER = Logger.getLogger(ProductDAO.class.getName());
 
-    private static final String selectStatement = "SELECT * FROM product";
     private static final String selectByIdStatement = "SELECT * FROM product WHERE id = ?";
 
     public ProductT getProductById(int id) {
@@ -36,43 +35,5 @@ public class ProductDAO extends AbstractDAO<ProductT> {
             ConnectionFactory.closeAll(con, statement, rs);
         }
         return productT;
-    }
-
-    private ArrayList<Object> processSelectResultSet(ResultSet rs) throws SQLException {
-        if (rs == null)
-            return null;
-        ArrayList<Object> list = new ArrayList<>();
-
-        while (rs.next()) {
-            int id = Integer.parseInt(rs.getString("id"));
-            String name = rs.getString("name");
-            int stock = Integer.parseInt(rs.getString("stock"));
-            int price = Integer.parseInt(rs.getString("price"));
-            list.add(new ProductT(name, stock, price, id));
-        }
-
-        return list;
-    }
-    @Override
-    public ArrayList<Object> read() {
-        Connection con = ConnectionFactory.getConnection();
-        PreparedStatement statement = null;
-        ResultSet rs = null;
-        ArrayList<Object> list = null;
-        String successString = "success";
-        try {
-            statement = con.prepareStatement(selectStatement, Statement.RETURN_GENERATED_KEYS);
-            rs = statement.executeQuery();
-            list = processSelectResultSet(rs);
-        }
-        catch (SQLException ex) {
-            successString = "fail";
-            LOGGER.log(Level.WARNING, "ProductDAO::select::" + ex.getMessage());
-        }
-        finally {
-            System.out.println("ProductDAO::select::"+ successString);
-            ConnectionFactory.closeAll(con, statement, rs);
-        }
-        return list;
     }
 }

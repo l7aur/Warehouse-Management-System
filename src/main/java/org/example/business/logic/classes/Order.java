@@ -35,7 +35,7 @@ public record Order(String clientID, String productID, String quantity, String i
             QuantityValidator.getValidator().validate(this.quantity);
         }
         catch (IllegalArgumentException e) {
-            System.out.println("<EXCEPTION> Order.java");
+            System.out.println("<EXCEPTION> Order.java" + e.getMessage());
             return null;
         }
         return new OrderT(Integer.parseInt(this.clientID), Integer.parseInt(this.productID),

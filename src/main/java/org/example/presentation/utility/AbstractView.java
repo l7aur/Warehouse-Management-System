@@ -7,6 +7,8 @@ import java.awt.*;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Abstract class that is the root of each View in the application
@@ -98,7 +100,7 @@ public abstract class AbstractView extends JPanel implements View {
                     data[i][j] = fields[j].get(objects.get(i)).toString();
                 }
                 catch (IllegalAccessException e) {
-                    e.printStackTrace();
+                    Logger.getLogger(AbstractView.class.getSimpleName()).log(Level.WARNING, "ILLEGAL ACCESS", e);
                 }
             }
         }
@@ -107,7 +109,6 @@ public abstract class AbstractView extends JPanel implements View {
 
     private static String[] getTableHeader(Object object) {
         Class<?> clazz = object.getClass();
-        System.out.println(clazz.getName());
         Field[] fields = clazz.getDeclaredFields();
         String[] columns = new String[fields.length];
         for(int i = 0; i < fields.length; i++) {

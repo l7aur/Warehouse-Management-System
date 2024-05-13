@@ -6,13 +6,17 @@ import org.example.data.access.classes.BillDAO;
  *  The bill model
  * @author L7aur
  */
-public record BillT(int orderID, int price) {
+public record BillT(int orderID, int price, int id) {
 
     public BillT(){
-        this(-1, -1);
+        this(-1, -1, -1);
+    }
+    public BillT(int orderID, int price){
+        this(orderID, price, -1);
     }
 
     public BillDAO convertToDAO() {
         return new BillDAO();
     }
+
 }

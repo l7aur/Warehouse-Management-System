@@ -2,7 +2,6 @@ package org.example.data.access.classes;
 
 import org.example.data.access.utility.AbstractDAO;
 import org.example.model.classes.dto.OrderT;
-import org.example.model.classes.dto.ProductT;
 import org.example.data.access.utility.ConnectionFactory;
 
 import java.sql.*;
@@ -13,17 +12,6 @@ public class OrderDAO extends AbstractDAO<OrderT> {
     private static final Logger LOGGER = Logger.getLogger(OrderDAO.class.getName());
 
     private static final String selectStatement = "SELECT * FROM \"order\" WHERE id = ?";
-
-
-    private ProductT getProduct(int id) {
-        ProductDAO productDAO = new ProductDAO();
-        return productDAO.getProductById(id);
-    }
-
-    private void updateQuantity(ProductT product) {
-        ProductDAO productDAO = new ProductDAO();
-        productDAO.update(product);
-    }
 
     public OrderT getOrder(int id) {
         Connection con = ConnectionFactory.getConnection();

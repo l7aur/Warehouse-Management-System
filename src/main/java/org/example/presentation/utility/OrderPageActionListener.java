@@ -26,9 +26,9 @@ public class OrderPageActionListener implements ActionListener {
         ArrayList<Object> clientList = null;
 
         if(pType != null)
-            productList = pType.convertToDAO().read();
+            productList = pType.convertToDAO().read(pType);
         if(cType != null)
-            clientList = cType.convertToDAO().read();
+            clientList = cType.convertToDAO().read(cType);
         this.panel.updateContent(clientList, productList);
     }
 
