@@ -65,9 +65,8 @@ The data access package contains a utility directory where the connection to the
 The class diagram is available [here](</Documentation resources/class_diagram.png>).
 
 <p align="center">
-  <img src="https://github.com/l7aur/Warehouse-Management-System/assets/81981519/5e31881e-c75c-4ce1-aaaa-74a04d1eb7c6" alt="Package_diagram"/>
+  <img src="https://github.com/l7aur/Warehouse-Management-System/assets/81981519/682a9f40-02bc-4691-8762-270db7aba63f" alt="Package_diagram"/>
 </p>
-
 
 ## Implementation
 
