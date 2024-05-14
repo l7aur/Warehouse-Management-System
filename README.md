@@ -47,7 +47,7 @@ The application is developed and designed to run in a Java Integrated Developmen
 The user diagram describes the dependencies between the user’s interactions and the system represented by the Warehouse Management System Application. The user can manage the database as described in the above paragraphs.
 
 <p align="center">
-  <img src="https://github.com/l7aur/Warehouse-Management-System/assets/81981519/3e25e4a5-2f57-46da-abee-0e9581e65d59" alt="Use_case_diagram"/>
+  <img src="https://github.com/l7aur/Warehouse-Management-System/assets/81981519/cab64bf6-6180-4b30-874f-584602e3b1e2" alt="Use_case_diagram"/>
 </p>
 
 ## Design
