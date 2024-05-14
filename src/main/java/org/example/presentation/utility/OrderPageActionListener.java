@@ -15,6 +15,10 @@ import java.util.ArrayList;
  * @author L7aur
  */
 public class OrderPageActionListener implements ActionListener {
+
+    /**
+     * The order panel reference.
+     */
     private final OrderPanel panel;
 
     /**

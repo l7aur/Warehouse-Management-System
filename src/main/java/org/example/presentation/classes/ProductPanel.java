@@ -10,10 +10,30 @@ import java.awt.*;
  * @author L7aur
  */
 public class ProductPanel extends AbstractView {
+
+    /**
+     * The unique identifier of the view.
+     */
     private final String id;
+
+    /**
+     * The main frame of the application refernce.
+     */
     private final MainFrame mainFrame;
+
+    /**
+     * The main panel of the view.
+     */
     private JPanel panel;
+
+    /**
+     * The card layout of the panel reference.
+     */
     private CardLayout mainPanelCardLayout;
+
+    /**
+     * The view product view reference.
+     */
     private ViewProductView viewProductView;
 
     /**

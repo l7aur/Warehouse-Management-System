@@ -8,9 +8,21 @@ import java.util.regex.Pattern;
  * @author L7aur
  */
 public class IdValidator implements Validator<String> {
+
+    /**
+     * Id regex.
+     */
     private static final String ID_PATTERN = "^[1-9]\\d*$";
 
+    /**
+     * Singleton instance.
+     */
     private static final IdValidator instance = new IdValidator();
+
+    /**
+     * Constructor.
+     */
+    private IdValidator() {}
 
     /**
      * Gets the singleton instance of the validator.

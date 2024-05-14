@@ -8,9 +8,21 @@ import java.util.regex.Pattern;
  * @author L7aur
  */
 public class StockValidator implements Validator<String> {
+
+    /**
+     * Stock regex.
+     */
     private static final String STOCK_PATTERN = "^[0-9]+$";
 
+    /**
+     * Singleton instance.
+     */
     private static final StockValidator instance = new StockValidator();
+
+    /**
+     * Constructor.
+     */
+    private StockValidator() {}
 
     /**
      * Gets the singleton instance of the validator.

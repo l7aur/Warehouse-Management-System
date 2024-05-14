@@ -13,15 +13,50 @@ import java.util.ArrayList;
  * @author L7aur
  */
 public class OrderPanel extends AbstractView {
+
+    /**
+     * The unique identifier of the view.
+     */
     private final String id;
+
+    /**
+     * The main frame of the application reference.
+     */
     private final MainFrame mainFrame;
+
+    /**
+     * The selector panel reference.
+     */
     private final JPanel selectorPanel;
+
+    /**
+     * The client selector reference.
+     */
     private JComboBox<ClientT> clientComboBox;
+
+    /**
+     * The product selector reference.
+     */
     private JComboBox<ProductT> productComboBox;
+
+    /**
+     * The text field reference.
+     */
     private JTextField textField;
 
+    /**
+     * The name of the first selector.
+     */
     private static final String SELECTOR_NAME_1 = "CLIENT";
+
+    /**
+     * The name of the second selector.
+     */
     private static final String SELECTOR_NAME_2 = "PRODUCT";
+
+    /**
+     * The name of the selector.
+     */
     private static final String SELECTOR_NAME_3 = "QUANTITY";
 
     /**

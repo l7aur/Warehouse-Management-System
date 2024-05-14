@@ -5,6 +5,12 @@ package org.example;
  * @author L7aur
  */
 public class Main {
+
+    /**
+     * Constructor.
+     */
+    public Main(){}
+
     /**
      * Main thread of the program.
      * @param args Command line arguments.

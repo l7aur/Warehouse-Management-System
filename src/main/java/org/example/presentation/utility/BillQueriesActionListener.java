@@ -12,6 +12,10 @@ import java.util.ArrayList;
  * @author L7aur
  */
 public class BillQueriesActionListener implements ActionListener {
+
+    /**
+     * The view bill view reference.
+     */
     private final ViewBillView panel;
 
     /**

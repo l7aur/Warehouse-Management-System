@@ -8,9 +8,21 @@ import java.util.regex.Pattern;
  * @author L7aur
  */
 public class ProductNameValidator implements Validator<String>{
+
+    /**
+     * Product name regex.
+     */
     private static final String PRODUCT_NAME_PATTERN = "^[A-Za-z-]+$";
 
+    /**
+     * Singleton instance.
+     */
     private static final ProductNameValidator instance = new ProductNameValidator();
+
+    /**
+     * Constructor.
+     */
+    private ProductNameValidator() {}
 
     /**
      * Gets the singleton instance of the validator.

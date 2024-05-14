@@ -8,9 +8,21 @@ import java.util.regex.Pattern;
  * @author L7aur
  */
 public class QuantityValidator implements Validator<String>{
+
+    /**
+     * Positive integer regex.
+     */
     private final static String INTEGER_PATTERN = "^[1-9]\\d*$";
 
+    /**
+     * Singleton instance.
+     */
     private static final QuantityValidator instance = new QuantityValidator();
+
+    /**
+     * Constructor.
+     */
+    private QuantityValidator() {}
 
     /**
      * Gets the singleton instance of the validator.

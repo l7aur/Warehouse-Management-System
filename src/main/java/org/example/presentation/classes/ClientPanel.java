@@ -10,10 +10,30 @@ import java.awt.*;
  * @author L7aur
  */
 public class ClientPanel extends AbstractView {
+
+    /**
+     * The unique identifier of the view.
+     */
     private final String id;
+
+    /**
+     * The main frame of the application.
+     */
     private final MainFrame mainFrame;
+
+    /**
+     * The main panel reference.
+     */
     private JPanel panel;
+
+    /**
+     * The card layout of the panel reference.
+     */
     private CardLayout mainPanelCardLayout;
+
+    /**
+     * The view client view reference
+     */
     private ViewClientView viewClientView;
 
     /**

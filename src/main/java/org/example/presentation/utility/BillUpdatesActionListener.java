@@ -18,6 +18,10 @@ import java.util.ArrayList;
  * @author L7aur
  */
 public class BillUpdatesActionListener implements ActionListener {
+
+    /**
+     * The array of text fields reference.
+     */
     private final ArrayList<JTextField> textFields;
 
     /**

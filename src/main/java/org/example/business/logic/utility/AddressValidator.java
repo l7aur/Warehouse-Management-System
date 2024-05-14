@@ -8,8 +8,20 @@ import java.util.regex.Pattern;
  * @author L7aur
  */
 public class AddressValidator implements Validator<String> {
+
+    /**
+     * Address regex.
+     */
     private static final String ADDRESS_PATTERN = "^Str\\. [A-Z][A-Za-z]+ Nr\\. [0-9]+[A-Z]?$";
 
+    /**
+     * Constructor.
+     */
+    private AddressValidator() {}
+
+    /**
+     * Singleton instance.
+     */
     private static final AddressValidator addressValidator = new AddressValidator();
 
     /**

@@ -10,8 +10,20 @@ import java.awt.event.ActionListener;
  * @author L7aur
  */
 public class ViewNavigateActionListener implements ActionListener {
+
+    /**
+     * The current panel reference.
+     */
     private final JPanel panel;
+
+    /**
+     * The card layout of the main frame reference.
+     */
     private final CardLayout layout;
+
+    /**
+     * The target panel unique identifier.
+     */
     private final String toWhere;
 
     /**

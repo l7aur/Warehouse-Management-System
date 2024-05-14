@@ -12,8 +12,20 @@ import java.awt.event.ActionListener;
  * @author L7aur
  */
 public class NavigateActionListener implements ActionListener {
+
+    /**
+     * The main frame of the application reference.
+     */
     private final MainFrame mainFrame;
+
+    /**
+     * The current panel reference.
+     */
     private final JPanel currentPanel;
+
+    /**
+     * The target panel unique identifier.
+     */
     private final String toWhere;
 
     /**

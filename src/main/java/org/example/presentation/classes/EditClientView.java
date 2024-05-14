@@ -15,6 +15,10 @@ import java.util.ArrayList;
  * @author L7aur
  */
 public class EditClientView extends AbstractView {
+
+    /**
+     * The unique identifier of the view.
+     */
     private final String id;
 
     /**

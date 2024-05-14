@@ -8,9 +8,21 @@ import java.util.regex.Pattern;
  * @author L7aur
  */
 public class PriceValidator implements Validator<String>{
+
+    /**
+     * Price regex.
+     */
     private static final String PRICE_PATTERN = "^[1-9]\\d*$";
 
+    /**
+     * Singleton instance.
+     */
     private static final PriceValidator instance = new PriceValidator();
+
+    /**
+     * Constructor.
+     */
+    private PriceValidator() {}
 
     /**
      * Gets the singleton instance of the validator.

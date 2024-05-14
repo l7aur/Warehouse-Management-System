@@ -9,4 +9,8 @@ import org.example.model.classes.dto.ClientT;
  */
 public class ClientDAO extends AbstractDAO<ClientT> {
 
+    /**
+     * Constructor.
+     */
+    public ClientDAO() {}
 }

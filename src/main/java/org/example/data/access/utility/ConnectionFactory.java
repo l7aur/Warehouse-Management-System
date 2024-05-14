@@ -10,12 +10,35 @@ import java.util.logging.Logger;
  * @author L7aur
  */
 public class ConnectionFactory {
+
+    /**
+     * Logger object.
+     */
     private static final Logger LOGGER = Logger.getLogger(ConnectionFactory.class.getName());
+
+    /**
+     * Driver path.
+     */
     private static final String DRIVER = "org.postgresql.Driver";
+
+    /**
+     * Link to database.
+     */
     private static final String DATABASE_URL = "jdbc:postgresql://localhost:5432/warehouse";
+
+    /**
+     * Database username. (root - bad practice)
+     */
     private static final String USER = "postgres";
+
+    /**
+     * User database password.
+     */
     private static final String PASS = "L7aur";
 
+    /**
+     * Singleton instance.
+     */
     private static final ConnectionFactory singleInstance = new ConnectionFactory();
 
     /**

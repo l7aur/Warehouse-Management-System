@@ -18,9 +18,25 @@ import java.awt.event.ActionListener;
  * @author L7aur
  */
 public class OrderUpdatesActionListener implements ActionListener {
+
+    /**
+     * The array of text fields reference.
+     */
     private final JTextField textField;
+
+    /**
+     * The client selector reference.
+     */
     private final JComboBox<ClientT> comboBox1;
+
+    /**
+     * The product selector reference.
+     */
     private final JComboBox<ProductT> comboBox2;
+
+    /**
+     * The query type.
+     */
     private QueryType type;
 
     /**

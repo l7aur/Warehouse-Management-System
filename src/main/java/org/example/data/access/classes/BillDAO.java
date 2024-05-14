@@ -9,4 +9,8 @@ import org.example.model.classes.dto.BillT;
  */
 public class BillDAO extends AbstractDAO<BillT> {
 
+    /**
+     * Constructor.
+     */
+    public BillDAO() {}
 }

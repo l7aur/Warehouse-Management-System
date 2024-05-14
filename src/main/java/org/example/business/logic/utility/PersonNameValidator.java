@@ -8,9 +8,21 @@ import java.util.regex.Pattern;
  * @author L7aur
  */
 public class PersonNameValidator implements Validator<String>{
+
+    /**
+     * Name regex.
+     */
     private static final String NAME_PATTERN = "^[A-Z][a-z]+ [A-Z][a-z]+$";
 
+    /**
+     * Singleton instance.
+     */
     private static final PersonNameValidator PERSON_NAME_VALIDATOR = new PersonNameValidator();
+
+    /**
+     * Constructor.
+     */
+    private PersonNameValidator() {}
 
     /**
      * Gets the singleton instance of the validator.

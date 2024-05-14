@@ -8,12 +8,36 @@ import java.awt.*;
  * @author L7aur
  */
 public class Colors {
+
+    /**
+     * The background color of the whole application.
+     */
     private static final Color backgroundColor = new Color(32, 42,68);
+
+    /**
+     * The text color of some special GUI elements such as tables or labels.
+     */
     private static final Color foregroundColor = Color.white;
+
+    /**
+     * The selection color of some special GUI elements such as tables.
+     */
     private static final Color selectionColor = new Color(137, 143, 16);
+
+    /**
+     * The highlight color of some special GUI elements such as important/key labels.
+     */
     private static final Color highlightColor = Color.red;
 
+    /**
+     * The singleton instance.
+     */
     private static final Colors colorInstance = new Colors();
+
+    /**
+     * Constructor.
+     */
+    private Colors() {}
 
     /**
      * Gets the singleton instance of the validator.

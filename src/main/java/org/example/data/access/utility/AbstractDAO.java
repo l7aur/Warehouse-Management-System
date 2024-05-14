@@ -17,7 +17,16 @@ import java.util.logging.Logger;
  * @author L7aur
  */
 public abstract class AbstractDAO<T> {
+
+    /**
+     * Logger object.
+     */
     private static final Logger LOGGER = Logger.getLogger(AbstractDAO.class.getSimpleName());
+
+    /**
+     * Constructor.
+     */
+    public AbstractDAO() {}
 
     /**
      * Constructs the 'INSERT INTO' statement.

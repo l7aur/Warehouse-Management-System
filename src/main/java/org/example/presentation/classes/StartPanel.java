@@ -9,7 +9,15 @@ import java.awt.*;
  * @author L7aur
  */
 public class StartPanel extends AbstractView {
+
+    /**
+     * The unique identifier of the view.
+     */
     private final String id;
+
+    /**
+     * The main frame application reference.
+     */
     private final MainFrame mainFrame;
 
     /**

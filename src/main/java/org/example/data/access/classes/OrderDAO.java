@@ -14,9 +14,21 @@ import java.util.logging.Logger;
  * @author L7aur
  */
 public class OrderDAO extends AbstractDAO<OrderT> {
+
+    /**
+     * Logger object.
+     */
     private static final Logger LOGGER = Logger.getLogger(OrderDAO.class.getName());
 
+    /**
+     * Query string.
+     */
     private static final String selectStatement = "SELECT * FROM \"order\" WHERE id = ?";
+
+    /**
+     * Constructor.
+     */
+    public OrderDAO() {};
 
     /**
      * Returns the order that has the corresponding id if it exists.

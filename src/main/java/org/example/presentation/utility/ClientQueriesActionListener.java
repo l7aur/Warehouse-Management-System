@@ -13,6 +13,10 @@ import java.util.ArrayList;
  * @author L7aur
  */
 public class ClientQueriesActionListener implements ActionListener {
+
+    /**
+     * The view client view reference.
+     */
     private final ViewClientView panel;
 
     /**

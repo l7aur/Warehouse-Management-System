@@ -13,6 +13,10 @@ import java.util.ArrayList;
  * @author L7aur
  */
 public class ProductQueriesActionListener implements ActionListener {
+
+    /**
+     * The view product view reference.
+     */
     private final ViewProductView panel;
 
     /**

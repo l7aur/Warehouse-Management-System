@@ -13,8 +13,20 @@ import java.util.logging.Logger;
  * @author L7aur
  */
 public class ProductDAO extends AbstractDAO<ProductT> {
+
+    /**
+     * Logger object.
+     */
     private static final Logger LOGGER = Logger.getLogger(ProductDAO.class.getName());
 
+    /**
+     * Constructor.
+     */
+    public ProductDAO() {}
+
+    /**
+     * Query string.
+     */
     private static final String selectByIdStatement = "SELECT * FROM product WHERE id = ?";
 
     /**

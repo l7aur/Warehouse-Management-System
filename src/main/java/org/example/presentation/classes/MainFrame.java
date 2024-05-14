@@ -10,8 +10,20 @@ import java.util.ArrayList;
  * @author L7aur
  */
 public class MainFrame extends JFrame {
+
+    /**
+     * The content pane of the application frame.
+     */
     private final Container contentPane;
+
+    /**
+     * The layout of the main frame.
+     */
     private final CardLayout layout;
+
+    /**
+     * The array of panel identifiers.
+     */
     private ArrayList<String> panels;
 
     /**

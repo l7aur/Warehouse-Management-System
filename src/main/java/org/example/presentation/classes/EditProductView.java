@@ -12,9 +12,13 @@ import java.util.ArrayList;
 
 /**
  * The edit product view.
- * @author L7aur 
+ * @author L7aur
  */
 public class EditProductView extends AbstractView {
+
+    /**
+     * The unique identifier of the view.
+     */
     private final String id;
 
     /**

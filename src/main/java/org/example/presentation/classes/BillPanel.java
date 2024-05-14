@@ -11,10 +11,30 @@ import java.awt.*;
  * @author L7aur
  */
 public class BillPanel extends AbstractView {
+
+    /**
+     * Unique identifier of the view.
+     */
     private final String id;
+
+    /**
+     * The main frame of the application.
+     */
     private final MainFrame mainFrame;
+
+    /**
+     * The main panel reference.
+     */
     private JPanel panel;
+
+    /**
+     * The card layout of the panel reference.
+     */
     private CardLayout mainPanelCardLayout;
+
+    /**
+     * The view bills view reference.
+     */
     private ViewBillView viewBillView;
 
     /**

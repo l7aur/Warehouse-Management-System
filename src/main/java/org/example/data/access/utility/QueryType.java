@@ -5,8 +5,24 @@ package org.example.data.access.utility;
  * @author L7aur
  */
 public enum QueryType {
+
+    /**
+     * SELECT type query.
+     */
     SELECT,
+
+    /**
+     * INSERT type query.
+     */
     INSERT,
+
+    /**
+     * UPDATE type query.
+     */
     UPDATE,
+
+    /**
+     * DELETE type query.
+     */
     DELETE;
 }

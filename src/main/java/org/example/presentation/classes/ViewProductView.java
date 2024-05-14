@@ -10,6 +10,10 @@ import java.awt.*;
  * @author L7aur
  */
 public class ViewProductView extends AbstractView {
+
+    /**
+     * The unique identifier of the view.
+     */
     private final String id;
 
     /**

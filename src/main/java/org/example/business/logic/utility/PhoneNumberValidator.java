@@ -8,9 +8,21 @@ import java.util.regex.Pattern;
  * @author L7aur
  */
 public class PhoneNumberValidator implements Validator<String> {
+
+    /**
+     * Phone number regex.
+     */
     private static final String PHONE_NUMBER_PATTERN = "^\\+407[0-9]{8}$";
 
+    /**
+     * Singleton instance.
+     */
     private static final PhoneNumberValidator phoneNumberValidator = new PhoneNumberValidator();
+
+    /**
+     * Constructor.
+     */
+    private PhoneNumberValidator() {}
 
     /**
      * Gets the singleton instance of the validator.

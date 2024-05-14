@@ -15,6 +15,12 @@ import java.util.logging.Logger;
  * @author L7aur
  */
 public abstract class AbstractView extends JPanel implements View {
+
+    /**
+     * Constructor.
+     */
+    public AbstractView() {}
+
     /**
      * Creates a number of labeled text fields that are placed in a JPanel.
      * @param names the labels that are going to be used for the text fields.
@@ -81,6 +87,10 @@ public abstract class AbstractView extends JPanel implements View {
         this.add(scrollPane, BorderLayout.CENTER);
     }
 
+    /**
+     * Refreshes the content of a table inside a view type view.
+     * @param objects The array of objects that represent the entries in the table.
+     */
     public void updateContent(List<Object> objects) {
         if (objects == null)
             return;

@@ -9,6 +9,10 @@ import java.awt.*;
  * The view client view.
  */
 public class ViewClientView extends AbstractView {
+
+    /**
+     * The unique identifier of the view.
+     */
     private final String id;
 
     /**

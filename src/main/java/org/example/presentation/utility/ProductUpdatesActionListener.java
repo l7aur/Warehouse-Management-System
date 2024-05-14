@@ -14,7 +14,15 @@ import java.util.ArrayList;
  * @author L7aur
  */
 public class ProductUpdatesActionListener implements ActionListener {
+
+    /**
+     * The array of text fields reference.
+     */
     private final ArrayList<JTextField> textFields;
+
+    /**
+     * The query type.
+     */
     private QueryType type;
 
     /**
