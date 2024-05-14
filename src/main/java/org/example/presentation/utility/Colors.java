@@ -3,8 +3,8 @@ package org.example.presentation.utility;
 import java.awt.*;
 
 /**
- * Singleton pattern
- * Instantiates the colors that are used throughout the whole GUI
+ * Singleton implementation of the colour palette of the application.
+ * Instantiates the colors that are used throughout the whole GUI for easier management.
  * @author L7aur
  */
 public class Colors {
@@ -15,45 +15,41 @@ public class Colors {
 
     private static final Colors colorInstance = new Colors();
 
-    private Colors() {
-
-    }
-
     /**
-     * Getter
-     * @return the singleton instance
+     * Gets the singleton instance of the validator.
+     * @return The singleton instance.
      */
     public static Colors getInstance() {
         return colorInstance;
     }
 
     /**
-     * Getter
-     * @return the background color
+     * Getter.
+     * @return The background color.
      */
     public Color getBackgroundColor() {
         return backgroundColor;
     }
 
     /**
-     * Getter
-     * @return the foreground color
+     * Getter.
+     * @return The foreground color.
      */
     public Color getForegroundColor() {
         return foregroundColor;
     }
 
     /**
-     * Getter
-     * @return the color used for highlighting
+     * Getter.
+     * @return The color used for highlighting.
      */
     public Color getHighlightColor() {
         return highlightColor;
     }
 
     /**
-     * Getter
-     * @return the color used for selecting
+     * Getter.
+     * @return The color used for selecting.
      */
     public Color getSelectionColor() {
         return selectionColor;

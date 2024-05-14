@@ -13,13 +13,25 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+/**
+ * Implementation of the ActionListener interface associated to the create SQL query in the order panel.
+ * @author L7aur
+ */
 public class BillUpdatesActionListener implements ActionListener {
     private final ArrayList<JTextField> textFields;
 
+    /**
+     * Constructor.
+     * @param textFields An array of references to the fields that are displayed in the GUI.
+     */
     public BillUpdatesActionListener(ArrayList<JTextField> textFields) {
         this.textFields = textFields;
     }
 
+    /**
+     * Queries the database on action event.
+     * @param e The event to be processed (button press).
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         int orderID = getOrderID();
@@ -40,6 +52,10 @@ public class BillUpdatesActionListener implements ActionListener {
             JOptionPane.showMessageDialog(null, "Bill could not be created");
     }
 
+    /**
+     * Finds the id of the order whose id is in the first text field displayed in the GUI.
+     * @return The id of the order.
+     */
     private int getOrderID() {
         String fieldData = textFields.getFirst().getText();
         try{

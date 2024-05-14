@@ -11,15 +11,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Abstract class that is the root of each View in the application
+ * Abstract class that implements the view panel model.
  * @author L7aur
  */
 public abstract class AbstractView extends JPanel implements View {
     /**
-     * Creates a number of labeled text fields that are placed in a JPanel
-     * @param names the labels that are going to be used for the text fields
-     * @param textFields empty array list so that some reference to the text fields is stored
-     * @return the JPanel where the above-mentioned are placed
+     * Creates a number of labeled text fields that are placed in a JPanel.
+     * @param names the labels that are going to be used for the text fields.
+     * @param textFields empty array list so that some reference to the text fields is stored.
+     * @return the JPanel where the above-mentioned are placed.
      */
     protected JPanel createTextFields(String[] names, ArrayList<JTextField> textFields) {
         JPanel panel = new JPanel();
@@ -41,7 +41,8 @@ public abstract class AbstractView extends JPanel implements View {
     }
 
     /**
-     * The default method of the abstract class creates the content of the delete view for the Client and Product Views
+     * The method of the abstract class creates the content of the delete view for
+     * the Client and Product Views.
      */
     @Override
     public void createContent() {
@@ -52,14 +53,14 @@ public abstract class AbstractView extends JPanel implements View {
         MyButton executeButton = new MyButton("EXECUTE DELETE");
         if(this.getId().equals("DELETE_CLIENT_VIEW"))
             executeButton.addActionListener(new ClientUpdatesActionListener(fields, this.getId()));
-        else
+        else //DELETE_PRODUCT_VIEW
             executeButton.addActionListener(new ProductUpdatesActionListener(fields, this.getId()));
         this.add(executeButton, BorderLayout.SOUTH);
     }
 
     /**
-     * Getter
-     * @return the id of the View
+     * Getter.
+     * @return The identifier of the View.
      */
     @Override
     public String getId() {
@@ -67,9 +68,9 @@ public abstract class AbstractView extends JPanel implements View {
     }
 
     /**
-     * Creates and adds a JScrollPane to the current object. Used for the OrderPanel View
-     * @param data matrix that stores the data that is going to fill the table in String format
-     * @param columns the name of the columns
+     * Creates and adds a JScrollPane to the current object. Used for the OrderPanel View.
+     * @param data Matrix that stores the data that is going to fill the table in String format.
+     * @param columns The name of the columns.
      */
     protected void addScrollPane(String[][] data, String[] columns) {
         JTable table = constructTable(data, columns);
@@ -89,6 +90,12 @@ public abstract class AbstractView extends JPanel implements View {
         addScrollPane(data, columns);
     }
 
+    /**
+     * Converts a list of objects into a matrix of strings representing the table entries.
+     * @param objects The array of objects.
+     * @param cols The name of the columns.
+     * @return A matrix of strings where a row represents an entry in the table.
+     */
     private static String[][] getTableEntries(List<Object> objects, int cols) {
         String[][] data = new String[objects.size()][cols];
         for (int i = 0; i < objects.size(); i++) {
@@ -107,6 +114,11 @@ public abstract class AbstractView extends JPanel implements View {
         return data;
     }
 
+    /**
+     * Generates through reflection the names of the columns of the table.
+     * @param object The abstract data object whose field names will become the header of the table.
+     * @return An array of strings representing the header of the table.
+     */
     private static String[] getTableHeader(Object object) {
         Class<?> clazz = object.getClass();
         Field[] fields = clazz.getDeclaredFields();
@@ -118,10 +130,10 @@ public abstract class AbstractView extends JPanel implements View {
     }
 
     /**
-     * Constructs a JTable with un-editable cells.
-     * @param data the data that is going to populate the table in String format
-     * @param columns the name of the columns in String format
-     * @return a JTable with the above-mentioned characteristics
+     * Constructs a JTable with non-editable cells.
+     * @param data A matrix of strings where a row represents a table entry.
+     * @param columns An array of strings representing the names of the columns.
+     * @return A table with the above-mentioned characteristics.
      */
     private JTable constructTable(String[][] data, String[] columns) {
         JTable table = new JTable(data, columns);

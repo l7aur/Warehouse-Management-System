@@ -9,10 +9,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+/**
+ * Implementation of the ActionListener interface associated to the creation, update and deletion in the client panel.
+ * @author L7aur
+ */
 public class ClientUpdatesActionListener implements ActionListener {
     private final ArrayList<JTextField> textFields;
     private QueryType type;
 
+    /**
+     * Constructor.
+     * @param textFields An array of references to the text fields that are displayed in the GUI.
+     * @param operationName The name of the operation that should be executed.
+     */
     public ClientUpdatesActionListener(ArrayList<JTextField> textFields, String operationName) {
         this.textFields = textFields;
         switch (operationName) {
@@ -31,6 +40,10 @@ public class ClientUpdatesActionListener implements ActionListener {
         }
     }
 
+    /**
+     * Queries the database on action event.
+     * @param e The event to be processed (button press).
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         ClientT cType = getClientT();
@@ -57,6 +70,10 @@ public class ClientUpdatesActionListener implements ActionListener {
             System.out.println("Client is null");
     }
 
+    /**
+     * Creates a client data transfer object based on how many fields are in the GUI view.
+     * @return The client data transfer object.
+     */
     private ClientT getClientT() {
         Client newClient;
         if(textFields == null)

@@ -8,12 +8,25 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+/**
+ * Implementation of the ActionListener interface associated to the read SQL query.
+ * @author L7aur
+ */
 public class ProductQueriesActionListener implements ActionListener {
     private final ViewProductView panel;
+
+    /**
+     * Constructor.
+     * @param panel A reference to the panel where the read SQL query results are displayed.
+     */
     public ProductQueriesActionListener(ViewProductView panel) {
         this.panel = panel;
     }
 
+    /**
+     * Queries the database on action event.
+     * @param e The event to be processed (button press).
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         ProductT pType = getProductT();
@@ -22,9 +35,13 @@ public class ProductQueriesActionListener implements ActionListener {
             panel.updateContent(list);
         }
         else
-            System.out.println("null");
+            System.out.println("NULL PRODUCT OBJECT WHEN BUTTON PRESSED!");
     }
 
+    /**
+     * Creates an instance of a product data transfer object.
+     * @return A new instance of the product data transfer object.
+     */
     private ProductT getProductT() {
         return (new Product()).convertToEntity();
     }

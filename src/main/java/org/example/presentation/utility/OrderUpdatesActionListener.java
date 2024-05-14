@@ -13,12 +13,23 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Implementation of the ActionListener interface associated to the create SQL query in the order panel.
+ * @author L7aur
+ */
 public class OrderUpdatesActionListener implements ActionListener {
     private final JTextField textField;
     private final JComboBox<ClientT> comboBox1;
     private final JComboBox<ProductT> comboBox2;
     private QueryType type;
 
+    /**
+     * Constructor.
+     * @param textField A reference to the text field that is displayed in the GUI.
+     * @param comboBox1 A reference to the combo box that selects between clients.
+     * @param comboBox2 A reference to the combo box that selects between products.
+     * @param operationName The name of the operation that should be executed.
+     */
     public OrderUpdatesActionListener(JTextField textField, JComboBox<ClientT> comboBox1, JComboBox<ProductT> comboBox2, String operationName) {
         this.textField = textField;
         this.comboBox1 = comboBox1;
@@ -28,6 +39,7 @@ public class OrderUpdatesActionListener implements ActionListener {
                 this.type = QueryType.INSERT;
                 break;
             case "VIEW":
+                //not requested
                 break;
             default:
                 System.out.println("You should not be here!");
@@ -35,6 +47,10 @@ public class OrderUpdatesActionListener implements ActionListener {
         }
     }
 
+    /**
+     * Queries the database on action event.
+     * @param e The event to be processed (button press).
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         OrderT oType = getOrderT();
@@ -63,6 +79,10 @@ public class OrderUpdatesActionListener implements ActionListener {
             }
     }
 
+    /**
+     * Creates an order data transfer object based on what is selected/filled in the GUI fields.
+     * @return The order data transfer object.
+     */
     private OrderT getOrderT() {
         if (comboBox1.getSelectedItem() == null || comboBox2.getSelectedItem() == null)
             return null;

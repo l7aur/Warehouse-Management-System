@@ -9,10 +9,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+/**
+ * Implementation of the ActionListener interface associated to the creation, update and deletion in the product panel.
+ * @author L7aur
+ */
 public class ProductUpdatesActionListener implements ActionListener {
     private final ArrayList<JTextField> textFields;
     private QueryType type;
 
+    /**
+     * Constructor.
+     * @param textFields An array of references to the text fields that are displayed in the GUI.
+     * @param operationName The name of the operation that should be executed.
+     */
     public ProductUpdatesActionListener(ArrayList<JTextField> textFields, String operationName) {
         this.textFields = textFields;
         switch (operationName) {
@@ -31,6 +40,10 @@ public class ProductUpdatesActionListener implements ActionListener {
         }
     }
 
+    /**
+     * Queries the database on action event.
+     * @param e The event to be processed (button press).
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         ProductT pType = getProductT();
@@ -57,6 +70,10 @@ public class ProductUpdatesActionListener implements ActionListener {
             System.out.println("null");
     }
 
+    /**
+     * Creates a product data transfer object based on how many fields are in the GUI view.
+     * @return The product data transfer object.
+     */
     private ProductT getProductT() {
         Product newProduct;
         if(textFields == null)
@@ -74,7 +91,6 @@ public class ProductUpdatesActionListener implements ActionListener {
         }
         else //delete
             newProduct = new Product(textFields.getFirst().getText());
-
         return newProduct.convertToEntity();
     }
 }
