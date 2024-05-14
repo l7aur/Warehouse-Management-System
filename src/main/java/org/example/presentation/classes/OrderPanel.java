@@ -9,7 +9,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 /**
- * The panel that houses the order view
+ * The order panel.
  * @author L7aur
  */
 public class OrderPanel extends AbstractView {
@@ -24,6 +24,10 @@ public class OrderPanel extends AbstractView {
     private static final String SELECTOR_NAME_2 = "PRODUCT";
     private static final String SELECTOR_NAME_3 = "QUANTITY";
 
+    /**
+     * Constructor.
+     * @param mainFrame The main frame of the application.
+     */
     public OrderPanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         this.id = "ORDER";
@@ -34,12 +38,20 @@ public class OrderPanel extends AbstractView {
         this.add(selectorPanel, BorderLayout.PAGE_START);
     }
 
+    /**
+     * Creates the selectors inside a panel.
+     * @param panel The panel that houses the selectors.
+     */
     private void setSelectorPanels(JPanel panel) {
         panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         panel.setLayout(new GridLayout(2, 1));
         panel.setBackground(Colors.getInstance().getBackgroundColor());
     }
 
+    /**
+     * Creates a panel that contains the GUI selector elements.
+     * @return The panel that houses the selectors.
+     */
     private JPanel createButtonMenu() {
         JPanel panel = new JPanel();
         panel.setBackground(Colors.getInstance().getBackgroundColor());
@@ -53,6 +65,11 @@ public class OrderPanel extends AbstractView {
         return panel;
     }
 
+    /**
+     * Fetches the contents of the selectors and sets them in the order panel.
+     * @param clients The array of clients that populate the selector.
+     * @param products The array of products that populate the selector.
+     */
     public void updateContent(ArrayList<Object> clients, ArrayList<Object> products) {
         JPanel selectorPanel1 = new JPanel();
         JPanel selectorPanel2 = new JPanel();
@@ -91,6 +108,12 @@ public class OrderPanel extends AbstractView {
         this.repaint();
     }
 
+    /**
+     * Generic method that creates a selector based on reflection.
+     * @param list The list of objects that are going to populate the selector.
+     * @return A selector object.
+     * @param <T> The data type the selector has to work with.
+     */
     private <T> JComboBox<T> createSelector(ArrayList<Object> list) {
         Class<?> clazz = list.getFirst().getClass();
         switch (clazz.getSimpleName()) {
@@ -112,6 +135,11 @@ public class OrderPanel extends AbstractView {
         return null;
     }
 
+    /**
+     * Creates a text field with a label.
+     * @param name The label of the text field.
+     * @return The reference to the created text field.
+     */
     private JTextField createTextField(String name) {
         JTextField field = new JTextField();
         JLabel label = new JLabel(name);
@@ -122,6 +150,10 @@ public class OrderPanel extends AbstractView {
         return field;
     }
 
+    /**
+     * Getter.
+     * @return The identifier of the panel.
+     */
     @Override
     public String getId() {
         return this.id;

@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * The panel that houses the client view
+ * The client panel.
  * @author L7aur
  */
 public class ClientPanel extends AbstractView {
@@ -16,6 +16,10 @@ public class ClientPanel extends AbstractView {
     private CardLayout mainPanelCardLayout;
     private ViewClientView viewClientView;
 
+    /**
+     * Constructor.
+     * @param mainFrame The main frame of the application.
+     */
     public ClientPanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         this.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
@@ -25,6 +29,9 @@ public class ClientPanel extends AbstractView {
         this.createContent();
     }
 
+    /**
+     * Creates the GUI of the panel.
+     */
     @Override
     public void createContent() {
         this.setMainPanel();
@@ -35,6 +42,9 @@ public class ClientPanel extends AbstractView {
         this.add(this.panel, BorderLayout.CENTER);
     }
 
+    /**
+     * Sets the GUI of the main panel.
+     */
     private void setMainPanel() {
         this.panel = new JPanel();
         this.panel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
@@ -51,6 +61,10 @@ public class ClientPanel extends AbstractView {
         this.panel.add(this.viewClientView, this.viewClientView.getId());
     }
 
+    /**
+     * Creates a panel that houses the operation buttons.
+     * @return A panel containing the operation buttons.
+     */
     private JPanel createOperationButtons() {
         JPanel operationButtons = new JPanel();
         operationButtons.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
@@ -73,6 +87,10 @@ public class ClientPanel extends AbstractView {
         return operationButtons;
     }
 
+    /**
+     * Getter.
+     * @return The identifier of the panel.
+     */
     @Override
     public String getId() {
         return this.id;

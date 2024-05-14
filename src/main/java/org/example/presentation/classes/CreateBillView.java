@@ -9,9 +9,16 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * The create bill view.
+ * @author L7aur
+ */
 public class CreateBillView extends AbstractView {
     private final String id;
 
+    /**
+     * Constructor.
+     */
     public CreateBillView() {
         this.id = "CREATE_BILL_VIEW";
         this.setBackground(Colors.getInstance().getBackgroundColor());
@@ -19,6 +26,9 @@ public class CreateBillView extends AbstractView {
         this.createContent();
     }
 
+    /**
+     * Creates the GUI of the panel.
+     */
     @Override
     public void createContent() {
         this.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -30,6 +40,10 @@ public class CreateBillView extends AbstractView {
         this.add(executeButton, BorderLayout.SOUTH);
     }
 
+    /**
+     * Getter.
+     * @return The identifier of the panel.
+     */
     @Override
     public String getId() {
         return id;

@@ -6,7 +6,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 /**
- * The application frame where all GUI components are housed
+ * The application frame where all GUI components are housed.
  * @author L7aur
  */
 public class MainFrame extends JFrame {
@@ -14,6 +14,9 @@ public class MainFrame extends JFrame {
     private final CardLayout layout;
     private ArrayList<String> panels;
 
+    /**
+     * Constructor.
+     */
     public MainFrame() {
         super("Warehouse Orders Management System");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -28,6 +31,9 @@ public class MainFrame extends JFrame {
         this.setVisible(true);
     }
 
+    /**
+     * Initializes the array of panel identifiers.
+     */
     public void initializePanelArray() {
         this.panels = new ArrayList<>();
         this.panels.add("START");
@@ -37,6 +43,10 @@ public class MainFrame extends JFrame {
         this.panels.add("BILL");
         this.panels.add("BACK");
     }
+
+    /**
+     * Adds the panels to the card layout.
+     */
     public void addPanels() {
 
         BillPanel billPanel = new BillPanel(this);
@@ -55,6 +65,10 @@ public class MainFrame extends JFrame {
         contentPane.add(startPanel, startPanel.getId());
     }
 
+    /**
+     * Shows the panel specified by the provided identifier.
+     * @param index The identifier of the panel.
+     */
     public void showPanel(String index) {
         boolean exists = false;
         for (String string : panels) {

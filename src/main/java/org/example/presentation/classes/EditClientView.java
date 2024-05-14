@@ -10,8 +10,16 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * The edit client view.
+ * @author L7aur
+ */
 public class EditClientView extends AbstractView {
     private final String id;
+
+    /**
+     * Constructor.
+     */
     public EditClientView() {
         this.id = "EDIT_CLIENT_VIEW";
         this.setBackground(Colors.getInstance().getBackgroundColor());
@@ -19,6 +27,9 @@ public class EditClientView extends AbstractView {
         this.createContent();
     }
 
+    /**
+     * Creates the GUI of the panel.
+     */
     @Override
     public void createContent() {
         this.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -30,6 +41,10 @@ public class EditClientView extends AbstractView {
         this.add(executeButton, BorderLayout.SOUTH);
     }
 
+    /**
+     * Getter.
+     * @return The identifier of the panel.
+     */
     @Override
     public String getId() {
         return this.id;

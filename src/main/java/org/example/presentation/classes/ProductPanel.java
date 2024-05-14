@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * The panel that houses the product view
+ * The product panel.
  * @author L7aur
  */
 public class ProductPanel extends AbstractView {
@@ -16,6 +16,10 @@ public class ProductPanel extends AbstractView {
     private CardLayout mainPanelCardLayout;
     private ViewProductView viewProductView;
 
+    /**
+     * Constructor.
+     * @param mainFrame The main frame of the application.
+     */
     public ProductPanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         this.id = "PRODUCT";
@@ -24,6 +28,9 @@ public class ProductPanel extends AbstractView {
         this.createContent();
     }
 
+    /**
+     * Creates the GUI of the panel.
+     */
     @Override
     public void createContent() {
         this.setMainPanel();
@@ -34,6 +41,9 @@ public class ProductPanel extends AbstractView {
         this.add(this.panel, BorderLayout.CENTER);
     }
 
+    /**
+     * Sets the views in the card layout.
+     */
     private void setMainPanel() {
         this.panel = new JPanel();
         this.panel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
@@ -52,6 +62,10 @@ public class ProductPanel extends AbstractView {
         this.panel.add(deleteProductView, deleteProductView.getId());
     }
 
+    /**
+     * Sets the buttons inside a panel.
+     * @return The panel that houses the buttons.
+     */
     private JPanel createOperationButtons() {
         JPanel operationButtons = new JPanel();
         operationButtons.setBackground(Colors.getInstance().getBackgroundColor());
@@ -74,6 +88,10 @@ public class ProductPanel extends AbstractView {
         return operationButtons;
     }
 
+    /**
+     * Getter.
+     * @return The identifier of the panel.
+     */
     @Override
     public String getId() {
         return this.id;

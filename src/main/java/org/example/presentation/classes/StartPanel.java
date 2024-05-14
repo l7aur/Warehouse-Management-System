@@ -5,13 +5,17 @@ import org.example.presentation.utility.*;
 import java.awt.*;
 
 /**
- * The initial panel that is displayed when the application is run
+ * The initial panel that is displayed when the application is run.
  * @author L7aur
  */
 public class StartPanel extends AbstractView {
     private final String id;
     private final MainFrame mainFrame;
 
+    /**
+     * Constructor.
+     * @param mainFrame The main frame of the application.
+     */
     public StartPanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         this.id = "START";
@@ -19,6 +23,9 @@ public class StartPanel extends AbstractView {
         this.createContent();
     }
 
+    /**
+     * Creates the GUI of the panel.
+     */
     @Override
     public void createContent() {
         MyButton goToClient = new MyButton("CLIENT OPERATIONS");
@@ -40,6 +47,11 @@ public class StartPanel extends AbstractView {
         this.add(goToProducts);
         this.add(goToBills);
     }
+
+    /**
+     * Getter.
+     * @return The identifier of the panel.
+     */
     @Override
     public String getId() {
         return this.id;

@@ -5,15 +5,25 @@ import org.example.presentation.utility.Colors;
 
 import java.awt.*;
 
+/**
+ * The view client view.
+ */
 public class ViewClientView extends AbstractView {
     private final String id;
 
+    /**
+     * Constructor.
+     */
     public ViewClientView() {
         this.id = "VIEW_CLIENT_VIEW";
         this.setBackground(Colors.getInstance().getBackgroundColor());
         this.setLayout(new BorderLayout());
     }
 
+    /**
+     * Getter.
+     * @return The identifier of the panel.
+     */
     @Override
     public String getId() {
         return this.id;

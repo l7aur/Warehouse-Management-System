@@ -6,6 +6,10 @@ import org.example.presentation.utility.*;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * The bill panel.
+ * @author L7aur
+ */
 public class BillPanel extends AbstractView {
     private final String id;
     private final MainFrame mainFrame;
@@ -13,6 +17,10 @@ public class BillPanel extends AbstractView {
     private CardLayout mainPanelCardLayout;
     private ViewBillView viewBillView;
 
+    /**
+     * Constructor.
+     * @param mainFrame The main frame of the application.
+     */
     public BillPanel(MainFrame mainFrame) {
         this.id = "BILL";
         this.mainFrame = mainFrame;
@@ -22,6 +30,9 @@ public class BillPanel extends AbstractView {
         this.createContent();
     }
 
+    /**
+     * Creates the GUI of the application.
+     */
     @Override
     public void createContent() {
         this.setMainPanel();
@@ -32,6 +43,9 @@ public class BillPanel extends AbstractView {
         this.add(this.panel, BorderLayout.CENTER);
     }
 
+    /**
+     * Sets the GUI of the panel.
+     */
     private void setMainPanel() {
         this.panel = new JPanel();
         this.panel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
@@ -45,6 +59,10 @@ public class BillPanel extends AbstractView {
         this.panel.add(viewBillView, viewBillView.getId());
     }
 
+    /**
+     * Creates a panel that houses the operation buttons.
+     * @return A panel containing the operation buttons.
+     */
     private JPanel createOperationButtons() {
         JPanel operationButtons = new JPanel();
         operationButtons.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
@@ -61,6 +79,10 @@ public class BillPanel extends AbstractView {
         return operationButtons;
     }
 
+    /**
+     * Getter.
+     * @return The identifier of the panel.
+     */
     public String getId() {
         return this.id;
     }
