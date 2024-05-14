@@ -1,0 +1,8 @@
+org.example
+org.example.business.logic.classes
+org.example.business.logic.utility
+org.example.data.access.classes
+org.example.data.access.utility
+org.example.model.classes.dto
+org.example.presentation.classes
+org.example.presentation.utility
