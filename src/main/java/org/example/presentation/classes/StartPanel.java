@@ -39,7 +39,7 @@ public class StartPanel extends AbstractView {
         MyButton goToClient = new MyButton("CLIENT OPERATIONS");
         MyButton goToOrders = new MyButton("CREATE ORDER");
         MyButton goToProducts = new MyButton("PRODUCT OPERATIONS");
-        MyButton goToBills = new MyButton("BILL OPERATIONS");
+        MyButton goToBills = new MyButton("LOG TABLE");
         goToClient.addActionListener(new NavigateActionListener(this.mainFrame, "CLIENT"));
         goToProducts.addActionListener(new NavigateActionListener(this.mainFrame, "PRODUCT"));
         goToOrders.addActionListener(new NavigateActionListener(this.mainFrame, "ORDER"));
