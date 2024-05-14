@@ -92,22 +92,30 @@ Other further developments:
 
 ## References
 
--	Programming Techniques lectures, laboratories, and support materials
--	Ștefan Tanasă, Ștefan Andrei, Cristian Olaru, Java: de la 0 la expert (2nd edition), Publisher: Polirom, Iași, Romania, ISBN: 978-973-46-2405-8, Published: 2011
--	Paul Deitel, Harvey Deitel, Java How to program (10th edition), Publisher: Pearson Education, Inc., Upper Saddle River, NJ, United States, ISBN: 978-0-13-380780-6, Published: 2015
--	Use Case Diagrams | Unified Modeling Language (UML) - GeeksforGeeks
--	Use Case Diagram Tutorial (Guide with Examples) | Creately 
--	Unified Modeling Language - Wikipedia
--	Introduction to JDBC | Baeldung
--	Layers of a Standard Enterprise Application - DZone
--	Creating PDF Files in Java | Baeldung
--	Introduction to JavaDoc | Baeldung
--	Java 14 Record Keyword | Baeldung
--	PostgreSQL | IntelliJ IDEA Documentation (jetbrains.com)
--	Setting up the JDBC Driver | pgJDBC (postgresql.org)
--	Guide to Java Reflection | Baeldung
--	What are Java Records and How to Use them Alongside Constructors and Methods? - GeeksforGeeks
-
+- [Unified Modeling Language](https://en.wikipedia.org/wiki/Unified_Modeling_Language)
+- [Use Case Diagrams | Unified Modeling Language (UML)](https://www.geeksforgeeks.org/use-case-diagram/)
+- [Draw.io](https://app.diagrams.net/)
+- [RegExr: Learn, Build, & Test RegEx](https://regexr.com/)
+- [regex101: build, test, and debug regex](https://regex101.com/)
+- [Regular expression - Wikipedia](https://en.wikipedia.org/wiki/Regular_expression)
+- [Use Case Diagram Tutorial](https://creately.com/guides/use-case-diagram-tutorial/)
+- [A Visual Guide to Layout Managers](https://docs.oracle.com/javase/tutorial/uiswing/layout/visual.html#border)
+- [Fundamental Programming Techniques lectures, laboratories, and support materials](https://dsrl.eu/)
+- [Java Thread Pool Example using Executors and ThreadPoolExecutor](https://www.javacodegeeks.com/2013/01/java-thread-pool-example-using-executors-and-threadpoolexecutor.html)
+- [java.util.Timer.schedule() Method](https://www.tutorialspoint.com/java/util/timer_schedule_period.htm)
+- [Lesson: Concurrency (The Java™ Tutorials > Essential Java Classes)](https://docs.oracle.com/javase/tutorial/essential/concurrency/index.html)
+- [Runnable vs. Callable in Java](https://www.baeldung.com/java-runnable-callable)
+- [Introduction to JDBC](https://www.baeldung.com/java-jdbc)
+- [Layers of a Standard Enterprise Application](https://dzone.com/articles/layers-standard-enterprise)
+- [Introduction to JavaDoc](https://www.baeldung.com/javadoc)
+- [Java 14 Record Keyword](https://www.baeldung.com/java-record-keyword)
+- [PostgreSQL | IntelliJ IDEA Documentation](https://www.jetbrains.com/help/idea/postgresql.html)
+- [Setting up the JDBC Driver | pgJDBC](https://jdbc.postgresql.org/documentation/setup/)
+- [Reflection](https://www.geeksforgeeks.org/reflection-in-java/)
+- [Guide to Java reflection](https://www.baeldung.com/java-reflection)
+- [Java records](https://www.geeksforgeeks.org/what-are-java-records-and-how-to-use-them-alongside-constructors-and-methods/)
+- Paul Deitel, Harvey Deitel, Java How to program (10th edition), Publisher: Pearson Education, Inc., Upper Saddle River, NJ, United States, ISBN: 978-0-13-380780-6, Published: 2015
+- Ștefan Tanasă, Ștefan Andrei, Cristian Olaru, Java: de la 0 la expert (2nd edition), Publisher: Polirom, Iași, Romania, ISBN: 978-973-46-2405-8, Published: 2011
 
 ## Pictures
 
