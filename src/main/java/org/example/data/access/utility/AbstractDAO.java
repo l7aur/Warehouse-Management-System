@@ -293,6 +293,7 @@ public abstract class AbstractDAO<T> {
         } finally {
             if (success != -1)
                 LOGGER.log(Level.INFO, "SUCCESS UPDATE OPERATION\n");
+
             ConnectionFactory.closeAll(connection, statement, null);
         }
     }
@@ -327,7 +328,7 @@ public abstract class AbstractDAO<T> {
     public void delete(T t) {
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement statement = null;
-        int success = -1;
+        int success = 0;
         try {
             statement = connection.prepareStatement(deleteStatement(t), Statement.RETURN_GENERATED_KEYS);
             setParametersForDelete(statement, t);
@@ -335,8 +336,11 @@ public abstract class AbstractDAO<T> {
         } catch (SQLException e) {
             LOGGER.log(Level.WARNING, "FAILED DELETE OPERATION\n" + e.getMessage());
         } finally {
-            if (success != -1)
+            if (success != 0)
                 LOGGER.log(Level.INFO, "SUCCESS DELETE OPERATION\n");
+
+            else
+                LOGGER.log(Level.INFO, "FAILED DELETE OPERATION\n");
             ConnectionFactory.closeAll(connection, statement, null);
         }
     }

@@ -3,6 +3,7 @@ package org.example.presentation.classes;
 import org.example.presentation.utility.AbstractView;
 import org.example.presentation.utility.BillUpdatesActionListener;
 import org.example.presentation.utility.Colors;
+import org.example.presentation.utility.MyButton;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -39,7 +40,7 @@ public class CreateBillView extends AbstractView {
         String[] textNames = {"Order ID: "};
         ArrayList<JTextField> textFields = new ArrayList<>();
         this.add(this.createTextFields(textNames, textFields), BorderLayout.NORTH);
-        Button executeButton = new Button("EXECUTE CREATE");
+        MyButton executeButton = new MyButton("EXECUTE CREATE");
         executeButton.addActionListener(new BillUpdatesActionListener(textFields));
         this.add(executeButton, BorderLayout.SOUTH);
     }
